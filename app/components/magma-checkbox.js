@@ -1,0 +1,1 @@
+export { default } from 'magma/components/magma-checkbox';
