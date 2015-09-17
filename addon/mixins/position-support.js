@@ -16,13 +16,22 @@ export function boundingClientRect(jQueryElement) {
 	}), jQueryElement.offset());
 }
 
+export function marginsClient(jQueryElement) {
+	return {
+		top: parseInt(jQueryElement.css('marginTop'), 10),
+		right: parseInt(jQueryElement.css('marginRight'), 10),
+		bottom: parseInt(jQueryElement.css('marginBottom'), 10),
+		left: parseInt(jQueryElement.css('marginLeft'), 10)
+	};
+}
+
 export default Ember.Mixin.create({
 
 	autoPosition: true,
 
 	alignment: 'top',
 
-	placement: 'right',
+	placement: 'center',
 
 	classNameBindings: [
 		'alignmentClassName',
@@ -40,6 +49,10 @@ export default Ember.Mixin.create({
 
 	absoluteElementRect: Ember.computed('absoluteElement', function () {
 		return boundingClientRect(this.get('absoluteElement'));
+	}),
+
+	absoluteElementMargins: Ember.computed('absoluteElement', function () {
+		return marginsClient(this.get('absoluteElement'));
 	}),
 
 	/**
@@ -68,11 +81,9 @@ export default Ember.Mixin.create({
 		const relativeElementRect = this.get('relativeElementRect');
 		const absoluteElementRect = this.get('absoluteElementRect');
 
-		console.log(relativeElementRect, absoluteElementRect);
-
 		let alignments;
 
-		if (['top','bottom'].indexOf(placement) > 0) {
+		if (['top','bottom'].indexOf(placement) >= 0) {
 			alignments = {
 				left: () => {
 					return relativeElementRect.left;
@@ -105,18 +116,20 @@ export default Ember.Mixin.create({
 		const placement = this.get('placement');
 		const relativeElementRect = this.get('relativeElementRect');
 		const absoluteElementRect = this.get('absoluteElementRect');
+		const absoluteElementMargins = this.get('absoluteElementMargins');
+
 		var placements = {
 			top: () => {
-				return relativeElementRect.top - absoluteElementRect.height;
+				return relativeElementRect.top - absoluteElementRect.height - absoluteElementMargins.bottom;
 			},
 			bottom: () => {
-				return relativeElementRect.top + relativeElementRect.height;
+				return relativeElementRect.top + relativeElementRect.height + absoluteElementMargins.top;
 			},
 			left: () => {
-				return relativeElementRect.left - absoluteElementRect.width;
+				return relativeElementRect.left - absoluteElementRect.width - absoluteElementMargins.right;
 			},
 			right: () => {
-				return relativeElementRect.left + relativeElementRect.width;
+				return relativeElementRect.left + relativeElementRect.width + absoluteElementMargins.left;
 			}
 		};
 
@@ -124,20 +137,19 @@ export default Ember.Mixin.create({
 	},
 
 	getPosition() {
-		const alignment = this.get('alignment');
-		const placement = this.get('placement');
-
-		if (['top','bottom'].indexOf(placement) > 0) {
-			return {
-				left: this.calculateAlignment(alignment),
-				top: this.calculatePlacement(placement)
+		let position;
+		if (['top','bottom'].indexOf(this.get('placement')) >= 0) {
+			position = {
+				left: this.calculateAlignment(),
+				top: this.calculatePlacement()
 			};
 		} else {
-			return {
-				left: this.calculatePlacement(placement),
-				top: this.calculateAlignment(alignment)
+			position = {
+				left: this.calculatePlacement(),
+				top: this.calculateAlignment()
 			};
 		}
+		return position;
 	}
 
 });
