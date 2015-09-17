@@ -1,0 +1,21 @@
+@mixin triangle($direction: right, $size: 5px, $color: #000, $thickness: 0px) {
+
+	@if $thickness == 0px {
+		$thickness: $size;
+	}
+
+	border-#{opposite-direction($direction)}: $thickness solid $color;
+	$perpendicular-border: $size solid transparent;
+
+	@if $direction == top or $direction == bottom {
+		border-left: $perpendicular-border;
+		border-right: $perpendicular-border;
+	}
+
+	@else if $direction == right or $direction == left {
+		border-bottom: $perpendicular-border;
+		border-top: $perpendicular-border;
+	}
+	height: 0;
+	width: 0;
+}

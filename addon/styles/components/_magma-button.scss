@@ -1,0 +1,21 @@
+.magma-button {
+	background: $magma--color-alpha;
+	border: 0;
+	border-radius: 4px;
+	color: $magma--color-gamma;
+	font-size: $magma--font-size-medium;
+	padding: 10px 15px;
+
+	&:hover:not(.magma-disabled) {
+		background: $magma--color-beta;
+		cursor: pointer;
+	}
+
+	&.magma-pressed:not(.magma-disabled) {
+		background: $magma--color-beta;
+	}
+
+	&.magma-disabled {
+		background: $magma--color-zeta;
+	}
+}
