@@ -1,0 +1,14 @@
+.magma-textbox {
+	background: $magma--color-eta;
+	border: 1px solid $magma--color-theta;
+	border-radius: 4px;
+	box-shadow: inset 0px 8px 5px -8px #ddd;
+	color: $magma--color-delta;
+	font-size: $magma--font-size-medium;
+	padding: 7px;
+	width: 250px;
+
+	&.magma-invalid {
+		border-color: $magma--color-alpha;
+	}
+}
