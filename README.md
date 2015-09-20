@@ -11,7 +11,9 @@ This toolkit contains reusable components you can assemble to build awesome thin
 
 *Note:* This addon has been created based on Ember 2.0. Make sure you have this version or a newer version of Ember before you install it
 A simple command line can make you use the addon right now. Simply run the following at the root level of your ember project:
-`ember install ember-magma`
+```
+ember install ember-magma
+```
 
 ## Documentation
 The documentation http://4lex-io.github.io/ember-magma/ to see examples.

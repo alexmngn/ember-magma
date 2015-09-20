@@ -12,8 +12,6 @@ export default Ember.Component.extend({
 
 	label: void 0,
 
-	hint: void 0,
-
 	didInsertElement() {
 		this.$('label').attr('for', this.$('input, textarea, select').first().attr('id'));
 	}
