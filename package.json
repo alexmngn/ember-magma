@@ -1,7 +1,7 @@
 {
-  "name": "magma",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "name": "ember-magma",
+  "version": "0.1-beta",
+  "description": "Magma is a bootstrap toolkit to easily create UI interfaces for Ember.js applications.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/4lex-io/magma"
+    "url": "https://github.com/4lex-io/ember-magma"
   },
   "engines": {
     "node": ">= 0.10.0"
@@ -45,6 +45,8 @@
     "ember-addon",
     "ember",
     "ember-cli",
+    "bootstrap",
+    "ui",
     "magma"
   ],
   "dependencies": {
@@ -54,9 +56,9 @@
   "ember-addon": {
     "configPath": "tests/dummy/config"
   },
-  "homepage": "https://github.com/4lex-io/magma",
+  "homepage": "https://github.com/4lex-io/ember-magma",
   "bugs": {
-    "url": "https://github.com/4lex-io/magma/issues"
+    "url": "https://github.com/4lex-io/ember-magma/issues"
   },
   "main": "index.js"
 }

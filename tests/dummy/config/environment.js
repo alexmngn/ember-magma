@@ -40,7 +40,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.baseURL = '/magma';
+    ENV.baseURL = '/ember-magma';
   }
 
   return ENV;
