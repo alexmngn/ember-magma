@@ -5,7 +5,7 @@ Magma is a bootstrap toolkit to easily create UI interfaces for Ember.js applica
 It's now even easier and faster to create your pages, for all devices.
 
 ## How does this work?
-This toolkit contains reusable components you can assemble to build awesome things. Better than too many words, please visit http://4lex-io.github.io/magma/ to see examples.
+This toolkit contains reusable components you can assemble to build awesome things. Better than too many words, please visit http://4lex-io.github.io/ember-magma/ to see examples.
 
 ## Installation
 
@@ -14,4 +14,4 @@ A simple command line can make you use the addon right now. Simply run the follo
 `ember install ember-magma`
 
 ## Documentation
-The documentation http://4lex-io.github.io/magma/ to see examples.
+The documentation http://4lex-io.github.io/ember-magma/ to see examples.
