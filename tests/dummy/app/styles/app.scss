@@ -1,0 +1,251 @@
+@import 'addon/styles/addon';
+@import "bower_components/susy/sass/susy";
+@import 'stickem';
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+$susy: (
+  columns: 12,
+  gutters: 1/4,
+  math: static,
+  column-width: 80px
+);
+
+html, body {
+	color: #555;
+	font-family: Roboto, Arial, sans-serif;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+}
+
+pre, code {
+	margin: 0;
+	overflow-x: auto;
+}
+
+a {
+	color: #a31212;
+	text-decoration: none;
+
+	&:hover {
+		color: #620505;
+	}
+}
+
+.container {
+	margin: 0 auto;
+	padding: 0 15px;
+	@include container();
+}
+
+h2 {
+	border-bottom: 1px solid #ddd;
+	color: #333;
+	font-size: 24px;
+	padding-bottom: 5px;
+}
+
+p {
+	line-height: 22px;
+}
+
+header {
+	background: #a31212;
+	box-sizing: border-box;
+	color: #f3f3f3;
+
+	&.header {
+		position: fixed;
+		z-index: 0;
+	}
+}
+
+.hero {
+	background: #a31212;
+	box-sizing: border-box;
+	color: #f3f3f3;
+	height: 50vh;
+	margin-bottom: 50px;
+	max-height: 500px;
+	min-height: 350px;
+	padding-top: 100px;
+	position: relative;
+	text-align: center;
+	z-index: 1;
+
+	.logo {
+		height: 12vh;
+		min-height: 100px;
+	}
+
+	.install {
+		background: transparent;
+		border: 1px solid #f3f3f3;
+		border-radius: 10px;
+		color: #f3f3f3;
+		display: block;
+		margin: 40px auto 0;
+		padding: 15px;
+		width: 150px;
+		text-decoration: none;
+
+		&:hover {
+			background: transparent;
+		}
+	}
+
+	.version {
+		color: #c68989;
+		display: block;
+		margin: 20px auto;
+	}
+}
+
+main {
+	> div {
+		margin-bottom: 50px !important;
+	}
+}
+
+
+.overview {
+	margin-bottom: 50px;
+	text-align: center;
+
+	h2 {
+		border: 0;
+		font-size: 32px;
+	}
+	p {
+		color: #777;
+		font-size: 18px;
+	}
+}
+
+.demo {
+	background: #eee;
+	padding: 50px 0;
+	@include clearfix;
+
+	.description {
+		margin-bottom: 30px;
+	}
+
+	.form {
+		@include span(6);
+
+		.magma-alert {
+			width: 412px;
+		}
+	}
+
+	.formResults {
+		@include span(6 last);
+
+		background: #ddd;
+		box-sizing: border-box;
+		line-height: 20px;
+		margin-bottom: 30px;
+		padding: 20px;
+
+		h3 {
+			margin-top: 0;
+		}
+	}
+}
+
+.installation {
+	@include clearfix;
+	code {
+		background: #eee;
+		display: block;
+		padding: 5px;
+	}
+}
+
+.documentation {
+	@include clearfix;
+	position: relative;
+
+	.leftside {
+		@include span(2);
+		background: #eee;
+
+		.magma-button {
+			background: transparent;
+			color: #a31212;
+			padding: 0;
+
+			&:hover {
+				color: #620505;
+			}
+		}
+
+		ul {
+			padding-left: 20px;
+		}
+
+		li {
+			list-style-type: none;
+			margin-bottom: 10px;
+		}
+	}
+
+	.rightside {
+		@include span(10 last);
+
+		.row {
+			@include clearfix;
+		}
+
+		strong, em {
+			background: #ffeaea;
+			color: #620505;
+			display: inline-block;
+			padding: 2px 5px;
+			vertical-align: middle;
+		}
+
+		li {
+			line-height: 20px;
+			margin: 5px 0;
+		}
+	}
+
+	code {
+		@include span(5);
+		background: #eee;
+		border-left: 4px solid #ccc;
+		box-sizing: border-box;
+		display: block;
+		padding: 10px;
+		position: relative;
+
+		&:after {
+			color: #aaa;
+			bottom: 10px;
+			font-family: Roboto, Arial, sans-serif;
+			font-variant: small-caps;
+			position: absolute;
+			right: 10px;
+		}
+
+		&.hbs:after {
+			content: 'hbs';
+		}
+	}
+
+	.example {
+		@include span(5 last);
+	}
+}
+
+footer {
+	color: #f3f3f3;
+	background: #620505;
+	padding: 50px;
+
+	a, a:hover {
+		color: #ddd;
+	}
+}

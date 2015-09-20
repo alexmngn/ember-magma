@@ -20,18 +20,15 @@ export default Ember.Component.extend(DisabledSupport, {
 
 	value: void 0,
 
-	initialize: Ember.on('init', function () {
+	buttonGroupInit: Ember.on('init', function () {
 		let name = this.get('name');
 		if (name) {
 			this.get('magmaEvent').subscribe(name+'Button', this, 'buttonDidChange');
 		}
+		Ember.run.schedule('afterRender', this, this.triggerEvent);
 	}),
 
-	insert: Ember.on('didInsertElement', function () {
-		this.triggerEvent();
-	}),
-
-	teardown: Ember.on('willDestroyElement', function () {
+	buttonGroupWillDestroyElement: Ember.on('willDestroyElement', function () {
 		let name = this.get('name');
 		if (name) {
 			this.get('magmaEvent').unsubscribe(name+'Button');

@@ -1,0 +1,14 @@
+.stickem-container {
+  position: relative;
+  @include clearfix;
+}
+
+.stickit {
+    position: fixed;
+    top: 0;
+}
+
+.stickit-end {
+    bottom: 0;
+    position: absolute;
+}

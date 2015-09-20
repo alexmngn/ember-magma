@@ -18,20 +18,29 @@ export default Ember.Component.extend(
 	action: void 0,
 
 	attributeBindings: [
+		'autofocus',
 		'aria-describedby',
 		'aria-label',
-		'aria-labelledby'
+		'aria-labelledby',
+		'disabled',
+		'required'
 	],
 
 	classNames: ['magma-selectbox'],
 
 	content: null,
 
+	_content: Ember.computed('content', function () {
+
+	}),
+
 	prompt: null,
 
 	optionValuePath: 'id',
 
 	optionLabelPath: 'title',
+
+	optionGroupPath: 'group',
 
 	selection: void 0,
 
@@ -41,6 +50,11 @@ export default Ember.Component.extend(
 		if (!this.get('content')) {
 			this.set('content', []);
 		}
+		Ember.run.schedule('afterRender', this, () => {
+			if (!this.get('selection') && !this.get('prompt') && this.get('content.length') > 0) {
+				this.set('selection', this.get('content')[0]);
+			}
+		});
 	}),
 
 	selectionDidChange: Ember.on('change', function () {

@@ -33,7 +33,7 @@ export default Ember.Component.extend(ModalSupport, PositionSupport, {
 
 			if (on === 'click') {
 				forjQueryElement.on('click', () => {
-					this.showPopover();
+					this.togglePopover();
 				});
 			} else if (on === 'hover') {
 				forjQueryElement.on('mouseenter', () => {
@@ -57,6 +57,10 @@ export default Ember.Component.extend(ModalSupport, PositionSupport, {
 			}
 		}
 	}),
+
+	togglePopover() {
+		return this.get('isVisible') ? this.hidePopover() : this.showPopover();
+	},
 
 	showPopover() {
 		this.set('isVisible', true);

@@ -12,7 +12,8 @@
     "jquery": "^1.11.3",
     "loader.js": "ember-cli/loader.js#3.2.1",
     "qunit": "~1.18.0",
-    "jQuery.tabbable": "~1.0.2"
+    "jQuery.tabbable": "~1.0.2",
+    "susy": "~2.2.6"
   },
   "resolutions": {
     "ember": "^2.0.0"

@@ -4,27 +4,47 @@
 	margin: 10px 0;
 	padding: 15px 20px;
 
+	a {
+		text-decoration: underline;
+	}
+
 	&.magma-alert-error {
 		background: #f3c7c7;
 		border-color: #973c3c;
 		color: #742525;
+
+		a {
+			color: #742525;
+		}
 	}
 
 	&.magma-alert-warning {
 		background: #f5e57a;
 		border-color: #846124;
 		color: #624d2b;
+
+		a {
+			color: #624d2b;
+		}
 	}
 
 	&.magma-alert-info {
 		background: #bdd0ee;
 		border-color: #456088;
 		color: #2b4162;
+
+		a {
+			color: #2b4162;
+		}
 	}
 
 	&.magma-alert-success {
 		background: #b0e1c2;
 		border-color: #45885e;
 		color: #27653e;
+
+		a {
+			color: #27653e;
+		}
 	}
 }

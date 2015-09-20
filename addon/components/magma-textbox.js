@@ -18,8 +18,11 @@ export default Ember.TextField.extend(
 	attributeBindings: [
 		'aria-describedby',
 		'aria-label',
-		'aria-labelledby'
+		'aria-labelledby',
+		'type'
 	],
 
-	classNames: ['magma-textbox']
+	classNames: ['magma-textbox'],
+
+	type: 'text'
 });

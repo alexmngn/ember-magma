@@ -2,11 +2,12 @@ $magma-popover-triangle--size: 6px;
 $magma-popover--placements: (left, right, top, bottom);
 
 .magma-popover {
-	background: $magma--color-beta;
+	background: $magma-color-beta;
 	border-radius: 5px;
-	color: $magma--color-gamma;
+	color: $magma-color-gamma;
 	max-width: 200px;
 	padding: 10px;
+	z-index: 100;
 
 	&:before {
 		content: '';
@@ -22,7 +23,7 @@ $magma-popover--placements: (left, right, top, bottom);
 
 		&:before {
 			#{opposite-direction($placement)}: -$magma-popover-triangle--size;
-			@include triangle(#{opposite-direction($placement)}, $magma-popover-triangle--size, $magma--color-beta);
+			@include triangle(#{opposite-direction($placement)}, $magma-popover-triangle--size, $magma-color-beta);
 		}
 
 		@if $placement == "left" or $placement == "right" {
