@@ -1,0 +1,19 @@
+.magma-progress {
+	border: 1px solid $magma-color-beta;
+	background: #fff;
+	border-radius: 5px;
+	box-sizing: border-box;
+	height: 25px;
+	margin: 10px 0;
+	white-space: nowrap;
+}
+
+.magma-progress-indicator {
+	background: $magma-color-alpha;
+	box-sizing: border-box;
+	color: $magma-color-gamma;
+	font-size: 12px;
+	height: 23px;
+	line-height: 23px;
+	text-align: center;
+}

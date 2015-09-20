@@ -33,14 +33,17 @@ export default Ember.Component.extend(DisabledSupport,
 
 	value: void 0,
 
-	initialize: Ember.on('init', function () {
+	buttonInit: Ember.on('init', function () {
 		let name = this.get('name');
 		if (name) {
 			this.get('magmaEvent').subscribe(name+'ButtonGroup', this, 'buttonGroupDidChange');
+			if (this.get('pressed')) {
+				Ember.run.schedule('afterRender', this, this.gotClicked);
+			}
 		}
 	}),
 
-	teardown: Ember.on('willDestroyElement', function () {
+	buttonWillDestroyElement: Ember.on('willDestroyElement', function () {
 		let name = this.get('name');
 		if (name) {
 			this.get('magmaEvent').unsubscribe(name+'ButtonGroup');

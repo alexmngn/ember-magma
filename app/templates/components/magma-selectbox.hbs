@@ -1,9 +1,9 @@
+{{#if prompt}}
+	<option selected={{is-not selection}}>
+		{{prompt}}
+	</option>
+{{/if}}
 {{#each content key="@index" as |item|}}
-	{{#if prompt}}
-		<option disabled selected={{is-not selection}}>
-			{{prompt}}
-		</option>
-	{{/if}}
 	<option value={{get item optionValuePath}} selected={{is-equal item selection}}>
 		{{get item optionLabelPath}}
 	</option>

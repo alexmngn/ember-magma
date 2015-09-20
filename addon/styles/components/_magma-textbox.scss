@@ -1,14 +1,29 @@
 .magma-textbox {
-	background: $magma--color-eta;
-	border: 1px solid $magma--color-theta;
+	background: $magma-color-eta;
+	border: 1px solid $magma-color-theta;
 	border-radius: 4px;
 	box-shadow: inset 0px 8px 5px -8px #ddd;
-	color: $magma--color-delta;
-	font-size: $magma--font-size-medium;
+	box-sizing: border-box;
+	color: $magma-color-delta;
+	font-size: $magma-font-size-medium;
 	padding: 7px;
 	width: 250px;
 
 	&.magma-invalid {
-		border-color: $magma--color-alpha;
+		border-color: $magma-color-alpha;
+	}
+
+	&.magma-disabled {
+		background: $magma-color-theta;
+	}
+
+	&.magma-small {
+		font-size: $magma-font-size-small;
+		padding: 5px;
+	}
+
+	&.magma-large {
+		font-size: $magma-font-size-large;
+		padding: 10px;
 	}
 }

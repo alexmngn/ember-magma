@@ -27,10 +27,8 @@ export default Ember.Component.extend({
 	classNames: ['magma-progress'],
 
 	indicatorValue: Ember.computed('value', 'valueMax', function () {
-		return parseFloat(this.get('value')*100/this.get('valueMax'));
+		return parseFloat(this.get('value')*100/this.get('valueMax')) || 0;
 	}),
-
-	label: void 0,
 
 	role: 'progressbar',
 

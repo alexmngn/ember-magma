@@ -1,0 +1,615 @@
+<header class="hero">
+	<img src="assets/logo.png" class="logo">
+	{{#magma-button class="install" action="scrollToAnchor" value="install"}}Install now{{/magma-button}}
+	<span class="version">Version 0.1 beta</span>
+</header>
+
+<main>
+	<div class="overview container">
+		<h2>Designed for Ember.js</h2>
+		<p>Magma is a bootstrap toolkit to easily create UI interfaces for Ember.js applications. </p>
+		<p>It's now even easier and faster to create your pages, for all devices.</p>
+		<a href="https://github.com/4lex-io/magma" target="_blank">View the project on Github</a>
+	</div>
+	<div class="demo">
+		<div class="container">
+			<h2>How does it work?</h2>
+			<p class="description">This toolkit contains reusable components you can assemble to build awesome things. Better than too many words, let's take a look to an example. The following form has been generated using Magma, don't hesitate to play with it! You can see the snippet of code below.</p>
+
+			<div class="form">
+				{{#magma-form-element label="First name:"}}
+					{{magma-textbox name="firstname" value=exampleFirstName}}
+				{{/magma-form-element}}
+
+				{{#magma-form-element label="Last name:"}}
+					{{magma-textbox name="lastname" value=exampleLastName required=true invalid=exampleLastNameIsInvalid}}
+					{{#if exampleLastNameIsInvalid}}
+						{{#magma-alert alert="error"}}
+							Please enter your last name
+						{{/magma-alert}}
+					{{/if}}
+				{{/magma-form-element}}
+
+				{{#magma-form-element label="City:"}}
+					{{magma-selectbox selection=exampleCity content=exampleCityOptions optionLabelPath="name" optionValuePath="value"}}
+				{{/magma-form-element}}
+
+				{{#magma-form-element}}
+					{{magma-checkbox name="terms" checked=exampleTerms required=true}}
+					<label class="example-label">I accept the terms and conditions</label>
+
+					{{#magma-popover for=".example-label" on="hover" placement="right" alignment="top"}}
+						You have to check this box to continue
+					{{/magma-popover}}
+
+				{{/magma-form-element}}
+
+				{{#magma-button action="submitForm"}}
+					Submit
+				{{/magma-button}}
+
+			</div>
+			<div class="formResults">
+				<h3>Form result:</h3>
+					<pre><code class="javascript">
+{
+  firstName: {{exampleFirstName}},
+  lastName: {{#if exampleLastNameIsInvalid}}null{{else}}{{exampleLastName}}{{/if}},
+  city: {{exampleCity.value}},
+  terms: {{exampleTerms}}
+}
+					</code></pre>
+			</div>
+		</div>
+	</div>
+
+	<div class="installation container">
+		<h2 data-anchor="install">Install with Ember-CLI</h2>
+
+		<p><strong>Note:</strong> This addon has been created based on Ember 2.0. Make sure you have this version or a newer version of Ember before you install it</p>
+
+		<p>A simple command line can make you use the addon right now. Simply run the following at the root level of your ember project:</p>
+		<code>$ ember install ember-magma</code>
+
+	</div>
+
+	<div class="documentation container">
+		<h2>Documentation</h2>
+
+		<div class="stickem-wrapper">
+			<div class="stickem-container row">
+				<nav class="leftside stickem">
+					<ul>
+						<li>{{#magma-button action="scrollToAnchor" value="alert"}}Alert{{/magma-button}}</li>
+						<li>{{#magma-button action="scrollToAnchor" value="button"}}Button{{/magma-button}}</li>
+						<li>{{#magma-button action="scrollToAnchor" value="button-group"}}Button group{{/magma-button}}</li>
+						<li>{{#magma-button action="scrollToAnchor" value="checkbox"}}Checkbox{{/magma-button}}</li>
+						<li>{{#magma-button action="scrollToAnchor" value="form-element"}}Form element{{/magma-button}}</li>
+						<li>{{#magma-button action="scrollToAnchor" value="popover"}}Popover{{/magma-button}}</li>
+						<li>{{#magma-button action="scrollToAnchor" value="progress"}}Progress{{/magma-button}}</li>
+						<li>{{#magma-button action="scrollToAnchor" value="radiobutton"}}Radiobutton{{/magma-button}}</li>
+						<li>{{#magma-button action="scrollToAnchor" value="radiobutton-group"}}Radiobutton group{{/magma-button}}</li>
+						<li>{{#magma-button action="scrollToAnchor" value="selectbox"}}Selectbox{{/magma-button}}</li>
+						<li>{{#magma-button action="scrollToAnchor" value="textarea"}}Textarea{{/magma-button}}</li>
+						<li>{{#magma-button action="scrollToAnchor" value="textbox"}}Textbox{{/magma-button}}</li>
+					</ul>
+				</nav>
+
+				<div class="rightside">
+
+					<h3 data-anchor="alert">Alert</h3>
+
+					<div class="row">
+						<p>An alert box with different style and color, based on your need. You can also create your own, it will add the class <em>magma-alert-{alert}</em> to the component, and you can style it the way you want.</p>
+						<ul>
+							<li><strong>alert</strong> Type of alert your want to display</li>
+						</ul>
+					</div>
+
+					<div class="row">
+
+						<code class="hbs"><pre>
+&#x7B;&#x7B;#magma-alert alert="error"&#x7D;&#x7D;
+  Please enter your firstname
+&#x7B;&#x7B;/magma-alert&#x7D;&#x7D;
+
+&#x7B;&#x7B;#magma-alert alert="warning"&#x7D;&#x7D;
+  Are you sure you want to continue?
+&#x7B;&#x7B;/magma-alert&#x7D;&#x7D;
+
+&#x7B;&#x7B;#magma-alert alert="info"&#x7D;&#x7D;
+  Have a look to this information, <a href="#">click here!</a>
+&#x7B;&#x7B;/magma-alert&#x7D;&#x7D;
+
+&#x7B;&#x7B;#magma-alert alert="success"&#x7D;&#x7D;
+  Your request has been sent!
+&#x7B;&#x7B;/magma-alert&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+
+							{{#magma-alert alert="error"}}
+								Please enter your firstname
+							{{/magma-alert}}
+
+							{{#magma-alert alert="warning"}}
+								Are you sure you want to continue?
+							{{/magma-alert}}
+
+							{{#magma-alert alert="info"}}
+								Have a look to this information, <a href="#">click here!</a>
+							{{/magma-alert}}
+
+							{{#magma-alert alert="success"}}
+								Your request has been sent!
+							{{/magma-alert}}
+						</div>
+					</div>
+
+					<h3 data-anchor="button">Button</h3>
+
+					<div class="row">
+						<p>The button is something very important in a web page. You can use the classes <em>magma-small</em> or <em>magma-large</em> to change the size of the component.</p>
+						<ul>
+							<li><strong>action</strong> This is the name of the action that will be called whenever the user click on the button.</li>
+							<li><strong>disabled</strong> When set to true, the button will be disabled.</li>
+							<li><strong>name</strong> Only used when part of a button-group.</li>
+							<li><strong>pressed</strong> When set to true, the button will have the pressed state.</li>
+							<li><strong>value</strong> You can pass an object to the action if you want.</li>
+						</ul>
+					</div>
+
+					<div class="row">
+
+						<h4>Small, default and large</h4>
+
+						<code class="hbs"><pre>
+&#x7B;&#x7B;#magma-button class="magma-small" action="openAlert"&#x7D;&#x7D;
+  Bonjour
+&#x7B;&#x7B;/magma-button&#x7D;&#x7D;
+
+&#x7B;&#x7B;#magma-alert action="openAlert"&#x7D;&#x7D;
+  Bonjour
+&#x7B;&#x7B;/magma-alert&#x7D;&#x7D;
+
+&#x7B;&#x7B;#magma-alert class="magma-large" action="openAlert"&#x7D;&#x7D;
+  Bonjour
+&#x7B;&#x7B;/magma-alert&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+							{{#magma-button class="magma-small"}}
+								Bonjour
+							{{/magma-button}}
+
+							{{#magma-button}}
+								Bonjour
+							{{/magma-button}}
+
+							{{#magma-button class="magma-large"}}
+								Bonjour
+							{{/magma-button}}
+						</div>
+					</div>
+
+					<div class="row">
+
+						<h4>Disabled and pressed</h4>
+
+						<code class="hbs"><pre>
+&#x7B;&#x7B;#magma-button disabled=true&#x7D;&#x7D;
+  Bonjour
+&#x7B;&#x7B;/magma-button&#x7D;&#x7D;
+
+&#x7B;&#x7B;#magma-button pressed=true&#x7D;&#x7D;
+  Bonjour
+&#x7B;&#x7B;/magma-button&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+
+							{{#magma-button disabled=true}}
+								Bonjour
+							{{/magma-button}}
+
+							{{#magma-button pressed=true}}
+								Bonjour
+							{{/magma-button}}
+
+						</div>
+					</div>
+
+					<h3 data-anchor="button-group">Button group</h3>
+
+					<p>You can assemble multiple buttons within a group. They will behave about the same way a radiobutton will work. This is very useful if you want to create a navigation bar, or a multi-panel with tabs for example.</p>
+					<ul>
+						<li><strong>name</strong> This name is mandatory and should be the same in the group and the button itself. It allows to share the events between the two components.</li>
+						<li><strong>value</strong> You can get the value of the current pressed button within this attribute. You can also set the default value.</li>
+					</ul>
+
+					<div class="row">
+						<code class="hbs"><pre>
+&#x7B;&#x7B;#magma-button-group name="buttonGroupHello" value=buttonGroupLangValue&#x7D;&#x7D;
+  &#x7B;&#x7B;#magma-button name="buttonGroupHello" value="Bonjour" pressed=true&#x7D;&#x7D; Bonjour &#x7B;&#x7B;/magma-button&#x7D;&#x7D;
+  &#x7B;&#x7B;#magma-button name="buttonGroupHello" value="Hola"&#x7D;&#x7D; Hola &#x7B;&#x7B;/magma-button&#x7D;&#x7D;
+  &#x7B;&#x7B;#magma-button name="buttonGroupHello" value="Hello"&#x7D;&#x7D; Hello &#x7B;&#x7B;/magma-button&#x7D;&#x7D;
+&#x7B;&#x7B;/magma-button-group&#x7D;&#x7D;
+
+Selected element: &#x7B;&#x7B;buttonGroupLangValue&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+						{{#magma-button-group name="buttonGroupHello" value=buttonGroupLangValue}}
+								{{#magma-button name="buttonGroupHello" value="Bonjour" pressed=true}} Bonjour {{/magma-button}}
+								{{#magma-button name="buttonGroupHello" value="Hola"}} Hola {{/magma-button}}
+								{{#magma-button name="buttonGroupHello" value="Hello"}} Hello {{/magma-button}}
+							{{/magma-button-group}}<br />
+
+							Selected element: {{buttonGroupLangValue}}
+						</div>
+
+					</div>
+
+					<h3 data-anchor="checkbox">Checkbox</h3>
+
+					<p>A simple checkbox. You can disable it, make it required or even have an invalid state set on it.</p>
+					<ul>
+						<li><strong>checked</strong> When set to true, the checkbox is ticked</li>
+						<li><strong>invalid</strong> When set to true, the checkbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
+						<li><strong>name</strong> The name of the checkbox</li>
+						<li><strong>required</strong> When set to true, the checkbox has a required state, and has the class <em>magma-required</em> set to it</li>
+					</ul>
+
+					<div class="row">
+						<code class="hbs"><pre>
+&#x7B;&#x7B;magma-checkbox name="checkbox" checked=true&#x7D;&#x7D;
+
+Is checked?: &#x7B;&#x7B;checkboxIsChecked&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+							{{magma-checkbox name="checkbox" checked=checkboxIsChecked}} <br /><br />
+							Is checked?: {{checkboxIsChecked}}
+						</div>
+					</div>
+
+					<h3 data-anchor="form-element">Form element</h3>
+
+					<p>It's not always easy to bind a label to form field with Ember, especially with auto-generated IDs. This will allow you to create a label and to bind it to your input element. You can also create your own label</p>
+					<ul>
+						<li><strong>label</strong> The label to be displayed</li>
+					</ul>
+
+					<div class="row">
+						<code class="hbs"><pre>
+&#x7B;&#x7B;#magma-form-element label="Name:"&#x7D;&#x7D;
+  &#x7B;&#x7B;magma-textbox value="Alex"&#x7D;&#x7D;
+&#x7B;&#x7B;/magma-form-element&#x7D;&#x7D;
+
+&#x7B;&#x7B;#magma-form-element&#x7D;&#x7D;
+   &#x7B;&#x7B;magma-checkbox&#x7D;&#x7D; &lt;label&gt;I accept the terms and conditions&lt;/label&gt;
+&#x7B;&#x7B;/magma-form-element&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+							{{#magma-form-element label="Name:"}}
+								{{magma-textbox value="Alex"}}
+							{{/magma-form-element}}
+
+							{{#magma-form-element}}
+								{{magma-checkbox}} <label>I accept the terms and conditions</label>
+							{{/magma-form-element}}
+						</div>
+					</div>
+
+					<h3 data-anchor="popover">Popover</h3>
+
+					<div class="row">
+						<p>You can create a popover that will appear on top of any element. It can be a tooltip, to display additional information, or you can even use this component to display a list of items (such as a dropdown), or to display a calendar, bound a textbox for example.</p>
+						<ul>
+							<li><strong>for</strong> It corresponds to the selector of the element that will trigger the popover to be displayed or hidden.</li>
+							<li><strong>on</strong> By default, the popover will appear on <em>hover</em> the <em>for</em> element, but you can also display it on <em>click</em>.</li>
+							<li><strong>placement</strong> You decide if you want the popover to be display on <em>top</em>, on the <em>left</em>, on the <em>right</em> or at the <em>bottom</em> of the <em>for</em> element.</li>
+							<li><strong>alignment</strong> You can align the popover to a side of the <em>for</em> element. When the placement is set to top or bottom, you can align it on the left, the right or center. When the placement is set to left or right, you can align it at the top, the bottom or center.</li>
+						</ul>
+					</div>
+					<div class="row">
+						<code class="hbs"><pre>
+&#x7B;&#x7B;#magma-button class="popover-button"&#x7D;&#x7D;
+  Roll over to display the tooltip
+&#x7B;&#x7B;/magma-button&#x7D;&#x7D;
+
+&#x7B;&#x7B;#magma-popover for=".popover-button" placement="right" alignment="center"&#x7D;&#x7D;
+  This appears on mouse over
+&#x7B;&#x7B;/magma-popover&#x7D;&#x7D;
+
+&#x7B;&#x7B;#magma-popover on="click" for=".popover-button" placement="bottom" alignment="left"&#x7D;&#x7D;
+  This appears on click&lt;br /&gt;&lt;br /&gt;
+  &lt;img src="https://upload.wikimedia.org/wikipedia/en/6/69/Ember.js_Logo_and_Mascot.png" width="150"&gt;
+&#x7B;&#x7B;/magma-popover&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+							{{#magma-button class="popover-button" style="background: transparent; border: 1px solid; color: #a31212"}}
+								Roll over to display a tooltip. <br />Click to display another one.
+							{{/magma-button}}
+
+							{{#magma-popover for=".popover-button" placement="right" alignment="center"}}
+								This appears on mouse over
+							{{/magma-popover}}
+
+							{{#magma-popover on="click" for=".popover-button" placement="bottom" alignment="left"}}
+								This appears on click<br /><br />
+								<img src="https://upload.wikimedia.org/wikipedia/en/6/69/Ember.js_Logo_and_Mascot.png" width="150">
+							{{/magma-popover}}
+						</div>
+					</div>
+
+					<h3 data-anchor="progress">Progress</h3>
+
+					<p>This creates a progress bar, very useful to display the state of something loading. You can display the value of the progression as well.</p>
+					<ul>
+						<li><strong>value</strong> The current value</li>
+						<li><strong>valueMax</strong> The maximum value the progress bar can reach</li>
+					</ul>
+
+					<div class="row">
+						<code class="hbs"><pre>
+&#x7B;&#x7B;magma-progress value=50&#x7D;&#x7D;
+
+&#x7B;&#x7B;#magma-progress value=75 as |progress|&#x7D;&#x7D;
+  &#x7B;&#x7B;progress.indicatorValue&#x7D;&#x7D;%
+&#x7B;&#x7B;/magma-popover&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+
+							{{magma-progress value=50}}
+
+							{{#magma-progress value=75 as |progress|}}
+								{{progress.indicatorValue}}%
+							{{/magma-progress}}
+
+						</div>
+					</div>
+
+					<h3 data-anchor="radiobutton">Radiobutton</h3>
+
+					<p>A simple radiobutton. You can disable it, make it required or even have an invalid state set on it.</p>
+					<ul>
+						<li><strong>checked</strong> When set to true, the radiobutton is ticked</li>
+						<li><strong>disabled</strong>  When set to true, the radiobutton has a disabled state, and has the class <em>magma-disabled</em> set to it.</li>
+						<li><strong>invalid</strong> When set to true, the checkbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
+						<li><strong>name</strong> The name of the checkbox</li>
+						<li><strong>required</strong> When set to true, the checkbox has a required state, and has the class <em>magma-required</em> set to it</li>
+					</ul>
+
+					<div class="row">
+						<code class="hbs"><pre>
+&#x7B;&#x7B;magma-radiobutton name="radiobuttonGroup" value="Hello"&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+							{{magma-radiobutton name="radiobuttonGroup1" value="Hello"}}
+							{{magma-radiobutton name="radiobuttonGroup1" value="Hello"}}
+						</div>
+					</div>
+
+					<h3 data-anchor="radiobutton-group">Radio button group</h3>
+
+					<p>A radiobutton doesn't work alone, they work in group. With this component, you can get the value of the current selected radiobutton.</p>
+					<ul>
+						<li><strong>name</strong> This name is mandatory and should be the same in the group and the button itself. It allows to share the events between the two components.</li>
+						<li><strong>value</strong> You can get the value of the current pressed button within this attribute. You can also set the default value.</li>
+					</ul>
+
+					<div class="row">
+						<code class="hbs"><pre>
+&#x7B;&#x7B;magma-radiobutton-group name="radiobuttonHelloGroup" value=radiobuttonHelloGroupValue&#x7D;&#x7D;
+  &#x7B;&#x7B;magma-radiobutton name="radiobuttonHelloGroup" value="Bonjour"&#x7D;&#x7D;
+  &#x7B;&#x7B;magma-radiobutton name="radiobuttonHelloGroup" value="Hola"&#x7D;&#x7D;
+  &#x7B;&#x7B;magma-radiobutton name="radiobuttonHelloGroup" value="Hello"&#x7D;&#x7D;
+&#x7B;&#x7B;/magma-radiobutton-group&#x7D;&#x7D;
+
+Selected element: &#x7B;&#x7B;radiobuttonHelloGroupValue&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+							{{#magma-radiobutton-group name="radiobuttonHelloGroup" value=radiobuttonHelloGroupValue}}
+								{{magma-radiobutton name="radiobuttonHelloGroup" value="Bonjour"}}
+								{{magma-radiobutton name="radiobuttonHelloGroup" value="Hola"}}
+								{{magma-radiobutton name="radiobuttonHelloGroup" value="Hello"}}
+							{{/magma-radiobutton-group}}<br />
+
+							Selected element: {{radiobuttonHelloGroupValue}}
+						</div>
+					</div>
+
+					<h3 data-anchor="selectbox">Selectbox</h3>
+
+					<p>Creates a drop-down list using the select tag.</p>
+					<ul>
+						<li><strong>content</strong> An array containing objects to be displayed in the drop-down.</li>
+						<li><strong>disabled</strong>  When set to true, the selectbox has a disabled state, and has the class <em>magma-disabled</em> set to it.</li>
+						<li><strong>invalid</strong> When set to true, the selectbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
+						<li><strong>prompt</strong> You can define a first item to be displayed when there is no selection.</li>
+						<li><strong>optionLabelPath</strong> It specifies the path on each object to the desired property for the element's text.</li>
+						<li><strong>optionValuePath</strong> Option is used to specify the path on each object to the desired property for the value attribute.</li>
+						<li><strong>required</strong> When set to true, the selectbox has a required state, and has the class <em>magma-required</em> set to it.</li>
+						<li><strong>selection</strong> This contains the currently selected object in the drop-down.</li>
+					</ul>
+
+					<div class="row">
+
+						<h4>Default</h4>
+
+						<code class="hbs"><pre>
+&#x7B;&#x7B;magma-selectbox content=cityOptions optionLabelPath="name" optionValuePath="value" class="magma-small"&#x7D;&#x7D;
+&#x7B;&#x7B;magma-selectbox content=cityOptions optionLabelPath="name" optionValuePath="value"&#x7D;&#x7D;
+&#x7B;&#x7B;magma-selectbox content=cityOptions optionLabelPath="name" optionValuePath="value" class="magma-large"&#x7D;&#x7D;
+
+Selected element: &#x7B;&#x7B;citySelection.value&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+							{{magma-selectbox selection=citySelection content=exampleCityOptions optionLabelPath="name" optionValuePath="value" class="magma-small"}}<br /><br />
+							{{magma-selectbox selection=citySelection content=exampleCityOptions optionLabelPath="name" optionValuePath="value"}}<br /><br />
+							{{magma-selectbox selection=citySelection content=exampleCityOptions optionLabelPath="name" optionValuePath="value" class="magma-large"}}<br /><br />
+
+							Selected element: {{citySelection.value}}
+						</div>
+
+					</div>
+
+					<div class="row">
+
+						<h4>Invalid and Disabled</h4>
+
+						<code class="hbs"><pre>
+&#x7B;&#x7B;magma-selectbox prompt="Select a city" invalid=true content=cityOptions optionLabelPath="name" optionValuePath="value"&#x7D;&#x7D;
+
+&#x7B;&#x7B;magma-selectbox disabled=true content=cityOptions optionLabelPath="name" optionValuePath="value"&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+							{{magma-selectbox prompt="Select a city" invalid=true content=exampleCityOptions optionLabelPath="name" optionValuePath="value"}}<br /><br />
+
+							{{magma-selectbox disabled=true content=exampleCityOptions optionLabelPath="name" optionValuePath="value"}}
+						</div>
+					</div>
+
+					<h3 data-anchor="textarea">Textarea</h3>
+
+					<p>Creates a multi-line text input using the textarea tag.</p>
+					<ul>
+						<li><strong>disabled</strong>  When set to true, the selectbox has a disabled state, and has the class <em>magma-disabled</em> set to it.</li>
+						<li><strong>invalid</strong> When set to true, the selectbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
+						<li><strong>required</strong> When set to true, the selectbox has a required state, and has the class <em>magma-required</em> set to it.</li>
+						<li><strong>value</strong> This contains the value of the field.</li>
+					</ul>
+
+
+					<div class="row">
+
+						<h4>Default</h4>
+
+						<code class="hbs"><pre>
+&#x7B;&#x7B;magma-textarea value="I love to play with fire!" class="magma-small"&#x7D;&#x7D;
+&#x7B;&#x7B;magma-textarea value="I love to play with fire!"&#x7D;&#x7D;
+&#x7B;&#x7B;magma-textarea value="I love to play with fire!" class="magma-large"&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+							{{magma-textarea value="I love to play with fire!" class="magma-small"}}<br /><br />
+
+							{{magma-textarea value="I love to play with fire!"}}<br /><br />
+
+							{{magma-textarea value="I love to play with fire!" class="magma-large"}}
+						</div>
+
+					</div>
+
+					<div class="row">
+
+						<h4>Invalid and Disabled</h4>
+
+						<code class="hbs"><pre>
+&#x7B;&#x7B;magma-textarea invalid=true&#x7D;&#x7D;
+
+&#x7B;&#x7B;magma-textarea disabled=true&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+							{{magma-textarea invalid=true}}<br /><br />
+
+							{{magma-textarea disabled=true}}
+						</div>
+					</div>
+
+					<h3 data-anchor="textbox">Textbox</h3>
+
+					<p>Creates a single-line text input using the input tag.</p>
+					<ul>
+						<li><strong>disabled</strong>  When set to true, the selectbox has a disabled state, and has the class <em>magma-disabled</em> set to it.</li>
+						<li><strong>invalid</strong> When set to true, the selectbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
+						<li><strong>required</strong> When set to true, the selectbox has a required state, and has the class <em>magma-required</em> set to it.</li>
+						<li><strong>value</strong> This contains the value of the field.</li>
+					</ul>
+
+					<div class="row">
+
+						<h4>Default</h4>
+
+						<code class="hbs"><pre>
+&#x7B;&#x7B;magma-textbox value="This is burning hot!" class="magma-small"&#x7D;&#x7D;
+&#x7B;&#x7B;magma-textbox value="This is burning hot!"&#x7D;&#x7D;
+&#x7B;&#x7B;magma-textbox value="This is burning hot!" class="magma-large"&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+							{{magma-textbox value="This is burning hot!" class="magma-small"}}<br /><br />
+
+							{{magma-textbox value="This is burning hot!"}}<br /><br />
+
+							{{magma-textbox value="This is burning hot!" class="magma-large"}}
+						</div>
+					</div>
+
+					<div class="row">
+
+						<h4>Invalid and Disabled</h4>
+
+						<code class="hbs"><pre>
+&#x7B;&#x7B;magma-textbox invalid=true&#x7D;&#x7D;
+
+&#x7B;&#x7B;magma-textbox disabled=true&#x7D;&#x7D;
+						</pre></code>
+
+						<div class="example">
+							{{magma-textbox invalid=true}}<br /><br />
+
+							{{magma-textbox disabled=true}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="upcoming container">
+		<h2>Upcoming features</h2>
+
+		<h3>Animation support</h3>
+		<p>There is currently no animation for the transitions when something appears, disappears or change its state.</p>
+
+	</div>
+
+	<div class="issues container">
+		<h2>Known issues</h2>
+
+		<h3>No issue for now.</h3>
+		<p>If you want to report an issue, please submit your request on Github: <a href="https://github.com/4lex-io/magma/issues" target="_blank">https://github.com/4lex-io/magma/issues</a></p>
+
+	</div>
+
+</main>
+
+<footer>
+	<div class="container">
+		<h3>Licence</h3>
+		<p>This addon is licensed under the MIT licence. For more information, <a href="https://github.com/4lex-io/magma/blob/master/LICENSE.md" target="_blank">click here</a></p>
+
+		<h3>Donation</h3>
+		<p>This project has been created to be open-source and free to the community. I don't want to monetize my libraries as I want them to be accessible to everyone, but if you like this project and you would like to reward the developer, it would be helpful :)</p>
+
+		<a href="https://www.paypal.me/alexismangin" target="_blank">
+			<img src="assets/paypal-reward.png" width="300">
+		</a>
+
+		<h3>Author</h3>
+		<p class="author">
+			Alexis Mangin - <a href="http://www.alexismangin.com/" target="_blank">http://www.alexismangin.com/</a>
+		</p>
+	</div>
+
+</footer>
