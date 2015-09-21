@@ -1,1 +1,1 @@
-export { default } from 'magma/components/magma-radiobutton-group';
+export { default } from 'ember-magma/components/magma-radiobutton-group';

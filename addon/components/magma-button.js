@@ -17,8 +17,8 @@
  */
 
 import Ember from 'ember';
-import DisabledSupport from 'magma/mixins/disabled-support';
-import PressedSupport from 'magma/mixins/pressed-support';
+import DisabledSupport from 'ember-magma/mixins/disabled-support';
+import PressedSupport from 'ember-magma/mixins/pressed-support';
 
 export default Ember.Component.extend(DisabledSupport,
 	PressedSupport, {

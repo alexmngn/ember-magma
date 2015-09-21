@@ -1,1 +1,1 @@
-export { default } from 'magma/components/magma-textarea';
+export { default } from 'ember-magma/components/magma-textarea';

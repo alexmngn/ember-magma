@@ -1,1 +1,1 @@
-export { default } from 'magma/components/magma-alert';
+export { default } from 'ember-magma/components/magma-alert';

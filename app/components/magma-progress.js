@@ -1,1 +1,1 @@
-export { default } from 'magma/components/magma-progress';
+export { default } from 'ember-magma/components/magma-progress';
