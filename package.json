@@ -57,12 +57,12 @@
     "ember-tabbable": "^0.1.0"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "demoURL": "https://4lex-io.github.io/ember-magma"
   },
   "homepage": "https://github.com/4lex-io/ember-magma",
   "bugs": {
     "url": "https://github.com/4lex-io/ember-magma/issues"
   },
-  "main": "index.js",
-  "demoURL": "https://4lex-io.github.io/ember-magma"
+  "main": "index.js"
 }
