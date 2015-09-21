@@ -1,4 +1,4 @@
-# Magma
+# Magma [![Build Status](https://travis-ci.org/4lex-io/ember-magma.png?branch=master)](https://travis-ci.org/4lex-io/ember-magma)
 
 ## Designed for Ember.js
 
