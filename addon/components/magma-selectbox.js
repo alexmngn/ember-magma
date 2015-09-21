@@ -1,8 +1,16 @@
 /**
- * Selectbox
+ * Creates a drop-down list using the select tag.
  *
  * @class Magma.Component.Selectbox
- *
+ * @constructor
+ * @uses Magma.Mixin.DisabledSupport
+ * @uses Magma.Mixin.InvalidSupport
+ * @uses Magma.Mixin.RequiredSupport
+ * @extends Ember.Component
+ * @example
+ * ```
+ * {{magma-selectbox content=cityOptions optionLabelPath="name" optionValuePath="value"}}
+ * ```
  */
 
 import Ember from 'ember';
@@ -15,37 +23,70 @@ export default Ember.Component.extend(
 	InvalidSupport,
 	RequiredSupport, {
 
-	action: void 0,
-
 	attributeBindings: [
 		'autofocus',
 		'aria-describedby',
 		'aria-label',
 		'aria-labelledby',
 		'disabled',
+		'readonly',
 		'required'
 	],
 
 	classNames: ['magma-selectbox'],
 
-	content: null,
-
-	_content: Ember.computed('content', function () {
-
-	}),
-
-	prompt: null,
-
-	optionValuePath: 'id',
-
-	optionLabelPath: 'title',
-
-	optionGroupPath: 'group',
-
-	selection: void 0,
-
 	tagName: 'select',
 
+	/**
+	 * You can call an action when the drop-down did change. It will have the `selection` in parameter
+	 * @property action {String}
+	 * @public
+	 */
+	action: void 0,
+
+	/**
+	 * An array containing objects to be displayed in the drop-down.
+	 * @property content {Array}
+	 * @public
+	 */
+	content: null,
+
+	/**
+	 * You can define a first item to be displayed when there is no selection.
+	 * @property promt {String}
+	 * @public
+	 */
+	prompt: null,
+
+	/**
+	 * It specifies the path on each object to the desired property for the element's text.
+	 * @property optionValuePath {String}
+	 * @default id
+	 * @public
+	 */
+	optionValuePath: 'id',
+
+	/**
+	 * Option is used to specify the path on each object to the desired property for the value attribute.
+	 * @property optionLabelPath {String}
+	 * @default title
+	 * @public
+	 */
+	optionLabelPath: 'title',
+
+	/**
+	 * This contains the currently selected object in the drop-down. It can be set with the item to display.
+	 * @property selection {Object}
+	 * @public
+	 */
+	selection: void 0,
+
+	/**
+	 * On init, will set the `content` to an empty array if not defined.
+	 * If not defined, the `selection` will be set by default to the first value of the content after render.
+	 * @method selectboxInit
+	 * @private
+	 */
 	selectboxInit: Ember.on('init', function () {
 		if (!this.get('content')) {
 			this.set('content', []);
@@ -57,13 +98,19 @@ export default Ember.Component.extend(
 		});
 	}),
 
-	selectionDidChange: Ember.on('change', function () {
+	/**
+	 * On change, the `selection` is set to the selected item.
+	 * If `action` is defined, will send the action with `selection` in parameter.
+	 * @method selectboxInit
+	 * @private
+	 */
+	selectionChange: Ember.on('change', function () {
 		const selectedIndex = this.$()[0].selectedIndex;
 		const selection = this.get('content')[!!this.get('prompt') ? selectedIndex - 1 : selectedIndex];
 		const action = this.get('action');
 		this.set('selection', selection);
 		if (action) {
-			action(selection);
+			this.sendAction(action, selection);
 		}
 	})
 });

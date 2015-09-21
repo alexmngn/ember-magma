@@ -1,5 +1,5 @@
 /**
- * Required
+ * Adds support of the required state to a component
  *
  * @class Magma.Mixin.RequiredSupport
  * @constructor Ember.Mixin
@@ -14,8 +14,10 @@ export default Ember.Mixin.create({
 	classNameBindings: ['required:magma-required'],
 
 	/**
+	 * When set to true, the component will have a required state and the class magma-required will be set to it.
 	 * @property required {Boolean}
 	 * @default false
+	 * @public
 	 */
 	required: false,
 

@@ -7,6 +7,7 @@ $magma-popover--placements: (left, right, top, bottom);
 	color: $magma-color-gamma;
 	max-width: 200px;
 	padding: 10px;
+	position: absolute;
 	z-index: 100;
 
 	&:before {
@@ -18,7 +19,7 @@ $magma-popover--placements: (left, right, top, bottom);
 
 
 @each $placement in $magma-popover--placements {
-	&.magma-popover-placement-#{$placement} {
+	&.magma-position-placement-#{$placement} {
 		margin-#{opposite-direction($placement)}: $magma-popover-triangle--size*2;
 
 		&:before {
@@ -27,19 +28,19 @@ $magma-popover--placements: (left, right, top, bottom);
 		}
 
 		@if $placement == "left" or $placement == "right" {
-			&.magma-popover-alignment-center:before, &.magma-popover-alignment-top:before {
+			&.magma-position-alignment-center:before, &.magma-position-alignment-top:before {
 				top: 5px;
 			}
 
-			&.magma-popover-alignment-center:before, &.magma-popover-alignment-bottom:before {
+			&.magma-position-alignment-center:before, &.magma-position-alignment-bottom:before {
 				bottom: 5px;
 			}
 		} @else {
-			&.magma-popover-alignment-center:before, &.magma-popover-alignment-left:before {
+			&.magma-position-alignment-center:before, &.magma-position-alignment-left:before {
 				left: 5px;
 			}
 
-			&.magma-popover-alignment-center:before, &.magma-popover-alignment-right:before {
+			&.magma-position-alignment-center:before, &.magma-position-alignment-right:before {
 				right: 5px;
 			}
 		}
