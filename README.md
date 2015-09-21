@@ -20,3 +20,14 @@ ember install ember-magma
 
 ## Documentation
 The documentation http://4lex-io.github.io/ember-magma/ to see examples.
+
+##Known issues
+### Styles not loading.
+
+There is currently an issue with Ember-CLI blocking the importation of the vendor styles when you install Magma into your project. Until this gets fixed by the Ember-CLI team, the work around for now would be to load the style manually into your project.
+
+Make sure you have ember-cli-sass installed on your project, and after installing the addon, just load the styles on the app.scss file.
+
+```
+@import "node_modules/ember-magma/addon/styles/addon";
+```
