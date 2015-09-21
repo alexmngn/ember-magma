@@ -1,7 +1,7 @@
 /**
- * Pressed
+ * Adds support of the pressed state to a component
  *
- * @class Magma.Mixin.Pressed
+ * @class Magma.Mixin.PressedSupport
  * @constructor Ember.Mixin
  */
 
@@ -14,8 +14,10 @@ export default Ember.Mixin.create({
 	classNameBindings: ['pressed:magma-pressed'],
 
 	/**
+	 * When set to true, the component will have a pressed state and the class magma-pressed will be set to it.
 	 * @property pressed {Boolean}
 	 * @default false
+	 * @public
 	 */
 	pressed: false,
 

@@ -1,8 +1,15 @@
 /**
- * Progress
+ * This creates a progress bar, very useful to display the state of something loading. You can display the value of the progression as well.
  *
  * @class Magma.Component.Progress
- *
+ * @constructor
+ * @extends Ember.Component
+ * @example
+ * ```
+ * {{#magma-progress value=75 as |progress|}}
+ *   {{progress.indicatorValue}}%
+ * {{/magma-popover}}
+ * ```
  */
 
 import Ember from 'ember';
@@ -26,15 +33,28 @@ export default Ember.Component.extend({
 
 	classNames: ['magma-progress'],
 
+	role: 'progressbar',
+
+	/**
+	 * The percentage of progress
+	 * @param indicatorValue {Number}
+	 * @private
+	 */
 	indicatorValue: Ember.computed('value', 'valueMax', function () {
 		return parseFloat(this.get('value')*100/this.get('valueMax')) || 0;
 	}),
 
-	role: 'progressbar',
-
-	title: void 0,
-
+	/**
+	 * The current value
+	 * @param value {Number}
+	 * @public
+	 */
 	value: 0,
 
+	/**
+	 * The maximum value the progress bar can reach
+	 * @param valueMax {Number}
+	 * @public
+	 */
 	valueMax: 100
 });

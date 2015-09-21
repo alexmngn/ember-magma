@@ -1,8 +1,16 @@
 /**
- * Radiobutton
+ * A simple radiobutton. You can disable it, make it required or even have an invalid state set on it.
  *
  * @class Magma.Component.Radiobutton
- *
+ * @constructor
+ * @uses Magma.Mixin.DisabledSupport
+ * @uses Magma.Mixin.InvalidSupport
+ * @uses Magma.Mixin.RequiredSupport
+ * @extends Ember.Component
+ * @example
+ * ```
+ * {{magma-radiobutton name="radiobuttonGroup" value="Hello"}}
+ * ```
  */
 
 import Ember from 'ember';
@@ -13,8 +21,6 @@ import RequiredSupport from 'magma/mixins/required-support';
 export default Ember.Component.extend(DisabledSupport,
 	InvalidSupport,
 	RequiredSupport, {
-
-	action: void 0,
 
 	attributeBindings: [
 		'checked',
@@ -30,34 +36,57 @@ export default Ember.Component.extend(DisabledSupport,
 
 	magmaEvent: Ember.inject.service('magma-event'),
 
-	tabindex: void 0,
-
 	tagName: 'input',
 
 	type: 'radio',
 
+	/**
+	 * Value of the radiobutton
+	 * @property value {String}
+	 * @public
+	 */
 	value: void 0,
 
-	initialize: Ember.on('init', function () {
+	/**
+	 * On init, initialize the event between the radiobutton and the radiobutton group if needed.
+	 * @method radiobuttonInit
+	 * @private
+	 */
+	radiobuttonInit: Ember.on('init', function () {
 		let name = this.get('name');
 		if (name) {
 			this.get('magmaEvent').subscribe(name+'RadiobuttonGroup', this, 'radiobuttonGroupDidChange');
 		}
 	}),
 
-	teardown: Ember.on('willDestroyElement', function () {
+	/**
+	 * On willDestroyElement, teardown the event between the radiobutton and the radiobutton group.
+	 * @method radiobuttonWillDestroyElement
+	 * @private
+	 */
+	radiobuttonWillDestroyElement: Ember.on('willDestroyElement', function () {
 		let name = this.get('name');
 		if (name) {
 			this.get('magmaEvent').unsubscribe(name+'RadiobuttonGroup');
 		}
 	}),
 
+	/**
+	 * Fired when one radiobutton group state changes. It sets the `checked` and `disabled` states.
+	 * @event radiobuttonGroupDidChange
+	 * @private
+	 */
 	radiobuttonGroupDidChange(event) {
 		this.set('checked', (event.value === this.get('value')));
 		this.set('disabled', event.disabled || false);
 	},
 
-	didChange: Ember.on('change', function () {
+	/**
+	 * On change, will send an event to the associated group.
+	 * @method radiobuttonChange
+	 * @private
+	 */
+	radiobuttonChange: Ember.on('change', function () {
 		let name = this.get('name');
 
 		if (this.get('disabled') || !name) {

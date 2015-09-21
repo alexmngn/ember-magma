@@ -1,5 +1,5 @@
 /**
- * Disabled
+ * Adds support of the disabled state to a component
  *
  * @class Magma.Mixin.DisabledSupport
  * @constructor Ember.Mixin
@@ -14,8 +14,10 @@ export default Ember.Mixin.create({
 	classNameBindings: ['disabled:magma-disabled'],
 
 	/**
+	 * When set to true, the component will have a disabled state and the class magma-disabled will be set to it.
 	 * @property disabled {Boolean}
 	 * @default false
+	 * @public
 	 */
 	disabled: false,
 

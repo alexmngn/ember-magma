@@ -1,5 +1,5 @@
 /**
- * Modal
+ * Adds support of the modal to a component
  *
  * @class Magma.Mixin.ModalSupport
  * @constructor Ember.Mixin
@@ -14,29 +14,39 @@ export default Ember.Mixin.create({
 	attributeBindings: ['tabindex'],
 
 	/**
+	 * When set to true, the tab will be constrained to the component
 	 * @property isConstrained {Boolean}
 	 * @default true
+	 * @public
 	 */
 	isConstrained: true,
 
 	/**
+	 * When set to true, the tab will be stopped.
 	 * @property isTrapped {Boolean}
 	 * @default false
+	 * @public
 	 */
 	isTrapped: false,
 
 	/**
-	 * @property modalElement {}
+	 * @property modalElement {Object}
+	 * @private
 	 */
 	modalElement: Ember.computed(function () {
 		return this;
 	}),
 
+	/**
+	 * @property tabindex
+	 * @protected
+	 */
 	tabindex: Ember.computed('isConstrained', function () {
 		return this.get('isConstrained') ? 0 : void 0;
 	}),
 
 	/**
+	 * On keydown, on the tab key, constrain the tab to the component.
 	 * @event modalConstrainKeyDown
 	 */
 	modalConstrainKeyDown: Ember.on('keyDown', function (event) {
@@ -60,6 +70,7 @@ export default Ember.Mixin.create({
 	}),
 
 	/**
+	 * On keydown, on the tab key, stop the tab.
 	 * @event modalTrappingKeyDown
 	 */
 	modalTrappingKeyDown: Ember.on('keyDown', function (event) {

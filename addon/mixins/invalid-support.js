@@ -1,5 +1,5 @@
 /**
- * Invalid
+ * Adds support of the invalid state to a component
  *
  * @class Magma.Mixin.InvalidSupport
  * @constructor Ember.Mixin
@@ -14,8 +14,10 @@ export default Ember.Mixin.create({
 	classNameBindings: ['invalid:magma-invalid'],
 
 	/**
+	 * When set to true, the component will have a invalid state and the class magma-invalid will be set to it.
 	 * @property invalid {Boolean}
 	 * @default false
+	 * @public
 	 */
 	invalid: false,
 

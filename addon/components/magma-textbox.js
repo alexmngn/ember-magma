@@ -1,8 +1,16 @@
 /**
- * Textbox
+ * Creates a single-line text input using the input tag.
  *
- * @class Magma.Component.Textbox
- *
+ * @class Magma.Component.Textarea
+ * @constructor
+ * @uses Magma.Mixin.DisabledSupport
+ * @uses Magma.Mixin.InvalidSupport
+ * @uses Magma.Mixin.RequiredSupport
+ * @extends Ember.Component
+ * @example
+ * ```
+ * {{magma-textarea value="I love to play with fire!"}}
+ * ```
  */
 
 import Ember from 'ember';
@@ -19,6 +27,10 @@ export default Ember.TextField.extend(
 		'aria-describedby',
 		'aria-label',
 		'aria-labelledby',
+		'disabled',
+		'maxlength',
+		'readonly',
+		'required',
 		'type'
 	],
 

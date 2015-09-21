@@ -152,8 +152,8 @@
 						<p>The button is something very important in a web page. You can use the classes <em>magma-small</em> or <em>magma-large</em> to change the size of the component.</p>
 						<ul>
 							<li><strong>action</strong> This is the name of the action that will be called whenever the user click on the button.</li>
-							<li><strong>disabled</strong> When set to true, the button will be disabled.</li>
-							<li><strong>name</strong> Only used when part of a button-group.</li>
+							<li><strong>disabled</strong> When set to true, the button is disabled, and has the class <em>magma-disabled</em> set to it.</li>
+							<li><strong>name</strong> The name is used to share events between the button and the button-group. Only used when part of a button-group.</li>
 							<li><strong>pressed</strong> When set to true, the button will have the pressed state.</li>
 							<li><strong>value</strong> You can pass an object to the action if you want.</li>
 						</ul>
@@ -239,7 +239,7 @@ Selected element: &#x7B;&#x7B;buttonGroupLangValue&#x7D;&#x7D;
 						</pre></code>
 
 						<div class="example">
-						{{#magma-button-group name="buttonGroupHello" value=buttonGroupLangValue}}
+							{{#magma-button-group name="buttonGroupHello" value=buttonGroupLangValue}}
 								{{#magma-button name="buttonGroupHello" value="Bonjour" pressed=true}} Bonjour {{/magma-button}}
 								{{#magma-button name="buttonGroupHello" value="Hola"}} Hola {{/magma-button}}
 								{{#magma-button name="buttonGroupHello" value="Hello"}} Hello {{/magma-button}}
@@ -255,6 +255,7 @@ Selected element: &#x7B;&#x7B;buttonGroupLangValue&#x7D;&#x7D;
 					<p>A simple checkbox. You can disable it, make it required or even have an invalid state set on it.</p>
 					<ul>
 						<li><strong>checked</strong> When set to true, the checkbox is ticked</li>
+						<li><strong>disabled</strong> When set to true, the checkbox is disabled, and has the class <em>magma-disabled</em> set to it.</li>
 						<li><strong>invalid</strong> When set to true, the checkbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
 						<li><strong>name</strong> The name of the checkbox</li>
 						<li><strong>required</strong> When set to true, the checkbox has a required state, and has the class <em>magma-required</em> set to it</li>
@@ -378,10 +379,11 @@ Is checked?: &#x7B;&#x7B;checkboxIsChecked&#x7D;&#x7D;
 					<p>A simple radiobutton. You can disable it, make it required or even have an invalid state set on it.</p>
 					<ul>
 						<li><strong>checked</strong> When set to true, the radiobutton is ticked</li>
-						<li><strong>disabled</strong>  When set to true, the radiobutton has a disabled state, and has the class <em>magma-disabled</em> set to it.</li>
+						<li><strong>disabled</strong>  When set to true, the radiobutton is disabled, and has the class <em>magma-disabled</em> set to it.</li>
 						<li><strong>invalid</strong> When set to true, the checkbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
 						<li><strong>name</strong> The name of the checkbox</li>
 						<li><strong>required</strong> When set to true, the checkbox has a required state, and has the class <em>magma-required</em> set to it</li>
+						<li><strong>value</strong> Value of the radiobutton.</li>
 					</ul>
 
 					<div class="row">
@@ -390,7 +392,6 @@ Is checked?: &#x7B;&#x7B;checkboxIsChecked&#x7D;&#x7D;
 						</pre></code>
 
 						<div class="example">
-							{{magma-radiobutton name="radiobuttonGroup1" value="Hello"}}
 							{{magma-radiobutton name="radiobuttonGroup1" value="Hello"}}
 						</div>
 					</div>
@@ -429,6 +430,7 @@ Selected element: &#x7B;&#x7B;radiobuttonHelloGroupValue&#x7D;&#x7D;
 
 					<p>Creates a drop-down list using the select tag.</p>
 					<ul>
+						<li><strong>action</strong> You can call an action when the drop-down did change. It will have the <em>selection</em> in parameter.</li>
 						<li><strong>content</strong> An array containing objects to be displayed in the drop-down.</li>
 						<li><strong>disabled</strong>  When set to true, the selectbox has a disabled state, and has the class <em>magma-disabled</em> set to it.</li>
 						<li><strong>invalid</strong> When set to true, the selectbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
@@ -436,7 +438,7 @@ Selected element: &#x7B;&#x7B;radiobuttonHelloGroupValue&#x7D;&#x7D;
 						<li><strong>optionLabelPath</strong> It specifies the path on each object to the desired property for the element's text.</li>
 						<li><strong>optionValuePath</strong> Option is used to specify the path on each object to the desired property for the value attribute.</li>
 						<li><strong>required</strong> When set to true, the selectbox has a required state, and has the class <em>magma-required</em> set to it.</li>
-						<li><strong>selection</strong> This contains the currently selected object in the drop-down.</li>
+						<li><strong>selection</strong> This contains the currently selected object in the drop-down. It can be set with the item to display.</li>
 					</ul>
 
 					<div class="row">

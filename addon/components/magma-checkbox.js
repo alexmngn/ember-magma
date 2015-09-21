@@ -1,8 +1,16 @@
 /**
- * Checkbox
+ * A simple checkbox. You can disable it, make it required or even have an invalid state set on it.
  *
  * @class Magma.Component.Checkbox
- *
+ * @constructor
+ * @uses Magma.Mixin.DisabledSupport
+ * @uses Magma.Mixin.InvalidSupport
+ * @uses Magma.Mixin.RequiredSupport
+ * @extends Ember.Component
+ * @example
+ * ```
+ * {{magma-checkbox name="checkbox" checked=true}}
+ * ```
  */
 
 import Ember from 'ember';
@@ -14,21 +22,20 @@ export default Ember.Checkbox.extend(DisabledSupport,
 	InvalidSupport,
 	RequiredSupport, {
 
-	action: void 0,
-
 	attributeBindings: [
 		'checked',
 		'disabled',
 		'name',
 		'style',
 		'tabindex',
-		'title',
-		'value'
+		'title'
 	],
 
 	classNames: ['magma-checkbox'],
 
-	tabindex: void 0,
-
-	value: void 0
+	/**
+	 * When set to true, the checkbox is ticked
+	 * @property checked {Boolean}
+	 */
+	checked: void 0
 });

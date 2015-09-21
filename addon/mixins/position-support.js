@@ -1,5 +1,5 @@
 /**
- * Position
+ * Adds support of the dynamic positioning to a component
  *
  * @class Magma.Mixin.PositionSupport
  * @constructor Ember.Mixin
@@ -27,54 +27,90 @@ export function marginsClient(jQueryElement) {
 
 export default Ember.Mixin.create({
 
-	autoPosition: true,
-
-	alignment: 'top',
-
-	placement: 'center',
-
 	classNameBindings: [
 		'alignmentClassName',
 		'placementClassName'
 	],
 
-	coordinates: void 0,
-
 	/**
-	 * @property absoluteElement {}
+	 * @property absoluteElement {Object}
+	 * @private
 	 */
 	absoluteElement: Ember.computed(function () {
 		return this.$();
 	}),
 
+	/**
+	 * @property absoluteElementRect {Object}
+	 * @private
+	 */
 	absoluteElementRect: Ember.computed('absoluteElement', function () {
 		return boundingClientRect(this.get('absoluteElement'));
 	}),
 
+	/**
+	 * @property absoluteElementMargins {Object}
+	 * @private
+	 */
 	absoluteElementMargins: Ember.computed('absoluteElement', function () {
 		return marginsClient(this.get('absoluteElement'));
 	}),
 
 	/**
-	 * @property relatedElement {}
+	 * Class name corresponding to the alignment `magma-position-alignment-{alignment}`
+	 * @property alignmentClassName {String}
+	 * @private
+	 */
+	alignmentClassName: Ember.computed('alignment', function () {
+		const alignment = this.get('alignment');
+		return alignment ? 'magma-position-alignment-'+alignment : void 0;
+	}),
+
+	/**
+	 * You can align the component to a side of the `relatedElement`. When the placement is set to top or bottom, you can align it on the left, the right or center. When the placement is set to left or right, you can align it at the top, the bottom or center.
+	 * @property alignment {String}
+	 * @default top
+	 * @private
+	 */
+	alignment: 'top',
+
+	/**
+	 * Class name corresponding to the placement `magma-position-alignment-{alignment}`
+	 * @property alignmentClassName {String}
+	 * @private
+	 */
+	placementClassName: Ember.computed('placement', function () {
+		const placement = this.get('placement');
+		return placement ? 'magma-position-placement-'+placement : void 0;
+	}),
+
+	/**
+	 * You decide if you want the component to be display on top, on the left, on the right or at the bottom of the `relatedElement`.
+	 * @property placement {String}
+	 * @default center
+	 * @public
+	 */
+	placement: 'center',
+
+	/**
+	 * @property relatedElement {Object}
+	 * @protected
 	 */
 	relatedElement: void 0,
 
+	/**
+	 * @property relativeElementRect {Object}
+	 * @private
+	 */
 	relativeElementRect: Ember.computed('relativeElement', function () {
 		const relativeElement = this.get('relativeElement');
 		return relativeElement.length > 0 ? boundingClientRect(relativeElement) : void 0;
 	}),
 
-	alignmentClassName: Ember.computed('alignment', function () {
-		const alignment = this.get('alignment');
-		return alignment ? 'magma-popover-alignment-'+alignment : void 0;
-	}),
-
-	placementClassName: Ember.computed('placement', function () {
-		const placement = this.get('placement');
-		return placement ? 'magma-popover-placement-'+placement : void 0;
-	}),
-
+	/**
+	 * @method calculateAlignment
+	 * @return {Number} Position `left` or `top` of the component, based on the placement and alignment.
+	 */
 	calculateAlignment() {
 		const placement = this.get('placement');
 		const alignment = this.get('alignment');
@@ -112,6 +148,10 @@ export default Ember.Mixin.create({
 		return alignments[alignment] ? alignments[alignment]() : alignments.center();
 	},
 
+	/**
+	 * @method calculatePlacement
+	 * @return {Number} Position `left` or `top` of the component, based on the placement
+	 */
 	calculatePlacement() {
 		const placement = this.get('placement');
 		const relativeElementRect = this.get('relativeElementRect');
@@ -136,6 +176,10 @@ export default Ember.Mixin.create({
 		return placements[placement] ? placements[placement]() : placements.right();
 	},
 
+	/**
+	 * @method getPosition
+	 * @return {Object} Position of the component
+	 */
 	getPosition() {
 		let position;
 		if (['top','bottom'].indexOf(this.get('placement')) >= 0) {
