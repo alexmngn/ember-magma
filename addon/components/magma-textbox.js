@@ -14,9 +14,9 @@
  */
 
 import Ember from 'ember';
-import DisabledSupport from 'magma/mixins/disabled-support';
-import InvalidSupport from 'magma/mixins/invalid-support';
-import RequiredSupport from 'magma/mixins/required-support';
+import DisabledSupport from 'ember-magma/mixins/disabled-support';
+import InvalidSupport from 'ember-magma/mixins/invalid-support';
+import RequiredSupport from 'ember-magma/mixins/required-support';
 
 export default Ember.TextField.extend(
 	DisabledSupport,

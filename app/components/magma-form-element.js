@@ -1,1 +1,1 @@
-export { default } from 'magma/components/magma-form-element';
+export { default } from 'ember-magma/components/magma-form-element';

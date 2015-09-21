@@ -19,8 +19,8 @@
  */
 
 import Ember from 'ember';
-import ModalSupport from 'magma/mixins/modal-support';
-import PositionSupport from 'magma/mixins/position-support';
+import ModalSupport from 'ember-magma/mixins/modal-support';
+import PositionSupport from 'ember-magma/mixins/position-support';
 
 export default Ember.Component.extend(ModalSupport, PositionSupport, {
 

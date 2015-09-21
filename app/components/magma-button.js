@@ -1,1 +1,1 @@
-export { default } from 'magma/components/magma-button';
+export { default } from 'ember-magma/components/magma-button';

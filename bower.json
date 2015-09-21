@@ -1,5 +1,5 @@
 {
-  "name": "magma",
+  "name": "ember-magma",
   "dependencies": {
     "ember": "^2.0.0",
     "ember-cli-shims": "ember-cli/ember-cli-shims#0.0.3",
@@ -12,7 +12,6 @@
     "jquery": "^1.11.3",
     "loader.js": "ember-cli/loader.js#3.2.1",
     "qunit": "~1.18.0",
-    "jQuery.tabbable": "~1.0.2",
     "susy": "~2.2.6"
   },
   "resolutions": {

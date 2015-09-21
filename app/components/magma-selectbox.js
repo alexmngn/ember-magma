@@ -1,1 +1,1 @@
-export { default } from 'magma/components/magma-selectbox';
+export { default } from 'ember-magma/components/magma-selectbox';

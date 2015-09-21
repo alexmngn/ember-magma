@@ -23,6 +23,12 @@ pre, code {
 	overflow-x: auto;
 }
 
+code {
+	background: #eee;
+	display: block;
+	padding: 5px;
+}
+
 a {
 	color: #a31212;
 	text-decoration: none;
@@ -30,6 +36,14 @@ a {
 	&:hover {
 		color: #620505;
 	}
+}
+
+strong, em {
+	background: #ffeaea;
+	color: #620505;
+	display: inline-block;
+	padding: 2px 5px;
+	vertical-align: middle;
 }
 
 .container {
@@ -139,6 +153,10 @@ main {
 		}
 	}
 
+	code {
+		background: transparent;
+	}
+
 	.formResults {
 		@include span(6 last);
 
@@ -156,11 +174,6 @@ main {
 
 .installation {
 	@include clearfix;
-	code {
-		background: #eee;
-		display: block;
-		padding: 5px;
-	}
 }
 
 .documentation {
@@ -196,14 +209,6 @@ main {
 
 		.row {
 			@include clearfix;
-		}
-
-		strong, em {
-			background: #ffeaea;
-			color: #620505;
-			display: inline-block;
-			padding: 2px 5px;
-			vertical-align: middle;
 		}
 
 		li {

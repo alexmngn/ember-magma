@@ -8,8 +8,6 @@ module.exports = function(defaults) {
     }
   });
 
-  app.import('bower_components/jQuery.tabbable/jquery.tabbable.js');
-
   /*
     This build file specifes the options for the dummy test app of this
     addon, located in `/tests/dummy`
