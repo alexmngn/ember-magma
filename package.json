@@ -52,7 +52,7 @@
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.3",
-    "ember-cli-sass": "^4.2.1",
+    "ember-cli-sass": "git+https://github.com/dukex/ember-cli-sass.git#bugfix/addon-styles",
     "ember-tabbable": "^0.1.0"
   },
   "ember-addon": {
