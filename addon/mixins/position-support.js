@@ -63,7 +63,13 @@ export default Ember.Mixin.create({
 	 */
 	alignmentClassName: Ember.computed('alignment', function () {
 		const alignment = this.get('alignment');
-		return alignment ? 'magma-position-alignment-'+alignment : void 0;
+		const placement = this.get('placement');
+		let returnValue = 'magma-position-alignment-';
+		if (['top','bottom'].indexOf(placement) >= 0 && ['left', 'center', 'right'].indexOf(alignment) >= 0 ||
+			['left','right'].indexOf(placement) >= 0 && ['top', 'center', 'bottom'].indexOf(alignment) >= 0) {
+			return returnValue+alignment;
+		}
+		return returnValue+'center';
 	}),
 
 	/**
@@ -72,7 +78,7 @@ export default Ember.Mixin.create({
 	 * @default top
 	 * @private
 	 */
-	alignment: 'top',
+	alignment: 'center',
 
 	/**
 	 * Class name corresponding to the placement `magma-position-alignment-{alignment}`
@@ -81,7 +87,11 @@ export default Ember.Mixin.create({
 	 */
 	placementClassName: Ember.computed('placement', function () {
 		const placement = this.get('placement');
-		return placement ? 'magma-position-placement-'+placement : void 0;
+		let returnValue = 'magma-position-placement-';
+		if (['top', 'right', 'bottom', 'left'].indexOf(placement) >= 0) {
+			return returnValue+placement;
+		}
+		return returnValue+'top';
 	}),
 
 	/**
@@ -90,7 +100,7 @@ export default Ember.Mixin.create({
 	 * @default center
 	 * @public
 	 */
-	placement: 'center',
+	placement: 'top',
 
 	/**
 	 * @property relatedElement {Object}
@@ -173,7 +183,7 @@ export default Ember.Mixin.create({
 			}
 		};
 
-		return placements[placement] ? placements[placement]() : placements.right();
+		return placements[placement] ? placements[placement]() : placements.top();
 	},
 
 	/**
