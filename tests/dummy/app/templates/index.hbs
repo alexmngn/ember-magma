@@ -109,21 +109,21 @@
 					<div class="row">
 
 						<code class="hbs"><pre>
-&#x7B;&#x7B;#magma-alert alert="error"&#x7D;&#x7D;
+\{{#magma-alert alert="error"}}
   Please enter your firstname
-&#x7B;&#x7B;/magma-alert&#x7D;&#x7D;
+\{{/magma-alert}}
 
-&#x7B;&#x7B;#magma-alert alert="warning"&#x7D;&#x7D;
+\{{#magma-alert alert="warning"}}
   Are you sure you want to continue?
-&#x7B;&#x7B;/magma-alert&#x7D;&#x7D;
+\{{/magma-alert}}
 
-&#x7B;&#x7B;#magma-alert alert="info"&#x7D;&#x7D;
+\{{#magma-alert alert="info"}}
   Have a look to this information, &lt;a href="#"&gt;click here!&lt;/a&gt;
-&#x7B;&#x7B;/magma-alert&#x7D;&#x7D;
+\{{/magma-alert}}
 
-&#x7B;&#x7B;#magma-alert alert="success"&#x7D;&#x7D;
+\{{#magma-alert alert="success"}}
   Your request has been sent!
-&#x7B;&#x7B;/magma-alert&#x7D;&#x7D;
+\{{/magma-alert}}
 						</pre></code>
 
 						<div class="example">
@@ -164,17 +164,17 @@
 						<h4>Small, default and large</h4>
 
 						<code class="hbs"><pre>
-&#x7B;&#x7B;#magma-button class="magma-small" action="openAlert"&#x7D;&#x7D;
+\{{#magma-button class="magma-small" action="openAlert"}}
   Bonjour
-&#x7B;&#x7B;/magma-button&#x7D;&#x7D;
+\{{/magma-button}}
 
-&#x7B;&#x7B;#magma-alert action="openAlert"&#x7D;&#x7D;
+\{{#magma-alert action="openAlert"}}
   Bonjour
-&#x7B;&#x7B;/magma-alert&#x7D;&#x7D;
+\{{/magma-alert}}
 
-&#x7B;&#x7B;#magma-alert class="magma-large" action="openAlert"&#x7D;&#x7D;
+\{{#magma-alert class="magma-large" action="openAlert"}}
   Bonjour
-&#x7B;&#x7B;/magma-alert&#x7D;&#x7D;
+\{{/magma-alert}}
 						</pre></code>
 
 						<div class="example">
@@ -197,13 +197,13 @@
 						<h4>Disabled and pressed</h4>
 
 						<code class="hbs"><pre>
-&#x7B;&#x7B;#magma-button disabled=true&#x7D;&#x7D;
+\{{#magma-button disabled=true}}
   Bonjour
-&#x7B;&#x7B;/magma-button&#x7D;&#x7D;
+\{{/magma-button}}
 
-&#x7B;&#x7B;#magma-button pressed=true&#x7D;&#x7D;
+\{{#magma-button pressed=true}}
   Bonjour
-&#x7B;&#x7B;/magma-button&#x7D;&#x7D;
+\{{/magma-button}}
 						</pre></code>
 
 						<div class="example">
@@ -229,20 +229,20 @@
 
 					<div class="row">
 						<code class="hbs"><pre>
-&#x7B;&#x7B;#magma-button-group name="buttonGroupHello" value=buttonGroupLangValue&#x7D;&#x7D;
-  &#x7B;&#x7B;#magma-button name="buttonGroupHello" value="Bonjour" pressed=true&#x7D;&#x7D; Bonjour &#x7B;&#x7B;/magma-button&#x7D;&#x7D;
-  &#x7B;&#x7B;#magma-button name="buttonGroupHello" value="Hola"&#x7D;&#x7D; Hola &#x7B;&#x7B;/magma-button&#x7D;&#x7D;
-  &#x7B;&#x7B;#magma-button name="buttonGroupHello" value="Hello"&#x7D;&#x7D; Hello &#x7B;&#x7B;/magma-button&#x7D;&#x7D;
-&#x7B;&#x7B;/magma-button-group&#x7D;&#x7D;
+\{{#magma-button-group name="buttonGroupHello" value=buttonGroupLangValue}}
+  \{{#magma-button name="buttonGroupHello" value="Bonjour" pressed=true}} Bonjour \{{/magma-button}}
+  \{{#magma-button name="buttonGroupHello" value="Hola"}} Hola \{{/magma-button}}
+  \{{#magma-button name="buttonGroupHello" value="Hello"}} Hello \{{/magma-button}}
+\{{/magma-button-group}}
 
-Selected element: &#x7B;&#x7B;buttonGroupLangValue&#x7D;&#x7D;
+Selected element: {{buttonGroupLangValue}}
 						</pre></code>
 
 						<div class="example">
 							{{#magma-button-group name="buttonGroupHello" value=buttonGroupLangValue}}
-								{{#magma-button name="buttonGroupHello" value="Bonjour" pressed=true}} Bonjour {{/magma-button}}
-								{{#magma-button name="buttonGroupHello" value="Hola"}} Hola {{/magma-button}}
-								{{#magma-button name="buttonGroupHello" value="Hello"}} Hello {{/magma-button}}
+								{{#magma-button name="buttonGroupHello" data="Bonjour" pressed=true}} Bonjour {{/magma-button}}
+								{{#magma-button name="buttonGroupHello" data="Hola"}} Hola {{/magma-button}}
+								{{#magma-button name="buttonGroupHello" data="Hello"}} Hello {{/magma-button}}
 							{{/magma-button-group}}<br />
 
 							Selected element: {{buttonGroupLangValue}}
@@ -263,9 +263,9 @@ Selected element: &#x7B;&#x7B;buttonGroupLangValue&#x7D;&#x7D;
 
 					<div class="row">
 						<code class="hbs"><pre>
-&#x7B;&#x7B;magma-checkbox name="checkbox" checked=true&#x7D;&#x7D;
+\{{magma-checkbox name="checkbox" checked=true}}
 
-Is checked?: &#x7B;&#x7B;checkboxIsChecked&#x7D;&#x7D;
+Is checked?: {{checkboxIsChecked}}
 						</pre></code>
 
 						<div class="example">
@@ -283,13 +283,13 @@ Is checked?: &#x7B;&#x7B;checkboxIsChecked&#x7D;&#x7D;
 
 					<div class="row">
 						<code class="hbs"><pre>
-&#x7B;&#x7B;#magma-form-element label="Name:"&#x7D;&#x7D;
-  &#x7B;&#x7B;magma-textbox value="Alex"&#x7D;&#x7D;
-&#x7B;&#x7B;/magma-form-element&#x7D;&#x7D;
+\{{#magma-form-element label="Name:"}}
+  \{{magma-textbox value="Alex"}}
+\{{/magma-form-element}}
 
-&#x7B;&#x7B;#magma-form-element&#x7D;&#x7D;
-   &#x7B;&#x7B;magma-checkbox&#x7D;&#x7D; &lt;label&gt;I accept the terms and conditions&lt;/label&gt;
-&#x7B;&#x7B;/magma-form-element&#x7D;&#x7D;
+\{{#magma-form-element}}
+   \{{magma-checkbox}} &lt;label&gt;I accept the terms and conditions&lt;/label&gt;
+\{{/magma-form-element}}
 						</pre></code>
 
 						<div class="example">
@@ -316,18 +316,18 @@ Is checked?: &#x7B;&#x7B;checkboxIsChecked&#x7D;&#x7D;
 					</div>
 					<div class="row">
 						<code class="hbs"><pre>
-&#x7B;&#x7B;#magma-button class="popover-button"&#x7D;&#x7D;
+\{{#magma-button class="popover-button"}}
   Roll over to display the tooltip
-&#x7B;&#x7B;/magma-button&#x7D;&#x7D;
+\{{/magma-button}}
 
-&#x7B;&#x7B;#magma-popover for=".popover-button" placement="right" alignment="center"&#x7D;&#x7D;
+\{{#magma-popover for=".popover-button" placement="right" alignment="center"}}
   This appears on mouse over
-&#x7B;&#x7B;/magma-popover&#x7D;&#x7D;
+\{{/magma-popover}}
 
-&#x7B;&#x7B;#magma-popover on="click" for=".popover-button" placement="bottom" alignment="left"&#x7D;&#x7D;
+\{{#magma-popover on="click" for=".popover-button" placement="bottom" alignment="left"}}
   This appears on click&lt;br /&gt;&lt;br /&gt;
   &lt;img src="https://upload.wikimedia.org/wikipedia/en/6/69/Ember.js_Logo_and_Mascot.png" width="150"&gt;
-&#x7B;&#x7B;/magma-popover&#x7D;&#x7D;
+\{{/magma-popover}}
 						</pre></code>
 
 						<div class="example">
@@ -356,11 +356,11 @@ Is checked?: &#x7B;&#x7B;checkboxIsChecked&#x7D;&#x7D;
 
 					<div class="row">
 						<code class="hbs"><pre>
-&#x7B;&#x7B;magma-progress value=50&#x7D;&#x7D;
+\{{magma-progress value=50}}
 
-&#x7B;&#x7B;#magma-progress value=75 as |progress|&#x7D;&#x7D;
-  &#x7B;&#x7B;progress.indicatorValue&#x7D;&#x7D;%
-&#x7B;&#x7B;/magma-popover&#x7D;&#x7D;
+\{{#magma-progress value=75 as |progress|}}
+  \{{progress.indicatorValue}}%
+\{{/magma-popover}}
 						</pre></code>
 
 						<div class="example">
@@ -388,7 +388,7 @@ Is checked?: &#x7B;&#x7B;checkboxIsChecked&#x7D;&#x7D;
 
 					<div class="row">
 						<code class="hbs"><pre>
-&#x7B;&#x7B;magma-radiobutton name="radiobuttonGroup" value="Hello"&#x7D;&#x7D;
+\{{magma-radiobutton name="radiobuttonGroup" value="Hello"}}
 						</pre></code>
 
 						<div class="example">
@@ -406,13 +406,13 @@ Is checked?: &#x7B;&#x7B;checkboxIsChecked&#x7D;&#x7D;
 
 					<div class="row">
 						<code class="hbs"><pre>
-&#x7B;&#x7B;magma-radiobutton-group name="radiobuttonHelloGroup" value=radiobuttonHelloGroupValue&#x7D;&#x7D;
-  &#x7B;&#x7B;magma-radiobutton name="radiobuttonHelloGroup" value="Bonjour"&#x7D;&#x7D;
-  &#x7B;&#x7B;magma-radiobutton name="radiobuttonHelloGroup" value="Hola"&#x7D;&#x7D;
-  &#x7B;&#x7B;magma-radiobutton name="radiobuttonHelloGroup" value="Hello"&#x7D;&#x7D;
-&#x7B;&#x7B;/magma-radiobutton-group&#x7D;&#x7D;
+\{{magma-radiobutton-group name="radiobuttonHelloGroup" value=radiobuttonHelloGroupValue}}
+  \{{magma-radiobutton name="radiobuttonHelloGroup" value="Bonjour"}}
+  \{{magma-radiobutton name="radiobuttonHelloGroup" value="Hola"}}
+  \{{magma-radiobutton name="radiobuttonHelloGroup" value="Hello"}}
+\{{/magma-radiobutton-group}}
 
-Selected element: &#x7B;&#x7B;radiobuttonHelloGroupValue&#x7D;&#x7D;
+Selected element: {{radiobuttonHelloGroupValue}}
 						</pre></code>
 
 						<div class="example">
@@ -446,11 +446,11 @@ Selected element: &#x7B;&#x7B;radiobuttonHelloGroupValue&#x7D;&#x7D;
 						<h4>Default</h4>
 
 						<code class="hbs"><pre>
-&#x7B;&#x7B;magma-selectbox content=cityOptions optionLabelPath="name" optionValuePath="value" class="magma-small"&#x7D;&#x7D;
-&#x7B;&#x7B;magma-selectbox content=cityOptions optionLabelPath="name" optionValuePath="value"&#x7D;&#x7D;
-&#x7B;&#x7B;magma-selectbox content=cityOptions optionLabelPath="name" optionValuePath="value" class="magma-large"&#x7D;&#x7D;
+\{{magma-selectbox content=cityOptions optionLabelPath="name" optionValuePath="value" class="magma-small"}}
+\{{magma-selectbox content=cityOptions optionLabelPath="name" optionValuePath="value"}}
+\{{magma-selectbox content=cityOptions optionLabelPath="name" optionValuePath="value" class="magma-large"}}
 
-Selected element: &#x7B;&#x7B;citySelection.value&#x7D;&#x7D;
+Selected element: {{citySelection.value}}
 						</pre></code>
 
 						<div class="example">
@@ -468,9 +468,9 @@ Selected element: &#x7B;&#x7B;citySelection.value&#x7D;&#x7D;
 						<h4>Invalid and Disabled</h4>
 
 						<code class="hbs"><pre>
-&#x7B;&#x7B;magma-selectbox prompt="Select a city" invalid=true content=cityOptions optionLabelPath="name" optionValuePath="value"&#x7D;&#x7D;
+\{{magma-selectbox prompt="Select a city" invalid=true content=cityOptions optionLabelPath="name" optionValuePath="value"}}
 
-&#x7B;&#x7B;magma-selectbox disabled=true content=cityOptions optionLabelPath="name" optionValuePath="value"&#x7D;&#x7D;
+\{{magma-selectbox disabled=true content=cityOptions optionLabelPath="name" optionValuePath="value"}}
 						</pre></code>
 
 						<div class="example">
@@ -496,9 +496,9 @@ Selected element: &#x7B;&#x7B;citySelection.value&#x7D;&#x7D;
 						<h4>Default</h4>
 
 						<code class="hbs"><pre>
-&#x7B;&#x7B;magma-textarea value="I love to play with fire!" class="magma-small"&#x7D;&#x7D;
-&#x7B;&#x7B;magma-textarea value="I love to play with fire!"&#x7D;&#x7D;
-&#x7B;&#x7B;magma-textarea value="I love to play with fire!" class="magma-large"&#x7D;&#x7D;
+\{{magma-textarea value="I love to play with fire!" class="magma-small"}}
+\{{magma-textarea value="I love to play with fire!"}}
+\{{magma-textarea value="I love to play with fire!" class="magma-large"}}
 						</pre></code>
 
 						<div class="example">
@@ -516,9 +516,9 @@ Selected element: &#x7B;&#x7B;citySelection.value&#x7D;&#x7D;
 						<h4>Invalid and Disabled</h4>
 
 						<code class="hbs"><pre>
-&#x7B;&#x7B;magma-textarea invalid=true&#x7D;&#x7D;
+\{{magma-textarea invalid=true}}
 
-&#x7B;&#x7B;magma-textarea disabled=true&#x7D;&#x7D;
+\{{magma-textarea disabled=true}}
 						</pre></code>
 
 						<div class="example">
@@ -543,9 +543,9 @@ Selected element: &#x7B;&#x7B;citySelection.value&#x7D;&#x7D;
 						<h4>Default</h4>
 
 						<code class="hbs"><pre>
-&#x7B;&#x7B;magma-textbox value="This is burning hot!" class="magma-small"&#x7D;&#x7D;
-&#x7B;&#x7B;magma-textbox value="This is burning hot!"&#x7D;&#x7D;
-&#x7B;&#x7B;magma-textbox value="This is burning hot!" class="magma-large"&#x7D;&#x7D;
+\{{magma-textbox value="This is burning hot!" class="magma-small"}}
+\{{magma-textbox value="This is burning hot!"}}
+\{{magma-textbox value="This is burning hot!" class="magma-large"}}
 						</pre></code>
 
 						<div class="example">
@@ -562,9 +562,9 @@ Selected element: &#x7B;&#x7B;citySelection.value&#x7D;&#x7D;
 						<h4>Invalid and Disabled</h4>
 
 						<code class="hbs"><pre>
-&#x7B;&#x7B;magma-textbox invalid=true&#x7D;&#x7D;
+\{{magma-textbox invalid=true}}
 
-&#x7B;&#x7B;magma-textbox disabled=true&#x7D;&#x7D;
+\{{magma-textbox disabled=true}}
 						</pre></code>
 
 						<div class="example">
