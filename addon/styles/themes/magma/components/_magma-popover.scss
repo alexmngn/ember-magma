@@ -26,23 +26,5 @@ $magma-popover--placements: (left, right, top, bottom);
 			#{opposite-direction($placement)}: -$magma-popover-triangle--size;
 			@include triangle(#{opposite-direction($placement)}, $magma-popover-triangle--size, $magma-color-beta);
 		}
-
-		@if $placement == "left" or $placement == "right" {
-			&.magma-position-alignment-center:before, &.magma-position-alignment-top:before {
-				top: 5px;
-			}
-
-			&.magma-position-alignment-center:before, &.magma-position-alignment-bottom:before {
-				bottom: 5px;
-			}
-		} @else {
-			&.magma-position-alignment-center:before, &.magma-position-alignment-left:before {
-				left: 5px;
-			}
-
-			&.magma-position-alignment-center:before, &.magma-position-alignment-right:before {
-				right: 5px;
-			}
-		}
 	}
 }

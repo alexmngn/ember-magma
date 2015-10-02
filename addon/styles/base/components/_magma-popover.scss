@@ -1,0 +1,46 @@
+$magma-popover-triangle--size: 6px;
+$magma-popover--placements: (left, right, top, bottom);
+
+.magma-popover {
+	background: #fff;
+	border: 1px solid;
+	padding: 5px;
+	position: absolute;
+	z-index: 100;
+
+	&:before {
+		content: '';
+		margin: auto;
+		position: absolute;
+	}
+}
+
+
+@each $placement in $magma-popover--placements {
+	&.magma-position-placement-#{$placement} {
+		margin-#{opposite-direction($placement)}: $magma-popover-triangle--size*2;
+
+		&:before {
+			#{opposite-direction($placement)}: -$magma-popover-triangle--size;
+			@include triangle(#{opposite-direction($placement)}, $magma-popover-triangle--size, #555);
+		}
+
+		@if $placement == "left" or $placement == "right" {
+			&.magma-position-alignment-center:before, &.magma-position-alignment-top:before {
+				top: 5px;
+			}
+
+			&.magma-position-alignment-center:before, &.magma-position-alignment-bottom:before {
+				bottom: 5px;
+			}
+		} @else {
+			&.magma-position-alignment-center:before, &.magma-position-alignment-left:before {
+				left: 5px;
+			}
+
+			&.magma-position-alignment-center:before, &.magma-position-alignment-right:before {
+				right: 5px;
+			}
+		}
+	}
+}
