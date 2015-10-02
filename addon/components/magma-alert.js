@@ -21,6 +21,8 @@
 
 	classNameBindings: ['alertClassName'],
 
+    role: 'alert',
+
 	/**
 	 * Type of alert your want to display
 	 * @property alert {String}
