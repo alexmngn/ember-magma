@@ -101,7 +101,7 @@ export default Ember.Component.extend(
 	/**
 	 * On change, the `selection` is set to the selected item.
 	 * If `action` is defined, will send the action with `selection` in parameter.
-	 * @method selectboxInit
+	 * @method selectionChange
 	 * @private
 	 */
 	selectionChange: Ember.on('change', function () {
