@@ -1,7 +1,7 @@
 <header class="hero">
 	<img src="assets/logo.png" class="logo">
 	{{#magma-button class="install" action="scrollToAnchor" value="install"}}Install now{{/magma-button}}
-	<span class="version">Version 0.1.2</span>
+	<span class="version">Version 0.1.3</span>
 </header>
 
 <main>
@@ -71,6 +71,17 @@
 		<p>A simple command line can make you use the addon right now. Simply run the following at the root level of your ember project:</p>
 		<code>$ ember install ember-magma</code>
 
+	</div>
+
+	<div class="themes container">
+
+		<h2>Themes</h2>
+
+		<p>We understand that you don't always want to use the default styles coming from this addon. It often adds a lot of styles that you don't always want to use, and you might want to create your own theme for your application without overriding everything. For this reason, the default theme is not loaded by default in the application anymore.</p>
+
+		<p>If you decide you want to use the Magma theme, you will need to include it in the main sass file of your project.</p>
+
+		<code>@import 'node_modules/ember-magma/styles/themes/magma';</code>
 	</div>
 
 	<div class="documentation container">
@@ -150,7 +161,7 @@
 					<h3 data-anchor="button">Button</h3>
 
 					<div class="row">
-						<p>The button is something very important in a web page. You can use the classes <em>magma-small</em> or <em>magma-large</em> to change the size of the component.</p>
+						<p>The button is something very important in a web page. If you use the magma theme, you can use the classes <em>magma-small</em> or <em>magma-large</em> to change the size of the component.</p>
 						<ul>
 							<li><strong>action</strong> This is the name of the action that will be called whenever the user click on the button.</li>
 							<li><strong>disabled</strong> When set to true, the button is disabled, and has the class <em>magma-disabled</em> set to it.</li>
@@ -241,9 +252,9 @@ Selected element: {{buttonGroupLangValue}}
 
 						<div class="example">
 							{{#magma-button-group name="buttonGroupHello" value=buttonGroupLangValue}}
-								{{#magma-button name="buttonGroupHello" data="Bonjour" pressed=true}} Bonjour {{/magma-button}}
-								{{#magma-button name="buttonGroupHello" data="Hola"}} Hola {{/magma-button}}
-								{{#magma-button name="buttonGroupHello" data="Hello"}} Hello {{/magma-button}}
+								{{#magma-button name="buttonGroupHello" value="Bonjour" pressed=true}} Bonjour {{/magma-button}}
+								{{#magma-button name="buttonGroupHello" value="Hola"}} Hola {{/magma-button}}
+								{{#magma-button name="buttonGroupHello" value="Hello"}} Hello {{/magma-button}}
 							{{/magma-button-group}}<br />
 
 							Selected element: {{buttonGroupLangValue}}
@@ -452,7 +463,7 @@ Selected element: {{radiobuttonHelloGroupValue}}
 
 					<h3 data-anchor="selectbox">Selectbox</h3>
 
-					<p>Creates a drop-down list using the select tag.</p>
+					<p>Creates a drop-down list using the select tag. If you use the magma theme, you can use the classes <em>magma-small</em> or <em>magma-large</em> to change the size of the component.</p>
 					<ul>
 						<li><strong>action</strong> You can call an action when the drop-down did change. It will have the <em>selection</em> in parameter.</li>
 						<li><strong>content</strong> An array containing objects to be displayed in the drop-down.</li>
@@ -506,7 +517,7 @@ Selected element: {{citySelection.value}}
 
 					<h3 data-anchor="textarea">Textarea</h3>
 
-					<p>Creates a multi-line text input using the textarea tag.</p>
+					<p>Creates a multi-line text input using the textarea tag. If you use the magma theme, you can use the classes <em>magma-small</em> or <em>magma-large</em> to change the size of the component.</p>
 					<ul>
 						<li><strong>disabled</strong>  When set to true, the selectbox has a disabled state, and has the class <em>magma-disabled</em> set to it.</li>
 						<li><strong>invalid</strong> When set to true, the selectbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
@@ -554,7 +565,7 @@ Selected element: {{citySelection.value}}
 
 					<h3 data-anchor="textbox">Textbox</h3>
 
-					<p>Creates a single-line text input using the input tag.</p>
+					<p>Creates a single-line text input using the input tag. If you use the magma theme, you can use the classes <em>magma-small</em> or <em>magma-large</em> to change the size of the component.</p>
 					<ul>
 						<li><strong>disabled</strong>  When set to true, the selectbox has a disabled state, and has the class <em>magma-disabled</em> set to it.</li>
 						<li><strong>invalid</strong> When set to true, the selectbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
