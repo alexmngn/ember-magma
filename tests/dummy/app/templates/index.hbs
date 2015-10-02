@@ -89,6 +89,7 @@
 						<li>{{#magma-button action="scrollToAnchor" value="progress"}}Progress{{/magma-button}}</li>
 						<li>{{#magma-button action="scrollToAnchor" value="radiobutton"}}Radiobutton{{/magma-button}}</li>
 						<li>{{#magma-button action="scrollToAnchor" value="radiobutton-group"}}Radiobutton group{{/magma-button}}</li>
+						<li>{{#magma-button action="scrollToAnchor" value="range"}}Range{{/magma-button}}</li>
 						<li>{{#magma-button action="scrollToAnchor" value="selectbox"}}Selectbox{{/magma-button}}</li>
 						<li>{{#magma-button action="scrollToAnchor" value="textarea"}}Textarea{{/magma-button}}</li>
 						<li>{{#magma-button action="scrollToAnchor" value="textbox"}}Textbox{{/magma-button}}</li>
@@ -423,6 +424,29 @@ Selected element: {{radiobuttonHelloGroupValue}}
 							{{/magma-radiobutton-group}}<br />
 
 							Selected element: {{radiobuttonHelloGroupValue}}
+						</div>
+					</div>
+
+					<h3 data-anchor="range">Range</h3>
+
+					<p>Creates a slider where you can set a minimum, current and maximum value.</p>
+					<ul>
+						<li><strong>max</strong> Indicate the maximum value of the allowed range of values for the element.</li>
+						<li><strong>min</strong> Indicate the minimum value of the allowed range of values for the element. </li>
+						<li><strong>step</strong> Specifies the value granularity of the element’s value.</li>
+						<li><strong>value</strong> Current value.</li>
+					</ul>
+
+					<div class="row">
+						<code class="hbs"><pre>
+\{{magma-range value=rangeValue}}
+						</pre></code>
+
+						<div class="example">
+							{{magma-range value=rangeValue}}<br />
+							<br />
+
+							Selected value: {{rangeValue}}
 						</div>
 					</div>
 

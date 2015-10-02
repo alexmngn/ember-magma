@@ -1,0 +1,87 @@
+/**
+ * The slider allows you to select a value between a range of two values
+ *
+ * @class Magma.Component.Slider
+ * @constructor
+ * @uses Magma.Mixin.DisabledSupport
+ * @extends Ember.Component
+ * @example
+ * ```
+ * {{magma-slider value=10}}
+ * ```
+ */
+
+import Ember from 'ember';
+import DisabledSupport from 'ember-magma/mixins/disabled-support';
+
+export default Ember.Component.extend(DisabledSupport, {
+
+	attributeBindings: [
+		'max',
+		'min',
+		'name',
+		'style',
+		'tabindex',
+		'type',
+		'title'
+	],
+
+	classNames: ['magma-slider'],
+
+	propertyBindings: ['value > element.value'],
+
+	tagName: 'input',
+
+	type: 'range',
+
+	/**
+	 * Indicate the minimum value of the allowed range of values for the element.
+	 * @param min {Number}
+	 * @default 0
+	 * @public
+	 */
+	min: 0,
+
+	/**
+	 * Indicate the maximum value of the allowed range of values for the element.
+	 * @param max {Number}
+	 * @default 100
+	 * @public
+	 */
+	max: 100,
+
+	/**
+	 * Specifies the value granularity of the element’s value.
+	 * @param value {Number}
+	 * @default 1
+	 * @public
+	 */
+	step: 1,
+
+	/**
+	 * Current value
+	 * @param value {Number}
+	 * @default 0
+	 * @public
+	 */
+	value: 0,
+
+	/**
+	 * On init, will set the `value` to the element value
+	 * @method rangeDidInsertElement
+	 * @private
+	 */
+	rangeDidInsertElement: Ember.on('didInsertElement', function () {
+		this.set('element.value', this.get('value'));
+	}),
+
+	/**
+	 * On input, the `value` is set to the element value.
+	 * @method rangeInput
+	 * @private
+	 */
+	rangeInput: Ember.on('input', function () {
+		this.set('value', Number(this.get('element.value')).valueOf());
+	}),
+
+});
