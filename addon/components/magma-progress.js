@@ -40,8 +40,8 @@ export default Ember.Component.extend({
 	 * @param indicatorValue {Number}
 	 * @private
 	 */
-	indicatorValue: Ember.computed('value', 'valueMax', function () {
-		return parseFloat(this.get('value')*100/this.get('valueMax')) || 0;
+	indicatorValue: Ember.computed('value', 'max', function () {
+		return parseFloat(this.get('value')*100/this.get('max')) || 0;
 	}),
 
 	/**
@@ -56,5 +56,5 @@ export default Ember.Component.extend({
 	 * @param valueMax {Number}
 	 * @public
 	 */
-	valueMax: 100
+	max: 100
 });
