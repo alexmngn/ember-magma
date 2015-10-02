@@ -17,5 +17,5 @@ test('Component has correct initial value', function (assert) {
 	assert.expect(3);
 	assert.ok(component.get('role') === 'progressbar');
 	assert.ok(component.get('value') === 0);
-	assert.ok(component.get('valueMax') === 100);
+	assert.ok(component.get('max') === 100);
 });
