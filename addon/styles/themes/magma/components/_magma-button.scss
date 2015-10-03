@@ -16,7 +16,8 @@
 	}
 
 	&.magma-disabled {
-		background: $magma-color-zeta;
+		opacity: 0.3;
+		pointer-events: none;
 	}
 
 	&.magma-small {
