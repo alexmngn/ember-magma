@@ -1,0 +1,91 @@
+.magma-range {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-clip: padding-box;
+	background-image: -webkit-gradient(linear, left top, left bottom, from($magma-color-alpha), to($magma-color-alpha));
+	background-position: left center;
+	background-repeat: no-repeat;
+	background-size: 100% 2px;
+	box-sizing: border-box;
+	height: 25px;
+	outline: none;
+	position: relative;
+	vertical-align: top;
+
+	&.magma-disabled {
+		pointer-events: none;
+		opacity: 0.3;
+	}
+
+	&::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		border: 1px solid $magma-color-zeta;
+		background: $magma-color-eta;
+		border-radius: 10px;
+		cursor: -webkit-grab;
+		height: 20px;
+		width: 20px;
+
+		&:hover {
+			background: $magma-color-gamma;
+		}
+
+		&:active {
+			cursor: -webkit-grabbing;
+		}
+	}
+
+	&::-moz-focus-outer {
+		border: 0;
+	}
+
+	&::-moz-range-thumb {
+		border: 1px solid $magma-color-zeta;
+		background: $magma-color-eta;
+		border-radius: 10px;
+		cursor: -moz-grab;
+		height: 20px;
+		width: 20px;
+
+		&:hover {
+			background: $magma-color-gamma;
+		}
+
+		&:active {
+			cursor: -moz-grabbing;
+		}
+	}
+
+	&::-moz-range-track {
+		background: $magma-color-alpha;
+		border: none;
+		height: 2px;
+	}
+}
+
+
+.ons-css .range::-moz-range-track {
+	position: relative;
+	border: none;
+	background-color: #ddd;
+	height: 2px;
+	border-radius: 30px;
+	box-shadow: none;
+	top: 0;
+	margin: 0;
+	padding: 0;
+}
+.ons-css .range::-moz-range-thumb {
+	cursor: pointer;
+	position: relative;
+	height: 29px;
+	width: 29px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 30px;
+	box-shadow: none;
+	margin: 0;
+	padding: 0;
+}

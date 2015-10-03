@@ -17,6 +17,7 @@ import DisabledSupport from 'ember-magma/mixins/disabled-support';
 export default Ember.Component.extend(DisabledSupport, {
 
 	attributeBindings: [
+		'disabled',
 		'max',
 		'min',
 		'name',
@@ -26,9 +27,7 @@ export default Ember.Component.extend(DisabledSupport, {
 		'title'
 	],
 
-	classNames: ['magma-slider'],
-
-	propertyBindings: ['value > element.value'],
+	classNames: ['magma-range'],
 
 	tagName: 'input',
 
@@ -84,4 +83,16 @@ export default Ember.Component.extend(DisabledSupport, {
 		this.set('value', Number(this.get('element.value')).valueOf());
 	}),
 
+	/**
+	 * On value change, will update the element.value with the new value
+	 * @method rangeValueDidChange
+	 * @private
+	 */
+	rangeValueDidChange: Ember.observer('value', function () {
+		const value = this.get('value');
+		const elementValue = Number(this.get('element.value')).valueOf();
+		if (elementValue !== value) {
+			this.set('element.value', value);
+		}
+	})
 });
