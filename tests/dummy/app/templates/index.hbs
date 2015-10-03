@@ -66,11 +66,11 @@
 	<div class="installation container">
 		<h2 data-anchor="install">Install with Ember-CLI</h2>
 
-		<p><strong>Note:</strong> This addon has been created based on Ember 2.0. Make sure you have this version or a newer version of Ember before you install it</p>
-
 		<p>A simple command line can make you use the addon right now. Simply run the following at the root level of your ember project:</p>
+
 		<code>$ ember install ember-magma</code>
 
+		<p><strong>Note:</strong> This addon has been created based on Ember 2.0. It hasn't been tested on lower version of Ember yet.</p>
 	</div>
 
 	<div class="themes container">
@@ -442,6 +442,7 @@ Selected element: {{radiobuttonHelloGroupValue}}
 
 					<p>Creates a slider where you can set a minimum, current and maximum value.</p>
 					<ul>
+						<li><strong>disabled</strong>  When set to true, the range has a disabled state, and has the class <em>magma-disabled</em> set to it.</li>
 						<li><strong>max</strong> Indicate the maximum value of the allowed range of values for the element.</li>
 						<li><strong>min</strong> Indicate the minimum value of the allowed range of values for the element. </li>
 						<li><strong>step</strong> Specifies the value granularity of the element’s value.</li>
@@ -451,10 +452,12 @@ Selected element: {{radiobuttonHelloGroupValue}}
 					<div class="row">
 						<code class="hbs"><pre>
 \{{magma-range value=rangeValue}}
+\{{magma-range value=rangeValue disabled=true}}
 						</pre></code>
 
 						<div class="example">
 							{{magma-range value=rangeValue}}<br />
+							{{magma-range value=rangeValue disabled=true}}<br />
 							<br />
 
 							Selected value: {{rangeValue}}
