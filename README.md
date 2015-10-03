@@ -11,12 +11,12 @@ Better than too many words, please visit <http://4lex-io.github.io/ember-magma/>
 
 ## Installation
 
-**Note:** This addon has been created based on Ember 2.0. It hasn't been tested on lower version of Ember.
-
 A simple command line can make you use the addon right now. Simply run the following at the root level of your ember project:
 ```
 ember install ember-magma
 ```
+
+**Note:** This addon has been created based on Ember 2.0. It hasn't been tested on lower version of Ember yet.
 
 ## Themes
 
