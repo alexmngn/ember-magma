@@ -1,0 +1,33 @@
+.magma-radiobutton {
+	-webkit-appearance: none;
+	cursor: pointer;
+	outline: none;
+	position: relative;
+	height: 14px;
+	width: 14px;
+	z-index: 0;
+
+	&:before {
+		border: 1px solid $magma-color-zeta;
+		background: $magma-color-eta;
+		border-radius: 8px;
+		content: '';
+		height: 14px;
+		margin: -1px 0 0 -1px;
+		position: absolute;
+		width: 14px;
+		z-index: 1;
+	}
+
+	&:checked:after {
+		background-color: $magma-color-alpha;
+		border-radius: 5px;
+		content: '';
+		height: 10px;
+		left: 2px;
+		position: absolute;
+		top: 2px;
+		width: 10px;
+		z-index: 2;
+	}
+}
