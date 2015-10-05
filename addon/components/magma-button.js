@@ -20,7 +20,7 @@ import Ember from 'ember';
 import DisabledSupport from 'ember-magma/mixins/disabled-support';
 import PressedSupport from 'ember-magma/mixins/pressed-support';
 
-const { computed, inject, on } = Ember;
+const { inject, on } = Ember;
 
 export default Ember.Component.extend(DisabledSupport,
 	PressedSupport, {
@@ -38,9 +38,13 @@ export default Ember.Component.extend(DisabledSupport,
 
 	magmaEvent: inject.service('magma-event'),
 
-	type: computed('attrs.type', function () {
-		return this.getAttr('type') || 'button';
-	}),
+	/**
+	 * Type of button, can be `button`, `submit` or `reset` as per HTML.
+	 * @property type {String}
+	 * @default button
+	 * @public
+	 */
+	type: 'button',
 
 	attrs: {
 
@@ -57,13 +61,6 @@ export default Ember.Component.extend(DisabledSupport,
 		 * @public
 		 */
 		name: void 0,
-
-		/**
-		 * Type of button, can be `button`, `submit` or `reset` as per HTML.
-		 * @property type {String}
-		 * @public
-		 */
-		type: void 0,
 
 		/**
 		 * The value is used to share events between the button and the button-group. Only used when part of a button-group.

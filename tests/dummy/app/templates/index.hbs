@@ -23,15 +23,17 @@
 
 				{{#magma-form-element label="Last name:"}}
 					{{magma-textbox name="lastname" value=exampleLastName required=true invalid=exampleLastNameIsInvalid}}
-					{{#if exampleLastNameIsInvalid}}
-						{{#magma-alert alert="error"}}
-							Please enter your last name
-						{{/magma-alert}}
-					{{/if}}
+					{{#magma-alert alert="error" isDisplayed=exampleLastNameIsInvalid}}
+						Please enter your last name
+					{{/magma-alert}}
 				{{/magma-form-element}}
 
 				{{#magma-form-element label="City:"}}
 					{{magma-selectbox selection=exampleCity content=exampleCityOptions optionLabelPath="name" optionValuePath="value"}}
+				{{/magma-form-element}}
+
+				{{#magma-form-element label="Distance:"}}
+					{{magma-range value=exampleDistance max=200}}
 				{{/magma-form-element}}
 
 				{{#magma-form-element}}
@@ -56,6 +58,7 @@
   firstName: {{exampleFirstName}},
   lastName: {{#if exampleLastNameIsInvalid}}null{{else}}{{exampleLastName}}{{/if}},
   city: {{exampleCity.value}},
+  distance: {{exampleDistance}},
   terms: {{exampleTerms}}
 }
 					</code></pre>
@@ -249,7 +252,7 @@
 					<p>You can assemble multiple buttons within a group. They will behave about the same way a radiobutton will work. This is very useful if you want to create a navigation bar, or a multi-panel with tabs for example.</p>
 					<ul>
 						<li><strong>name</strong> This name is mandatory and should be the same in the group and the button itself. It allows to share the events between the two components.</li>
-						<li><strong>on-value-change</strong> This is the action that will be called whenever the value of the group changes.</li>
+						<li><strong>on-value-change</strong> This is the action that will be called whenever the value of the group changes. The action will receive the value as a parameter.</li>
 						<li><strong>value</strong> You can set the value of the current pressed button with this attribute.</li>
 					</ul>
 
@@ -433,7 +436,7 @@ Is checked?: \{{checkboxIsChecked}}
 					<p>A radiobutton doesn't work alone, they work in group. With this component, you can get the value of the current selected radiobutton.</p>
 					<ul>
 						<li><strong>name</strong> This name is mandatory and should be the same in the group and the button itself. It allows to share the events between the two components.</li>
-						<li><strong>on-value-change</strong> This is the action that will be called whenever the value of the group changes.</li>
+						<li><strong>on-value-change</strong> This is the action that will be called whenever the value of the group changes. The action will receive the value as a parameter.</li>
 						<li><strong>value</strong> You can get the value of the current pressed button within this attribute. You can also set the default value.</li>
 					</ul>
 
@@ -635,14 +638,6 @@ Selected element: {{citySelection.value}}
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<div class="upcoming container">
-		<h2>Upcoming features</h2>
-
-		<h3>Animation support</h3>
-		<p>There is currently no animation for the transitions when something appears, disappears or change its state.</p>
-
 	</div>
 
 	<div class="issues container">

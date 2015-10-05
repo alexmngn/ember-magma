@@ -12,10 +12,21 @@ const transitionEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimat
 
 export default Ember.Mixin.create({
 
+	/**
+	 * @property animations
+	 * @private
+	 */
 	animations: computed(function () {
 		return Ember.A();
 	}),
 
+	/**
+	 * Animate an element
+	 * @method animate
+	 * @param animation Type of animation (see animate.css documentation)
+	 * @param target jQuery selector of the element you want to animate. By default, will target the current component.
+	 * @protected
+	 */
   	animate(animation, target) {
 		const deferred = RSVP.defer();
 		this.stopAnimation(target);
@@ -39,6 +50,12 @@ export default Ember.Mixin.create({
 		return deferred.promise;
 	},
 
+	/**
+	 * Stop the animation of an element
+	 * @method stopAnimation
+	 * @param target jQuery selector of the element you want to stop the animation. By default, will target the current component.
+	 * @protected
+	 */
 	stopAnimation(target = '') {
 		let animations = this.get('animations');
 		const animationObject = animations.findBy('target', target);

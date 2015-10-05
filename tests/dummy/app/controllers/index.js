@@ -2,6 +2,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 	exampleFirstName: 'Alex',
 	exampleLastName: '',
+	exampleDistance: 10,
 	exampleLastNameIsInvalid: Ember.computed.empty('exampleLastName'),
 	exampleCityOptions: [{
 		name:'Mississauga',

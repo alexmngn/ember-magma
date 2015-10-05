@@ -33,10 +33,22 @@
 
 	role: 'alert',
 
+	/**
+	 * @property animationIn {String}
+	 * @private
+	 */
 	animationIn: 'fadeIn',
 
+	/**
+	 * @property animationOut {String}
+	 * @private
+	 */
 	animationOut: 'fadeOut',
 
+	/**
+	 * @property isDisplayed {Boolean}
+	 * @private
+	 */
 	isDisplayed: computed('attrs.isDisplayed', function () {
 		const isDisplayed = this.getAttr('isDisplayed');
 		return isNone(isDisplayed) ? true : isDisplayed;
@@ -76,6 +88,15 @@
 	},
 
 	/**
+	 * On didInsertElement, refresh the animation
+	 * @method alertDidInsertElement
+	 * @private
+	 */
+	alertDidInsertElement: on('didInsertElement', function () {
+		this.refreshAnimation();
+	}),
+
+	/**
 	 * Class name of the alert box, based on `alert` property. It returns `magma-alert-{alert}`
 	 * @property alertClassName {String}
 	 * @private
@@ -83,10 +104,6 @@
 	alertClassName: computed('alert', function () {
 		const alert = this.getAttr('alert');
 		return alert ? 'magma-alert-'+alert : void 0;
-	}),
-
-	alertDidInsertElement: on('didInsertElement', function () {
-		this.refreshAnimation();
 	}),
 
 	/**

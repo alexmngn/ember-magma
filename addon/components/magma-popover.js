@@ -34,12 +34,24 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 		'tabindex'
 	],
 
-	animationIn: 'fadeIn',
-
-	animationOut: 'fadeOut',
-
 	isVisible: false,
 
+	/**
+	 * @property animationIn {String}
+	 * @private
+	 */
+	animationIn: 'fadeIn',
+
+	/**
+	 * @property animationOut {String}
+	 * @private
+	 */
+	animationOut: 'fadeOut',
+
+	/**
+	 * @property isDisplayed {Boolean}
+	 * @private
+	 */
 	isDisplayed: false,
 
 	on: computed('attrs.on', function () {
@@ -124,6 +136,10 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 		}
 	}),
 
+	/**
+	 * @method popoverSetOffset
+	 * @private
+	 */
 	popoverSetOffset: observer('attrs.alignment', 'attrs.placement', function () {
 		this.$().offset(this.getPosition());
 	}),
