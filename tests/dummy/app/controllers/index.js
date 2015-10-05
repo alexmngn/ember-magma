@@ -45,11 +45,41 @@ export default Ember.Controller.extend({
 		});
 	}),
 
+	alertIsDisplayed: true,
+
+	progressValue: 25,
+
+	buttonGroupInitialValue: 'Bonjour',
+
+	buttonGroupValue: Ember.computed.alias('buttonGroupInitialValue'),
+
+	radiobuttonGroupInitialValue: 'Bonjour',
+
+	radiobuttonGroupValue: Ember.computed.alias('radiobuttonGroupInitialValue'),
+
 	actions: {
+
 		scrollToAnchor(anchor) {
 			$('html, body').animate({
-				scrollTop: $('[data-anchor="'+anchor+'"]').offset().top - 30 //offset if required
+				scrollTop: $('[data-anchor="'+anchor+'"]').offset().top - 30
 			}, 400);
+		},
+
+		buttonGroupValueDidChange(value) {
+			this.set('buttonGroupValue', value);
+		},
+
+		radiobuttonGroupValueDidChange(value) {
+			this.set('radiobuttonGroupValue', value);
+		},
+
+		toggleAlert() {
+			this.toggleProperty('alertIsDisplayed');
+		},
+
+		changeProgressValue() {
+			let value = Math.ceil(Math.random() * 100);
+			this.set('progressValue', value);
 		}
 	}
 });

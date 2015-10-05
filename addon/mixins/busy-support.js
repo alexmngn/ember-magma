@@ -7,6 +7,8 @@
 
 import Ember from 'ember';
 
+const { computed } = Ember;
+
 export default Ember.Mixin.create({
 
 	attributeBindings: ['ariaBusy:aria-busy'],
@@ -14,18 +16,30 @@ export default Ember.Mixin.create({
 	classNameBindings: ['busy:magma-busy'],
 
 	/**
-	 * When set to true, the component will have a busy state and the class magma-busy will be set to it.
 	 * @property busy {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
-	busy: false,
+	busy: computed('attrs.busy', function () {
+		return this.getAttr('busy') || false;
+	}),
 
 	/**
 	 * @property ariaBusy {String}
 	 * @private
 	 */
-	ariaBusy: Ember.computed('busy', function () {
-		return this.get('busy') ? String(this.get('busy')) : void 0;
-	})
+	ariaBusy: computed('busy', function () {
+		const busy = this.get('busy');
+		return busy ? String(busy) : void 0;
+	}),
+
+	attrs: {
+		/**
+		 * When set to true, the component will have a busy state and the class magma-busy will be set to it.
+		 * @property busy {Boolean}
+		 * @default false
+		 * @public
+		 */
+		busy: void 0
+	}
 });

@@ -14,8 +14,6 @@ moduleForComponent('magma-popover', 'Unit | Component | magma popover', {
 });
 
 test('Component has correct initial value', function (assert) {
-	assert.expect(3);
+	assert.expect(1);
 	assert.ok(component.get('isVisible') === false);
-	assert.ok(component.get('for') !== null);
-	assert.ok(component.get('on') === 'hover');
 });

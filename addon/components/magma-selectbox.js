@@ -18,6 +18,8 @@ import DisabledSupport from 'ember-magma/mixins/disabled-support';
 import InvalidSupport from 'ember-magma/mixins/invalid-support';
 import RequiredSupport from 'ember-magma/mixins/required-support';
 
+const { on } = Ember;
+
 export default Ember.Component.extend(
 	DisabledSupport,
 	InvalidSupport,
@@ -87,7 +89,7 @@ export default Ember.Component.extend(
 	 * @method selectboxInit
 	 * @private
 	 */
-	selectboxInit: Ember.on('init', function () {
+	selectboxInit: on('init', function () {
 		if (!this.get('content')) {
 			this.set('content', []);
 		}
@@ -104,7 +106,7 @@ export default Ember.Component.extend(
 	 * @method selectionChange
 	 * @private
 	 */
-	selectionChange: Ember.on('change', function () {
+	selectionChange: on('change', function () {
 		const selectedIndex = this.$()[0].selectedIndex;
 		const selection = this.get('content')[!!this.get('prompt') ? selectedIndex - 1 : selectedIndex];
 		const action = this.get('action');

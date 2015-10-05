@@ -14,8 +14,6 @@ moduleForComponent('magma-progress', 'Unit | Component | magma progress', {
 });
 
 test('Component has correct initial value', function (assert) {
-	assert.expect(3);
+	assert.expect(1);
 	assert.ok(component.get('role') === 'progressbar');
-	assert.ok(component.get('value') === 0);
-	assert.ok(component.get('max') === 100);
 });

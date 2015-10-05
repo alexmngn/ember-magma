@@ -20,12 +20,12 @@ ember install ember-magma
 
 ## Themes
 
-We understand that you don't always want to use the default styles coming from this addon. It often adds a lot of styles that you don't always want to use, and you might want to create your own theme for your application without overriding everything. For this reason, the default theme is not loaded by default in the application anymore.
+We understand that you don't always want to use the default styles coming from this addon. It often adds a lot of styles, and you might want to create your own theme for your application without overriding everything. For this reason, the default theme is not loaded by default in the application anymore.
 
 If you decide you want to use the Magma theme, you will need to include it in the main sass file of your project.
 
 ```
-@import 'node_modules/ember-magma/styles/themes/magma';
+@import 'node_modules/ember-magma/addon/styles/themes/magma';
 ```
 
 ## Documentation

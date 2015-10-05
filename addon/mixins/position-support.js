@@ -7,10 +7,12 @@
 
 import Ember from 'ember';
 
+const { computed, on, $ } = Ember;
+
 export function boundingClientRect(jQueryElement) {
 	let element = jQueryElement[0];
 
-	return Ember.$.extend({}, (typeof element.getBoundingClientRect === 'function' ? element.getBoundingClientRect() : {
+	return $.extend({}, (typeof element.getBoundingClientRect === 'function' ? element.getBoundingClientRect() : {
 		width: element.offsetWidth || 0,
 		height: element.offsetHeight || 0
 	}), jQueryElement.offset());
@@ -36,7 +38,7 @@ export default Ember.Mixin.create({
 	 * @property absoluteElement {Object}
 	 * @private
 	 */
-	absoluteElement: Ember.computed(function () {
+	absoluteElement: computed(function () {
 		return this.$();
 	}),
 
@@ -44,7 +46,7 @@ export default Ember.Mixin.create({
 	 * @property absoluteElementRect {Object}
 	 * @private
 	 */
-	absoluteElementRect: Ember.computed('absoluteElement', function () {
+	absoluteElementRect: computed('absoluteElement', function () {
 		return boundingClientRect(this.get('absoluteElement'));
 	}),
 
@@ -52,8 +54,12 @@ export default Ember.Mixin.create({
 	 * @property absoluteElementMargins {Object}
 	 * @private
 	 */
-	absoluteElementMargins: Ember.computed('absoluteElement', function () {
+	absoluteElementMargins: computed('absoluteElement', function () {
 		return marginsClient(this.get('absoluteElement'));
+	}),
+
+	alignment: computed('attrs.alignment', function () {
+		return this.getAttr('alignment');
 	}),
 
 	/**
@@ -61,10 +67,11 @@ export default Ember.Mixin.create({
 	 * @property alignmentClassName {String}
 	 * @private
 	 */
-	alignmentClassName: Ember.computed('alignment', function () {
-		const alignment = this.get('alignment');
-		const placement = this.get('placement');
+	alignmentClassName: computed('attrs.alignment', 'attrs.placement', function () {
+		const alignment = this.getAttr('alignment');
+		const placement = this.getAttr('placement');
 		let returnValue = 'magma-position-alignment-';
+
 		if (['top','bottom'].indexOf(placement) >= 0 && ['left', 'center', 'right'].indexOf(alignment) >= 0 ||
 			['left','right'].indexOf(placement) >= 0 && ['top', 'center', 'bottom'].indexOf(alignment) >= 0) {
 			return returnValue+alignment;
@@ -72,22 +79,19 @@ export default Ember.Mixin.create({
 		return returnValue+'center';
 	}),
 
-	/**
-	 * You can align the component to a side of the `relatedElement`. When the placement is set to top or bottom, you can align it on the left, the right or center. When the placement is set to left or right, you can align it at the top, the bottom or center.
-	 * @property alignment {String}
-	 * @default top
-	 * @private
-	 */
-	alignment: 'center',
+	placement: computed('attrs.placement', function () {
+		return this.getAttr('placement');
+	}),
 
 	/**
 	 * Class name corresponding to the placement `magma-position-alignment-{alignment}`
 	 * @property alignmentClassName {String}
 	 * @private
 	 */
-	placementClassName: Ember.computed('placement', function () {
-		const placement = this.get('placement');
+	placementClassName: computed('placement', function () {
+		const placement = this.getAttr('placement');
 		let returnValue = 'magma-position-placement-';
+
 		if (['top', 'right', 'bottom', 'left'].indexOf(placement) >= 0) {
 			return returnValue+placement;
 		}
@@ -95,26 +99,47 @@ export default Ember.Mixin.create({
 	}),
 
 	/**
-	 * You decide if you want the component to be display on top, on the left, on the right or at the bottom of the `relatedElement`.
-	 * @property placement {String}
-	 * @default center
-	 * @public
-	 */
-	placement: 'top',
-
-	/**
-	 * @property relatedElement {Object}
+	 * @property relativeElement {Object}
 	 * @protected
 	 */
-	relatedElement: void 0,
+	relativeElement: void 0,
 
 	/**
 	 * @property relativeElementRect {Object}
 	 * @private
 	 */
-	relativeElementRect: Ember.computed('relativeElement', function () {
+	relativeElementRect: computed('relativeElement', function () {
 		const relativeElement = this.get('relativeElement');
 		return relativeElement.length > 0 ? boundingClientRect(relativeElement) : void 0;
+	}),
+
+	attrs: {
+		/**
+		 * You can align the component to a side of the `relatedElement`. When the placement is set to top or bottom, you can align it on the left, the right or center. When the placement is set to left or right, you can align it at the top, the bottom or center.
+		 * @property alignment {String}
+		 * @default center
+		 * @public
+		 */
+		alignment: 'center',
+
+		/**
+		 * You decide if you want the component to be display on top, on the left, on the right or at the bottom of the `relatedElement`.
+		 * @property placement {String}
+		 * @default top
+		 * @public
+		 */
+		placement: 'top',
+	},
+
+	positionDidInsertElement: on('didInsertElement', function () {
+		$(window).bind('resize.positionSupport', () => {
+			this.notifyPropertyChange('relativeElement');
+			this.notifyPropertyChange('absoluteElement');
+		});
+	}),
+
+	positionWillDestroyElement: on('willDestroyElement', function () {
+		$(window).unbind('resize.positionSupport');
 	}),
 
 	/**
@@ -122,14 +147,12 @@ export default Ember.Mixin.create({
 	 * @return {Number} Position `left` or `top` of the component, based on the placement and alignment.
 	 */
 	calculateAlignment() {
-		const placement = this.get('placement');
-		const alignment = this.get('alignment');
-		const relativeElementRect = this.get('relativeElementRect');
-		const absoluteElementRect = this.get('absoluteElementRect');
-
+		const { relativeElementRect,  absoluteElementRect } =
+			this.getProperties('relativeElementRect', 'absoluteElementRect');
+		const alignment = this.getAttr('alignment');
 		let alignments;
 
-		if (['top','bottom'].indexOf(placement) >= 0) {
+		if (['top','bottom'].indexOf(this.getAttr('placement')) >= 0) {
 			alignments = {
 				left: () => {
 					return relativeElementRect.left;
@@ -163,12 +186,10 @@ export default Ember.Mixin.create({
 	 * @return {Number} Position `left` or `top` of the component, based on the placement
 	 */
 	calculatePlacement() {
-		const placement = this.get('placement');
-		const relativeElementRect = this.get('relativeElementRect');
-		const absoluteElementRect = this.get('absoluteElementRect');
-		const absoluteElementMargins = this.get('absoluteElementMargins');
-
-		var placements = {
+		const { relativeElementRect, absoluteElementRect,  absoluteElementMargins } =
+			this.getProperties('relativeElementRect', 'absoluteElementRect', 'absoluteElementMargins');
+		const placement = this.getAttr('placement');
+		let placements = {
 			top: () => {
 				return relativeElementRect.top - absoluteElementRect.height - absoluteElementMargins.bottom;
 			},
@@ -192,7 +213,8 @@ export default Ember.Mixin.create({
 	 */
 	getPosition() {
 		let position;
-		if (['top','bottom'].indexOf(this.get('placement')) >= 0) {
+
+		if (['top','bottom'].indexOf(this.getAttr('placement')) >= 0) {
 			position = {
 				left: this.calculateAlignment(),
 				top: this.calculatePlacement()

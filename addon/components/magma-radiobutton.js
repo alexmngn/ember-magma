@@ -18,6 +18,8 @@ import DisabledSupport from 'ember-magma/mixins/disabled-support';
 import InvalidSupport from 'ember-magma/mixins/invalid-support';
 import RequiredSupport from 'ember-magma/mixins/required-support';
 
+const { inject, on } = Ember;
+
 export default Ember.Component.extend(DisabledSupport,
 	InvalidSupport,
 	RequiredSupport, {
@@ -34,7 +36,7 @@ export default Ember.Component.extend(DisabledSupport,
 
 	classNames: ['magma-radiobutton'],
 
-	magmaEvent: Ember.inject.service('magma-event'),
+	magmaEvent: inject.service('magma-event'),
 
 	tagName: 'input',
 
@@ -52,7 +54,7 @@ export default Ember.Component.extend(DisabledSupport,
 	 * @method radiobuttonInit
 	 * @private
 	 */
-	radiobuttonInit: Ember.on('init', function () {
+	radiobuttonInit: on('init', function () {
 		let name = this.get('name');
 		if (name) {
 			this.get('magmaEvent').subscribe(name+'RadiobuttonGroup', this, 'radiobuttonGroupDidChange');
@@ -64,7 +66,7 @@ export default Ember.Component.extend(DisabledSupport,
 	 * @method radiobuttonWillDestroyElement
 	 * @private
 	 */
-	radiobuttonWillDestroyElement: Ember.on('willDestroyElement', function () {
+	radiobuttonWillDestroyElement: on('willDestroyElement', function () {
 		let name = this.get('name');
 		if (name) {
 			this.get('magmaEvent').unsubscribe(name+'RadiobuttonGroup');
@@ -77,8 +79,10 @@ export default Ember.Component.extend(DisabledSupport,
 	 * @private
 	 */
 	radiobuttonGroupDidChange(event) {
-		this.set('checked', (event.value === this.get('value')));
-		this.set('disabled', event.disabled || false);
+		this.setProperties({
+			checked: (event.value === this.get('value')),
+			disabled: event.disabled || false
+		});
 	},
 
 	/**
@@ -86,9 +90,8 @@ export default Ember.Component.extend(DisabledSupport,
 	 * @method radiobuttonChange
 	 * @private
 	 */
-	radiobuttonChange: Ember.on('change', function () {
+	radiobuttonChange: on('change', function () {
 		let name = this.get('name');
-
 		if (this.get('disabled') || !name) {
 			return false;
 		}

@@ -7,4 +7,9 @@
 	background: $magma-color-alpha;
 	box-sizing: border-box;
 	color: $magma-color-gamma;
+	min-width: 25px;
+
+	.magma-progress-indicator-animate & {
+		transition: width 400ms;
+	}
 }

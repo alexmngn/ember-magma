@@ -8,6 +8,7 @@
 	font-size: $magma-font-size-medium;
 	padding: 7px;
 	width: 250px;
+	transition: border-color 400ms;
 
 	&.magma-invalid {
 		border-color: $magma-color-alpha;

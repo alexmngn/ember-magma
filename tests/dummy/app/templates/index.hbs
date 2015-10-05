@@ -1,7 +1,7 @@
 <header class="hero">
 	<img src="assets/logo.png" class="logo">
-	{{#magma-button class="install" action="scrollToAnchor" value="install"}}Install now{{/magma-button}}
-	<span class="version">Version 0.1.3</span>
+	{{#magma-button class="install" on-click=(action "scrollToAnchor" "install")}}Install now{{/magma-button}}
+	<span class="version">Version 0.2.0</span>
 </header>
 
 <main>
@@ -70,18 +70,26 @@
 
 		<code>$ ember install ember-magma</code>
 
-		<p><strong>Note:</strong> This addon has been created based on Ember 2.0. It hasn't been tested on lower version of Ember yet.</p>
+		<p><strong>Note:</strong> This addon has been created based on Ember 2.0. Please update your project to this version of Ember or above to be able to use this addon.</p>
 	</div>
 
 	<div class="themes container">
 
 		<h2>Themes</h2>
 
-		<p>We understand that you don't always want to use the default styles coming from this addon. It often adds a lot of styles that you don't always want to use, and you might want to create your own theme for your application without overriding everything. For this reason, the default theme is not loaded by default in the application anymore.</p>
+		<p>We understand that you don't always want to use the default styles coming from this addon. It often adds a lot of styles, and you might want to create your own theme for your application without overriding everything. For this reason, the default theme is not loaded by default in the application anymore.</p>
 
 		<p>If you decide you want to use the Magma theme, you will need to include it in the main sass file of your project.</p>
 
-		<code>@import 'node_modules/ember-magma/styles/themes/magma';</code>
+		<code>@import 'node_modules/ember-magma/addon/styles/themes/magma';</code>
+	</div>
+
+	<div class="animations container">
+
+		<h2>Animations</h2>
+
+		<p>Some components allow you to set an animation. It uses animate.css to animate the components, you can go on the website <a href="https://daneden.github.io/animate.css/" target="_blank">https://daneden.github.io/animate.css/</a> to see the full list of available animations.
+		If you want a component not to have any animation, you can simply set the animation to <strong>none</strong>.</p>
 	</div>
 
 	<div class="documentation container">
@@ -91,19 +99,19 @@
 			<div class="stickem-container row">
 				<nav class="leftside stickem">
 					<ul>
-						<li>{{#magma-button action="scrollToAnchor" value="alert"}}Alert{{/magma-button}}</li>
-						<li>{{#magma-button action="scrollToAnchor" value="button"}}Button{{/magma-button}}</li>
-						<li>{{#magma-button action="scrollToAnchor" value="button-group"}}Button group{{/magma-button}}</li>
-						<li>{{#magma-button action="scrollToAnchor" value="checkbox"}}Checkbox{{/magma-button}}</li>
-						<li>{{#magma-button action="scrollToAnchor" value="form-element"}}Form element{{/magma-button}}</li>
-						<li>{{#magma-button action="scrollToAnchor" value="popover"}}Popover{{/magma-button}}</li>
-						<li>{{#magma-button action="scrollToAnchor" value="progress"}}Progress{{/magma-button}}</li>
-						<li>{{#magma-button action="scrollToAnchor" value="radiobutton"}}Radiobutton{{/magma-button}}</li>
-						<li>{{#magma-button action="scrollToAnchor" value="radiobutton-group"}}Radiobutton group{{/magma-button}}</li>
-						<li>{{#magma-button action="scrollToAnchor" value="range"}}Range{{/magma-button}}</li>
-						<li>{{#magma-button action="scrollToAnchor" value="selectbox"}}Selectbox{{/magma-button}}</li>
-						<li>{{#magma-button action="scrollToAnchor" value="textarea"}}Textarea{{/magma-button}}</li>
-						<li>{{#magma-button action="scrollToAnchor" value="textbox"}}Textbox{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "alert")}}Alert{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "button")}}Button{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "button-group")}}Button group{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "checkbox")}}Checkbox{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "form-element")}}Form element{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "popover")}}Popover{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "progress")}}Progress{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "radiobutton")}}Radiobutton{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "radiobutton-group")}}Radiobutton group{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "range")}}Range{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "selectbox")}}Selectbox{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "textarea")}}Textarea{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "textbox")}}Textbox{{/magma-button}}</li>
 					</ul>
 				</nav>
 
@@ -114,7 +122,10 @@
 					<div class="row">
 						<p>An alert box with different style and color, based on your need. You can also create your own, it will add the class <em>magma-alert-{alert}</em> to the component, and you can style it the way you want.</p>
 						<ul>
-							<li><strong>alert</strong> Type of alert your want to display</li>
+							<li><strong>alert</strong> Type of alert your want to display.</li>
+							<li><strong>animationIn</strong> Animation when the component appears. Default is <em>fadeIn</em>.</li>
+							<li><strong>animationOut</strong> Animation when the component disappears. Default is <em>fadeOut</em>.</li>
+							<li><strong>isDisplayed</strong> When set to true, the alert is visible.</li>
 						</ul>
 					</div>
 
@@ -133,7 +144,7 @@
   Have a look to this information, &lt;a href="#"&gt;click here!&lt;/a&gt;
 \{{/magma-alert}}
 
-\{{#magma-alert alert="success"}}
+\{{#magma-alert alert="success" animationIn="flipInX" animationOut="flipOutX" isDisplayed=(mut alertIsDisplayed)}}
   Your request has been sent!
 \{{/magma-alert}}
 						</pre></code>
@@ -152,9 +163,11 @@
 								Have a look to this information, <a href="javascript:alert('Yay!');">click here!</a>
 							{{/magma-alert}}
 
-							{{#magma-alert alert="success"}}
+							{{#magma-alert alert="success" animationIn="flipInX" animationOut="flipOutX" isDisplayed=(mut alertIsDisplayed)}}
 								Your request has been sent!
-							{{/magma-alert}}
+							{{/magma-alert}}<br />
+
+							{{#magma-button on-click=(action "toggleAlert")}}Toggle alert visibility{{/magma-button}}
 						</div>
 					</div>
 
@@ -163,11 +176,11 @@
 					<div class="row">
 						<p>The button is something very important in a web page. If you use the magma theme, you can use the classes <em>magma-small</em> or <em>magma-large</em> to change the size of the component.</p>
 						<ul>
-							<li><strong>action</strong> This is the name of the action that will be called whenever the user click on the button.</li>
 							<li><strong>disabled</strong> When set to true, the button is disabled, and has the class <em>magma-disabled</em> set to it.</li>
 							<li><strong>name</strong> The name is used to share events between the button and the button-group. Only used when part of a button-group.</li>
 							<li><strong>pressed</strong> When set to true, the button will have the pressed state.</li>
-							<li><strong>value</strong> You can pass an object to the action if you want.</li>
+							<li><strong>on-click</strong> This is the action that will be called whenever the user click on the button.</li>
+							<li><strong>value</strong> The value is used to share events between the button and the button-group. Only used when part of a button-group.</li>
 						</ul>
 					</div>
 
@@ -176,15 +189,15 @@
 						<h4>Small, default and large</h4>
 
 						<code class="hbs"><pre>
-\{{#magma-button class="magma-small" action="openAlert"}}
+\{{#magma-button class="magma-small" on-click=(action "openAlert")}}
   Bonjour
 \{{/magma-button}}
 
-\{{#magma-alert action="openAlert"}}
+\{{#magma-alert on-click=(action "openAlert")}}
   Bonjour
 \{{/magma-alert}}
 
-\{{#magma-alert class="magma-large" action="openAlert"}}
+\{{#magma-alert class="magma-large" on-click=(action "openAlert")}}
   Bonjour
 \{{/magma-alert}}
 						</pre></code>
@@ -236,28 +249,29 @@
 					<p>You can assemble multiple buttons within a group. They will behave about the same way a radiobutton will work. This is very useful if you want to create a navigation bar, or a multi-panel with tabs for example.</p>
 					<ul>
 						<li><strong>name</strong> This name is mandatory and should be the same in the group and the button itself. It allows to share the events between the two components.</li>
-						<li><strong>value</strong> You can get the value of the current pressed button within this attribute. You can also set the default value.</li>
+						<li><strong>on-value-change</strong> This is the action that will be called whenever the value of the group changes.</li>
+						<li><strong>value</strong> You can set the value of the current pressed button with this attribute.</li>
 					</ul>
 
 					<div class="row">
 						<code class="hbs"><pre>
-\{{#magma-button-group name="buttonGroupHello" value=buttonGroupLangValue}}
+\{{#magma-button-group name="buttonGroupHello" value=(mut buttonGroupInitialValue) on-value-change=(action "buttonGroupValueDidChange")}}
   \{{#magma-button name="buttonGroupHello" value="Bonjour" pressed=true}} Bonjour \{{/magma-button}}
   \{{#magma-button name="buttonGroupHello" value="Hola"}} Hola \{{/magma-button}}
   \{{#magma-button name="buttonGroupHello" value="Hello"}} Hello \{{/magma-button}}
 \{{/magma-button-group}}
 
-Selected element: {{buttonGroupLangValue}}
+Selected element: \{{buttonGroupValue}}
 						</pre></code>
 
 						<div class="example">
-							{{#magma-button-group name="buttonGroupHello" value=buttonGroupLangValue}}
+							{{#magma-button-group name="buttonGroupHello" value=(mut buttonGroupInitialValue) on-value-change=(action "buttonGroupValueDidChange")}}
 								{{#magma-button name="buttonGroupHello" value="Bonjour" pressed=true}} Bonjour {{/magma-button}}
 								{{#magma-button name="buttonGroupHello" value="Hola"}} Hola {{/magma-button}}
 								{{#magma-button name="buttonGroupHello" value="Hello"}} Hello {{/magma-button}}
 							{{/magma-button-group}}<br />
 
-							Selected element: {{buttonGroupLangValue}}
+							Selected element: {{buttonGroupValue}}
 						</div>
 
 					</div>
@@ -266,7 +280,7 @@ Selected element: {{buttonGroupLangValue}}
 
 					<p>A simple checkbox. You can disable it, make it required or even have an invalid state set on it.</p>
 					<ul>
-						<li><strong>checked</strong> When set to true, the checkbox is ticked</li>
+						<li><strong>checked</strong> When set to true, the checkbox is ticked.</li>
 						<li><strong>disabled</strong> When set to true, the checkbox is disabled, and has the class <em>magma-disabled</em> set to it.</li>
 						<li><strong>invalid</strong> When set to true, the checkbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
 						<li><strong>name</strong> The name of the checkbox</li>
@@ -277,7 +291,7 @@ Selected element: {{buttonGroupLangValue}}
 						<code class="hbs"><pre>
 \{{magma-checkbox name="checkbox" checked=true}}
 
-Is checked?: {{checkboxIsChecked}}
+Is checked?: \{{checkboxIsChecked}}
 						</pre></code>
 
 						<div class="example">
@@ -320,6 +334,8 @@ Is checked?: {{checkboxIsChecked}}
 					<div class="row">
 						<p>You can create a popover that will appear on top of any element. It can be a tooltip, to display additional information, or you can even use this component to display a list of items (such as a dropdown), or to display a calendar, bound a textbox for example.</p>
 						<ul>
+							<li><strong>animationIn</strong> Animation when the component appears. Default is <em>fadeIn</em>.</li>
+							<li><strong>animationOut</strong> Animation when the component disappears. Default is <em>fadeOut</em>.</li>
 							<li><strong>for</strong> It corresponds to the selector of the element that will trigger the popover to be displayed or hidden.</li>
 							<li><strong>on</strong> By default, the popover will appear on <em>hover</em> the <em>for</em> element, but you can also display it on <em>click</em>.</li>
 							<li><strong>placement</strong> You decide if you want the popover to be display on <em>top</em>, on the <em>left</em>, on the <em>right</em> or at the <em>bottom</em> of the <em>for</em> element.</li>
@@ -347,7 +363,7 @@ Is checked?: {{checkboxIsChecked}}
 								Roll over to display a tooltip. <br />Click to display another one.
 							{{/magma-button}}
 
-							{{#magma-popover for=".popover-button" placement="right" alignment="center"}}
+							{{#magma-popover for=".popover-button" on="hover" placement="right" alignment="center"}}
 								This appears on mouse over
 							{{/magma-popover}}
 
@@ -360,17 +376,19 @@ Is checked?: {{checkboxIsChecked}}
 
 					<h3 data-anchor="progress">Progress</h3>
 
-					<p>This creates a progress bar, very useful to display the state of something loading. You can display the value of the progression as well.</p>
+					<p>This creates a progress bar, very useful to display the state of something loading. You can display the value of the progression as well. You can access the property <em>indicatorValue</em> which returns the percentage of progression.</p>
 					<ul>
-						<li><strong>value</strong> The current value</li>
-						<li><strong>valueMax</strong> The maximum value the progress bar can reach</li>
+						<li><strong>indicatorAnimation</strong> When set to true, the progress bar will be animated. Default is <em>true</em>.</li>
+						<li><strong>indicatorAnimationDuration</strong> When <em>indicatorAnimation</em> is set to true, this will set the speed of the <em>indicatorValue</em> animation in miliseconds. Default is <em>400</em>.</li>
+						<li><strong>max</strong> The maximum value the progress bar can reach. Default is <em>100</em>.</li>
+						<li><strong>value</strong> The current value of the progress bar. Default is <em>0</em>.</li>
 					</ul>
 
 					<div class="row">
 						<code class="hbs"><pre>
 \{{magma-progress value=50}}
 
-\{{#magma-progress value=75 as |progress|}}
+\{{#magma-progress value=(mut progressValue) as |progress|}}
   \{{progress.indicatorValue}}%
 \{{/magma-popover}}
 						</pre></code>
@@ -379,9 +397,11 @@ Is checked?: {{checkboxIsChecked}}
 
 							{{magma-progress value=50}}
 
-							{{#magma-progress value=75 as |progress|}}
+							{{#magma-progress value=(mut progressValue) as |progress|}}
 								{{progress.indicatorValue}}%
-							{{/magma-progress}}
+							{{/magma-progress}}<br />
+
+							{{#magma-button on-click=(action "changeProgressValue")}}Change progress value{{/magma-button}}
 
 						</div>
 					</div>
@@ -413,28 +433,29 @@ Is checked?: {{checkboxIsChecked}}
 					<p>A radiobutton doesn't work alone, they work in group. With this component, you can get the value of the current selected radiobutton.</p>
 					<ul>
 						<li><strong>name</strong> This name is mandatory and should be the same in the group and the button itself. It allows to share the events between the two components.</li>
+						<li><strong>on-value-change</strong> This is the action that will be called whenever the value of the group changes.</li>
 						<li><strong>value</strong> You can get the value of the current pressed button within this attribute. You can also set the default value.</li>
 					</ul>
 
 					<div class="row">
 						<code class="hbs"><pre>
-\{{magma-radiobutton-group name="radiobuttonHelloGroup" value=radiobuttonHelloGroupValue}}
+\{{magma-radiobutton-group name="radiobuttonHelloGroup" value=(mut radiobuttonGroupInitialValue) on-value-change=(action "radiobuttonGroupValueDidChange")}}
   \{{magma-radiobutton name="radiobuttonHelloGroup" value="Bonjour"}}
   \{{magma-radiobutton name="radiobuttonHelloGroup" value="Hola"}}
   \{{magma-radiobutton name="radiobuttonHelloGroup" value="Hello"}}
 \{{/magma-radiobutton-group}}
 
-Selected element: {{radiobuttonHelloGroupValue}}
+Selected element: \{{radiobuttonGroupValue}}
 						</pre></code>
 
 						<div class="example">
-							{{#magma-radiobutton-group name="radiobuttonHelloGroup" value=radiobuttonHelloGroupValue}}
-								{{magma-radiobutton name="radiobuttonHelloGroup" value="Bonjour"}}
+							{{#magma-radiobutton-group name="radiobuttonHelloGroup" value=(mut radiobuttonGroupInitialValue) on-value-change=(action "radiobuttonGroupValueDidChange")}}
+								{{magma-radiobutton name="radiobuttonHelloGroup" value="Bonjour" checked=true}}
 								{{magma-radiobutton name="radiobuttonHelloGroup" value="Hola"}}
 								{{magma-radiobutton name="radiobuttonHelloGroup" value="Hello"}}
 							{{/magma-radiobutton-group}}<br />
 
-							Selected element: {{radiobuttonHelloGroupValue}}
+							Selected element: {{radiobuttonGroupValue}}
 						</div>
 					</div>
 

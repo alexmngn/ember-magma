@@ -5,6 +5,8 @@
 	color: $magma-color-gamma;
 	font-size: $magma-font-size-medium;
 	padding: 10px 15px;
+	outline: none;
+	transition: background 400ms;
 
 	&:hover:not(.magma-disabled) {
 		background: $magma-color-beta;

@@ -7,6 +7,8 @@
 
 import Ember from 'ember';
 
+const { computed } = Ember;
+
 export default Ember.Mixin.create({
 
 	attributeBindings: ['ariaDisabled:aria-disabled'],
@@ -14,20 +16,31 @@ export default Ember.Mixin.create({
 	classNameBindings: ['disabled:magma-disabled'],
 
 	/**
-	 * When set to true, the component will have a disabled state and the class magma-disabled will be set to it.
 	 * @property disabled {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
-	disabled: false,
+	disabled: computed('attrs.disabled', function () {
+		return this.getAttr('disabled') || false;
+	}),
 
 	/**
 	 * @property ariaDisabled {String}
 	 * @private
 	 */
-	ariaDisabled: Ember.computed('disabled', function () {
-		return this.get('disabled') &&
-			this.get('attributeBindings').indexOf('disabled') === -1 ?
-			String(this.get('disabled')) : void 0;
-	})
+	ariaDisabled: computed('disabled', function () {
+		const disabled = this.get('disabled');
+		return disabled && this.get('attributeBindings').indexOf('disabled') === -1 ? String(disabled) : void 0;
+	}),
+
+	attrs: {
+
+		/**
+		 * When set to true, the component will have a disabled state and the class magma-disabled will be set to it.
+		 * @property disabled {Boolean}
+		 * @default false
+		 * @public
+		 */
+		disabled: void 0
+	}
 });

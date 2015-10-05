@@ -14,6 +14,8 @@
 import Ember from 'ember';
 import DisabledSupport from 'ember-magma/mixins/disabled-support';
 
+const { observer, on } = Ember;
+
 export default Ember.Component.extend(DisabledSupport, {
 
 	attributeBindings: [
@@ -70,7 +72,7 @@ export default Ember.Component.extend(DisabledSupport, {
 	 * @method rangeDidInsertElement
 	 * @private
 	 */
-	rangeDidInsertElement: Ember.on('didInsertElement', function () {
+	rangeDidInsertElement: on('didInsertElement', function () {
 		this.set('element.value', this.get('value'));
 	}),
 
@@ -79,7 +81,7 @@ export default Ember.Component.extend(DisabledSupport, {
 	 * @method rangeInput
 	 * @private
 	 */
-	rangeInput: Ember.on('input', function () {
+	rangeInput: on('input', function () {
 		this.set('value', Number(this.get('element.value')).valueOf());
 	}),
 
@@ -88,7 +90,7 @@ export default Ember.Component.extend(DisabledSupport, {
 	 * @method rangeValueDidChange
 	 * @private
 	 */
-	rangeValueDidChange: Ember.observer('value', function () {
+	rangeValueDidChange: observer('value', function () {
 		const value = this.get('value');
 		const elementValue = Number(this.get('element.value')).valueOf();
 		if (elementValue !== value) {

@@ -20,9 +20,10 @@ import Ember from 'ember';
 import DisabledSupport from 'ember-magma/mixins/disabled-support';
 import PressedSupport from 'ember-magma/mixins/pressed-support';
 
+const { computed, inject, on } = Ember;
+
 export default Ember.Component.extend(DisabledSupport,
 	PressedSupport, {
-
 
 	attributeBindings: [
 		'disabled',
@@ -35,35 +36,42 @@ export default Ember.Component.extend(DisabledSupport,
 
 	tagName: 'button',
 
-	magmaEvent: Ember.inject.service('magma-event'),
+	magmaEvent: inject.service('magma-event'),
 
-	/**
-	 * This is the name of the action that will be called whenever the user click on the button.
-	 * @property action {String}
-	 * @public
-	 */
-	action: void 0,
+	type: computed('attrs.type', function () {
+		return this.getAttr('type') || 'button';
+	}),
 
-	/**
-	 * The name is used to share events between the button and the button-group. Only used when part of a button-group.
-	 * @property name {String}
-	 * @public
-	 */
-	name: void 0,
+	attrs: {
 
-	/**
-	 * Type of button, can be `button`, `submit` or `reset` as per HTML..
-	 * @property type {String}
-	 * @public
-	 */
-	type: 'button',
+		/**
+		 * This is the action that will be called whenever the user click on the button.
+		 * @property on-click {Function}
+		 * @public
+		 */
+		'on-click': void 0,
 
-	/**
-	 * Value to send with the action.
-	 * @property value {Object}
-	 * @public
-	 */
-	value: void 0,
+		/**
+		 * The name is used to share events between the button and the button-group. Only used when part of a button-group.
+		 * @property name {String}
+		 * @public
+		 */
+		name: void 0,
+
+		/**
+		 * Type of button, can be `button`, `submit` or `reset` as per HTML.
+		 * @property type {String}
+		 * @public
+		 */
+		type: void 0,
+
+		/**
+		 * The value is used to share events between the button and the button-group. Only used when part of a button-group.
+		 * @property value {String}
+		 * @public
+		 */
+		value: void 0
+	},
 
 	/**
 	 * On init, initialize the event between the button and the button group if needed.
@@ -71,12 +79,12 @@ export default Ember.Component.extend(DisabledSupport,
 	 * @method buttonInit
 	 * @private
 	 */
-	buttonInit: Ember.on('init', function () {
-		let name = this.get('name');
+	buttonInit: on('init', function () {
+		let name = this.getAttr('name');
 		if (name) {
 			this.get('magmaEvent').subscribe(name+'ButtonGroup', this, 'buttonGroupDidChange');
-			if (this.get('pressed')) {
-				Ember.run.schedule('afterRender', this, this.buttonClick);
+			if (this.getAttr('pressed')) {
+				Ember.run.schedule('afterRender', this, this.get('buttonClick'));
 			}
 		}
 	}),
@@ -86,7 +94,7 @@ export default Ember.Component.extend(DisabledSupport,
 	 * @method buttonWillDestroyElement
 	 * @private
 	 */
-	buttonWillDestroyElement: Ember.on('willDestroyElement', function () {
+	buttonWillDestroyElement: on('willDestroyElement', function () {
 		let name = this.get('name');
 		if (name) {
 			this.get('magmaEvent').unsubscribe(name+'ButtonGroup');
@@ -100,8 +108,10 @@ export default Ember.Component.extend(DisabledSupport,
 	 * @private
 	 */
 	buttonGroupDidChange(event) {
-		this.set('pressed', (event.value === this.get('value')));
-		this.set('disabled', event.disabled || false);
+		this.setProperties({
+			pressed: (event.value === this.getAttr('value')),
+			disabled: event.disabled || false
+		});
 	},
 
 	/**
@@ -110,12 +120,12 @@ export default Ember.Component.extend(DisabledSupport,
 	 * @method buttonClick
 	 * @private
 	 */
-	buttonClick: Ember.on('click', function (event) {
-		let name = this.get('name');
-		let action = this.get('action');
-		let value = this.get('value');
+	buttonClick: on('click', function (event) {
+		let name = this.getAttr('name');
+		let onClickAction = this.getAttr('on-click');
+		let value = this.getAttr('value');
 
-		if (this.get('disabled')) {
+		if (this.getAttr('disabled')) {
 			return false;
 		}
 
@@ -124,8 +134,8 @@ export default Ember.Component.extend(DisabledSupport,
 			event.stopPropagation();
 		}
 
-		if (action) {
-			this.sendAction('action', value);
+		if (onClickAction) {
+			onClickAction();
 		} else if (name) {
 			this.get('magmaEvent').publish(name+'Button', {value: value});
 		}
