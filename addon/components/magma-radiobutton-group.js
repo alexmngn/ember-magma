@@ -28,16 +28,29 @@ export default Ember.Component.extend(DisabledSupport, {
 
 	magmaEvent: inject.service('magma-event'),
 
+	/**
+	 * @property name
+	 * @private
+	 */
 	name: computed.alias('attrs.name', function () {
 		return this.getAttr('name');
 	}),
 
+	/**
+	 * @property value
+	 * @private
+	 */
 	value: computed.alias('attrs.value', function () {
 		return this.getAttr('value');
 	}),
 
 	attrs: {
 
+		/**
+		 * This is the action that will be called whenever the value of the group changes. The action will receive the value as a parameter.
+		 * @property on-value-change {Function}
+		 * @public
+		 */
 		'on-value-change': void 0,
 
 		/**

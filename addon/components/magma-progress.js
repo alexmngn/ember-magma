@@ -39,19 +39,50 @@ export default Ember.Component.extend({
 
 	ariaValuenow: computed.alias('value'),
 
+	/**
+	 * @property indicatorAnimation
+	 * @private
+	 */
 	indicatorAnimation: computed('attrs.indicatorAnimation', function () {
 		const indicatorAnimation = this.getAttr('indicatorAnimation');
 		return isNone(indicatorAnimation) ? true : indicatorAnimation;
 	}),
 
+	/**
+	 * @property indicatorAnimationDuration
+	 * @private
+	 */
 	indicatorAnimationDuration: computed('attrs.indicatorAnimationDuration', function () {
 		return this.getAttr('indicatorAnimationDuration') || 400;
 	}),
 
+	/**
+	 * The percentage of progress
+	 * @param indicatorValue {Number}
+	 * @private
+	 */
+	indicatorValue: computed(function () {
+		return this.get('progress');
+	}),
+
+	/**
+	 * @property max
+	 * @private
+	 */
 	max: computed('attrs.max', function () {
 		return this.getAttr('max') || 100;
 	}),
 
+	/**
+	 * @property progress
+	 * @private
+	 */
+	progress: 0,
+
+	/**
+	 * @property value
+	 * @private
+	 */
 	value: computed('attrs.value', function () {
 		return this.getAttr('value') || 0;
 	}),
@@ -88,6 +119,18 @@ export default Ember.Component.extend({
 		value: void 0
 	},
 
+	/**
+	 * @method progressDidInsertElement
+	 * @private
+	 */
+	progressDidInsertElement: on('didInsertElement', function () {
+		this.valueDidChange();
+	}),
+
+	/**
+	 * @method valueDidChange
+	 * @private
+	 */
 	valueDidChange: observer('value', 'max', function () {
 		this.set('progress', parseFloat(this.get('value')*100/this.get('max')) || 0);
 		if (this.get('indicatorAnimation') === true) {
@@ -97,21 +140,10 @@ export default Ember.Component.extend({
 		}
 	}),
 
-	progressDidInsertElement: on('didInsertElement', function () {
-		this.valueDidChange();
-	}),
-
-	progress: 0,
-
 	/**
-	 * The percentage of progress
-	 * @param indicatorValue {Number}
+	 * @method animateIndicatorValue
 	 * @private
 	 */
-	indicatorValue: computed(function () {
-		return this.get('progress');
-	}),
-
 	animateIndicatorValue() {
 		const { progress, indicatorValue, animationDuration } =
 			this.getProperties('progress', 'indicatorValue', 'indicatorAnimationDuration');

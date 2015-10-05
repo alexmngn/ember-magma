@@ -16,7 +16,7 @@ A simple command line can make you use the addon right now. Simply run the follo
 ember install ember-magma
 ```
 
-**Note:** This addon has been created based on Ember 2.0. It hasn't been tested on lower version of Ember yet.
+**Note:** This addon has been created based on Ember 2.0. Please update your project to this version of Ember or above to be able to use this addon.
 
 ## Themes
 
