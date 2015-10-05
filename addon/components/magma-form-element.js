@@ -22,18 +22,21 @@ export default Ember.Component.extend({
 	classNames: ['magma-form-element'],
 
 	/**
-	 * The label to be displayed
-	 * @property label {String}
-	 * @public
-	 */
-	label: void 0,
-
-	/**
 	 * On didInsertElement, create the attribute "for" to the label, based on the first input element in the {{yield}}
 	 * @method formElementDidInsertElement
 	 * @private
 	 */
 	formElementDidInsertElement: Ember.on('didInsertElement', function () {
 		this.$('label').attr('for', this.$('input, textarea, select').first().attr('id'));
-	})
+	}),
+
+	attrs: {
+
+		/**
+		 * The label to be displayed
+		 * @property label {String}
+		 * @public
+		 */
+		label: void 0
+	}
 });

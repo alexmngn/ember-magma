@@ -14,6 +14,8 @@
 
 import Ember from 'ember';
 
+const { computed, isNone, observer, on } = Ember;
+
 export default Ember.Component.extend({
 
 	attributeBindings: [
@@ -25,36 +27,102 @@ export default Ember.Component.extend({
 		'title'
 	],
 
-	ariaValuemin: 0,
-
-	ariaValuemax: Ember.computed.alias('valueMax'),
-
-	ariaValuenow: Ember.computed.alias('value'),
-
 	classNames: ['magma-progress'],
 
+	classNameBindings: ['indicatorAnimation:magma-progress-indicator-animate'],
+
 	role: 'progressbar',
+
+	ariaValuemin: 0,
+
+	ariaValuemax: computed.alias('valueMax'),
+
+	ariaValuenow: computed.alias('value'),
+
+	indicatorAnimation: computed('attrs.indicatorAnimation', function () {
+		const indicatorAnimation = this.getAttr('indicatorAnimation');
+		return isNone(indicatorAnimation) ? true : indicatorAnimation;
+	}),
+
+	indicatorAnimationDuration: computed('attrs.indicatorAnimationDuration', function () {
+		return this.getAttr('indicatorAnimationDuration') || 400;
+	}),
+
+	max: computed('attrs.max', function () {
+		return this.getAttr('max') || 100;
+	}),
+
+	value: computed('attrs.value', function () {
+		return this.getAttr('value') || 0;
+	}),
+
+	attrs: {
+		/**
+		 * When set to true, the indicator number will be animated
+		 * @param indicatorAnimation {Boolean}
+		 * @default true
+		 * @public
+		 */
+		indicatorAnimation: void 0,
+
+		/**
+		 * When animate is set to true, this will set the speed of the animation in miliseconds
+		 * @param indicatorAnimationDuration {Number}
+		 * @default 400
+		 * @public
+		 */
+		indicatorAnimationDuration: void 0,
+
+		/**
+		 * The maximum value the progress bar can reach
+		 * @param max {Number}
+		 * @public
+		 */
+		max: void 0,
+
+		/**
+		 * The current value
+		 * @param value {Number}
+		 * @public
+		 */
+		value: void 0
+	},
+
+	valueDidChange: observer('value', 'max', function () {
+		this.set('progress', parseFloat(this.get('value')*100/this.get('max')) || 0);
+		if (this.get('indicatorAnimation') === true) {
+			this.animateIndicatorValue();
+		} else {
+			this.set('indicatorValue', this.get('progress'));
+		}
+	}),
+
+	progressDidInsertElement: on('didInsertElement', function () {
+		this.valueDidChange();
+	}),
+
+	progress: 0,
 
 	/**
 	 * The percentage of progress
 	 * @param indicatorValue {Number}
 	 * @private
 	 */
-	indicatorValue: Ember.computed('value', 'max', function () {
-		return parseFloat(this.get('value')*100/this.get('max')) || 0;
+	indicatorValue: computed(function () {
+		return this.get('progress');
 	}),
 
-	/**
-	 * The current value
-	 * @param value {Number}
-	 * @public
-	 */
-	value: 0,
+	animateIndicatorValue() {
+		const { progress, indicatorValue, animationDuration } =
+			this.getProperties('progress', 'indicatorValue', 'indicatorAnimationDuration');
 
-	/**
-	 * The maximum value the progress bar can reach
-	 * @param valueMax {Number}
-	 * @public
-	 */
-	max: 100
+		this.$().prop('indicatorValue', indicatorValue).animate({
+			indicatorValue: progress
+		}, {
+			duration: animationDuration,
+			step: (now) => {
+				this.set('indicatorValue', Math.ceil(now));
+			}
+		});
+	}
 });

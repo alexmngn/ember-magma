@@ -7,6 +7,8 @@
 
 import Ember from 'ember';
 
+const { computed } = Ember;
+
 export default Ember.Mixin.create({
 
 	attributeBindings: ['ariaPressed:aria-pressed'],
@@ -14,18 +16,30 @@ export default Ember.Mixin.create({
 	classNameBindings: ['pressed:magma-pressed'],
 
 	/**
-	 * When set to true, the component will have a pressed state and the class magma-pressed will be set to it.
 	 * @property pressed {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
-	pressed: false,
+	pressed: computed('attrs.pressed', function () {
+		return this.getAttr('pressed') || false;
+	}),
 
 	/**
 	 * @property ariaPressed {String}
 	 * @private
 	 */
-	ariaPressed: Ember.computed('pressed', function () {
-		return this.get('pressed') ? String(this.get('pressed')) : void 0;
-	})
+	ariaPressed: computed('pressed', function () {
+		const pressed = this.get('pressed');
+		return pressed ? String(pressed) : void 0;
+	}),
+
+	attrs: {
+		/**
+		 * When set to true, the component will have a pressed state and the class magma-pressed will be set to it.
+		 * @property pressed {Boolean}
+		 * @default false
+		 * @public
+		 */
+		pressed: void 0
+	}
 });

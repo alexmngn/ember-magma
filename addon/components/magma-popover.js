@@ -19,10 +19,13 @@
  */
 
 import Ember from 'ember';
+import AnimationSupport from 'ember-magma/mixins/animation-support';
 import ModalSupport from 'ember-magma/mixins/modal-support';
 import PositionSupport from 'ember-magma/mixins/position-support';
 
-export default Ember.Component.extend(ModalSupport, PositionSupport, {
+const { computed, observer, on, run, $ } = Ember;
+
+export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSupport, {
 
 	classNames: ['magma-popover'],
 
@@ -31,33 +34,62 @@ export default Ember.Component.extend(ModalSupport, PositionSupport, {
 		'tabindex'
 	],
 
+	animationIn: 'fadeIn',
+
+	animationOut: 'fadeOut',
+
 	isVisible: false,
 
-	/**
-	 * It corresponds to the selector of the element that will trigger the popover to be displayed or hidden.
-	 * @property for {String}
-	 * @public
-	 */
-	for: void 0,
+	isDisplayed: false,
 
-	/**
-	 * The popover will appear on hover the for element, but you can also display it on click.
-	 * @property on {String}
-	 * @default hover
-	 * @public
-	 */
-	on: 'hover',
+	on: computed('attrs.on', function () {
+		return this.getAttr('on') || 'hover';
+	}),
+
+	attrs: {
+
+		/**
+		 * Animation when the component appears
+		 * @property animationIn
+		 * @default fadeIn
+		 * @public
+		 */
+		animationIn: void 0,
+
+		/**
+		 * Animation when the component disappears
+		 * @property attrs.animationOut
+		 * @default fadeOut
+		 * @public
+		 */
+		animationOut: void 0,
+
+		/**
+		 * It corresponds to the selector of the element that will trigger the popover to be displayed or hidden.
+		 * @property for {String}
+		 * @public
+		 */
+		for: void 0,
+
+		/**
+		 * The popover will appear on hover the for element, but you can also display it on click.
+		 * @property on {String}
+		 * @default hover
+		 * @public
+		 */
+		on: void 0
+	},
 
 	/**
 	 * On didInsertElement, verify the `for` attribute is set and creates the event on the element.
 	 * @method popoverDidInsertElement
 	 * @private
 	 */
-	popoverDidInsertElement: Ember.on('didInsertElement', function () {
+	popoverDidInsertElement: on('didInsertElement', function () {
 		//Attach events on the 'for' element
-		let forjQueryElement = Ember.$(this.get('for'));
+		let forjQueryElement = $(this.getAttr('for'));
 		if (forjQueryElement.length) {
-			let on = this.get('on');
+			let on = this.getAttr('on');
 			this.set('relativeElement', forjQueryElement);
 
 			if (on === 'click') {
@@ -79,11 +111,11 @@ export default Ember.Component.extend(ModalSupport, PositionSupport, {
 	 * @method popoverWillDestroyElement
 	 * @private
 	 */
-	popoverWillDestroyElement: Ember.on('willDestroyElement', function () {
+	popoverWillDestroyElement: on('willDestroyElement', function () {
 		//Detach events on the 'for' element
-		let forjQueryElement = Ember.$(this.get('for'));
+		let forjQueryElement = $(this.getAttr('for'));
 		if (forjQueryElement.length) {
-			let on = this.get('on');
+			let on = this.getAttr('on');
 			if (on === 'click') {
 				forjQueryElement.off('click');
 			} else if (on === 'hover') {
@@ -92,13 +124,17 @@ export default Ember.Component.extend(ModalSupport, PositionSupport, {
 		}
 	}),
 
+	popoverSetOffset: observer('attrs.alignment', 'attrs.placement', function () {
+		this.$().offset(this.getPosition());
+	}),
+
 	/**
 	 * Toggle the popover visibility
 	 * @method togglePopover
 	 * @private
 	 */
 	togglePopover() {
-		return this.get('isVisible') ? this.hidePopover() : this.showPopover();
+		return this.toggleProperty('isDisplayed');
 	},
 
 	/**
@@ -107,10 +143,7 @@ export default Ember.Component.extend(ModalSupport, PositionSupport, {
 	 * @private
 	 */
 	showPopover() {
-		this.set('isVisible', true);
-		Ember.run.schedule('afterRender', this, function () {
-			this.$().offset(this.getPosition());
-		});
+		this.set('isDisplayed', true);
 	},
 
 	/**
@@ -119,7 +152,22 @@ export default Ember.Component.extend(ModalSupport, PositionSupport, {
 	 * @private
 	 */
 	hidePopover() {
-		this.set('isVisible', false);
-	}
+		this.set('isDisplayed', false);
+	},
+
+	refreshAnimation: observer('isDisplayed', function () {
+		if (this.get('isDisplayed') === true) {
+			this.set('isVisible', this.get('isDisplayed'));
+			run.schedule('afterRender', this, () => {
+				this.popoverSetOffset();
+				this.animate(this.get('animationIn'));
+			});
+		} else {
+			this.animate(this.get('animationOut')).then(() => {
+				this.set('isVisible', this.get('isDisplayed'));
+			});
+		}
+	})
+
 
 });

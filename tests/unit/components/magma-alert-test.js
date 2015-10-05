@@ -14,8 +14,6 @@ moduleForComponent('magma-alert', 'Unit | Component | magma alert', {
 });
 
 test('Component has correct initial value', function (assert) {
-	assert.expect(3);
+	assert.expect(1);
 	assert.ok(component.get('role') === 'alert');
-	assert.ok(component.get('alert') !== null);
-    assert.ok(this.$().hasClass('magma-alert-error'), 'Class name is valid');
 });

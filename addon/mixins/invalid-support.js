@@ -7,6 +7,8 @@
 
 import Ember from 'ember';
 
+const { computed } = Ember;
+
 export default Ember.Mixin.create({
 
 	attributeBindings: ['ariaInvalid:aria-invalid'],
@@ -14,20 +16,31 @@ export default Ember.Mixin.create({
 	classNameBindings: ['invalid:magma-invalid'],
 
 	/**
-	 * When set to true, the component will have a invalid state and the class magma-invalid will be set to it.
 	 * @property invalid {Boolean}
 	 * @default false
-	 * @public
-	 */
-	invalid: false,
-
-	/**
-	 * @property ariaInvalid {String}
 	 * @private
 	 */
-	ariaInvalid: Ember.computed('invalid', function () {
-		return this.get('invalid') &&
-			this.get('attributeBindings').indexOf('invalid') === -1 ?
-			String(this.get('invalid')) : void 0;
-	})
+	invalid: computed('attrs.invalid', function () {
+		return this.getAttr('invalid') || false;
+	}),
+
+	/**
+	 * @property ariaDisabled {String}
+	 * @private
+	 */
+	ariaInvalid: computed('invalid', function () {
+		const invalid = this.get('invalid');
+		return invalid && this.get('attributeBindings').indexOf('invalid') === -1 ? String(invalid) : void 0;
+	}),
+
+	attrs: {
+
+		/**
+		 * When set to true, the component will have a invalid state and the class magma-invalid will be set to it.
+		 * @property invalid {Boolean}
+		 * @default false
+		 * @public
+		 */
+		invalid: void 0
+	}
 });

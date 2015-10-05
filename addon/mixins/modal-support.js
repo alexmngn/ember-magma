@@ -9,31 +9,27 @@
 
 import Ember from 'ember';
 
+const { computed, isNone, on } = Ember;
+
 export default Ember.Mixin.create({
 
 	attributeBindings: ['tabindex'],
 
-	/**
-	 * When set to true, the tab will be constrained to the component
-	 * @property isConstrained {Boolean}
-	 * @default true
-	 * @public
-	 */
-	isConstrained: true,
+	isConstrained: computed('attrs.isConstrained', function () {
+		const isConstrained = this.getAttr('isConstrained');
+		return isNone(isConstrained) ? true : isConstrained;
+	}),
 
-	/**
-	 * When set to true, the tab will be stopped.
-	 * @property isTrapped {Boolean}
-	 * @default false
-	 * @public
-	 */
-	isTrapped: false,
+	isTrapped: computed('attrs.isTrapped', function () {
+		const isTrapped = this.getAttr('isTrapped');
+		return isNone(isTrapped) ? false : isTrapped;
+	}),
 
 	/**
 	 * @property modalElement {Object}
 	 * @private
 	 */
-	modalElement: Ember.computed(function () {
+	modalElement: computed(function () {
 		return this;
 	}),
 
@@ -41,15 +37,34 @@ export default Ember.Mixin.create({
 	 * @property tabindex
 	 * @protected
 	 */
-	tabindex: Ember.computed('isConstrained', function () {
+	tabindex: computed('isConstrained', function () {
 		return this.get('isConstrained') ? 0 : void 0;
 	}),
+
+	attrs: {
+
+		/**
+		 * When set to true, the tab will be constrained to the component
+		 * @property isConstrained {Boolean}
+		 * @default true
+		 * @public
+		 */
+		isConstrained: void 0,
+
+		/**
+		 * When set to true, the tab will be stopped.
+		 * @property isTrapped {Boolean}
+		 * @default false
+		 * @public
+		 */
+		isTrapped: void 0
+	},
 
 	/**
 	 * On keydown, on the tab key, constrain the tab to the component.
 	 * @event modalConstrainKeyDown
 	 */
-	modalConstrainKeyDown: Ember.on('keyDown', function (event) {
+	modalConstrainKeyDown: on('keyDown', function (event) {
 		if (event.which === 9 && this.get('isVisible') &&
 			this.get('isConstrained') && !this.get('isTrapped')) {
 			const tabbableElements = this.get('modalElement').$(':tabbable');
@@ -73,7 +88,7 @@ export default Ember.Mixin.create({
 	 * On keydown, on the tab key, stop the tab.
 	 * @event modalTrappingKeyDown
 	 */
-	modalTrappingKeyDown: Ember.on('keyDown', function (event) {
+	modalTrappingKeyDown: on('keyDown', function (event) {
 		if (event.which === 9 && this.get('isVisible') &&
 			this.get('isConstrained') && this.get('isTrapped')) {
 			event.preventDefault();

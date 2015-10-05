@@ -1,11 +1,13 @@
 /**
  * Adds support of the required state to a component
  *
- * @class Magma.Mixin.RequiredSupport
+ * @class Magma.Mixin.PressedSupport
  * @constructor Ember.Mixin
  */
 
 import Ember from 'ember';
+
+const { computed } = Ember;
 
 export default Ember.Mixin.create({
 
@@ -14,18 +16,30 @@ export default Ember.Mixin.create({
 	classNameBindings: ['required:magma-required'],
 
 	/**
-	 * When set to true, the component will have a required state and the class magma-required will be set to it.
 	 * @property required {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
-	required: false,
+	required: computed('attrs.required', function () {
+		return this.getAttr('required') || false;
+	}),
 
 	/**
 	 * @property ariaRequired {String}
 	 * @private
 	 */
-	ariaRequired: Ember.computed('required', function () {
-		return this.get('required') ? String(this.get('required')) : void 0;
-	})
+	ariaRequired: computed('required', function () {
+		const required = this.get('required');
+		return required && this.get('attributeBindings').indexOf('required') === -1 ? String(required) : void 0;
+	}),
+
+	attrs: {
+		/**
+		 * When set to true, the component will have a required state and the class magma-required will be set to it.
+		 * @property required {Boolean}
+		 * @default false
+		 * @public
+		 */
+		required: void 0
+	}
 });

@@ -18,27 +18,42 @@
 import Ember from 'ember';
 import DisabledSupport from 'ember-magma/mixins/disabled-support';
 
+const { computed, inject, on, observer } = Ember;
+
 export default Ember.Component.extend(DisabledSupport, {
 
 	attributeBindings: ['style'],
 
 	classNames: ['magma-button-group'],
 
-	magmaEvent: Ember.inject.service('magma-event'),
+	magmaEvent: inject.service('magma-event'),
 
-	/**
-	 * This name is mandatory and should be the same in the group and the button itself. It allows to share the events between the two components.
-	 * @property name {String}
-	 * @public
-	 */
-	name: void 0,
+	name: computed.alias('attrs.name', function () {
+		return this.getAttr('name');
+	}),
 
-	/**
-	 * You can get the value of the current pressed button within this attribute. You can also set the default value.
-	 * @property value {String}
-	 * @public
-	 */
-	value: void 0,
+	value: computed.alias('attrs.value', function () {
+		return this.getAttr('value');
+	}),
+
+	attrs: {
+
+		'on-value-change': void 0,
+
+		/**
+		 * This name is mandatory and should be the same in the group and the button itself. It allows to share the events between the two components.
+		 * @property name {String}
+		 * @public
+		 */
+		name: void 0,
+
+		/**
+		 * You can set the value of the current pressed button with this attribute
+		 * @property value {String}
+		 * @public
+		 */
+		value: void 0
+	},
 
 	/**
 	 * On init, initialize the event between the button and the button group.
@@ -46,7 +61,7 @@ export default Ember.Component.extend(DisabledSupport, {
 	 * @method buttonInit
 	 * @private
 	 */
-	buttonGroupInit: Ember.on('init', function () {
+	buttonGroupInit: on('init', function () {
 		let name = this.get('name');
 		if (name) {
 			this.get('magmaEvent').subscribe(name+'Button', this, 'buttonDidChange');
@@ -59,7 +74,7 @@ export default Ember.Component.extend(DisabledSupport, {
 	 * @method buttonGroupWillDestroyElement
 	 * @private
 	 */
-	buttonGroupWillDestroyElement: Ember.on('willDestroyElement', function () {
+	buttonGroupWillDestroyElement: on('willDestroyElement', function () {
 		let name = this.get('name');
 		if (name) {
 			this.get('magmaEvent').unsubscribe(name+'Button');
@@ -71,11 +86,8 @@ export default Ember.Component.extend(DisabledSupport, {
 	 * @method triggerEvent
 	 * @private
 	 */
-	triggerEvent: Ember.observer('name', 'value', 'disabled', function () {
-		this.get('magmaEvent').publish(this.get('name')+'ButtonGroup', {
-			value: this.get('value'),
-			disabled: this.get('disabled')
-		});
+	triggerEvent: observer('name', 'value', 'disabled', function () {
+		this.get('magmaEvent').publish(this.get('name')+'ButtonGroup', this.getProperties('value', 'disabled'));
 	}),
 
 	/**
@@ -84,6 +96,10 @@ export default Ember.Component.extend(DisabledSupport, {
 	 * @private
 	 */
 	buttonDidChange(event) {
+		const onValueChangeAction = this.getAttr('on-value-change');
+		if (onValueChangeAction) {
+			onValueChangeAction(event.value);
+		}
 		this.set('value', event.value);
 	}
 });
