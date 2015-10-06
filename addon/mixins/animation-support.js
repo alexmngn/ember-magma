@@ -61,9 +61,11 @@ export default Ember.Mixin.create({
 		const animationObject = animations.findBy('target', target);
 
 		if (animationObject) {
-			animations.removeObject(animationObject);
-			animationObject.deferred.resolve();
-			this.$(animationObject.target).removeClass('animated ' + animationObject.animation);
+			run.scheduleOnce('render', this, function () {
+				animations.removeObject(animationObject);
+				animationObject.deferred.resolve();
+				this.$(animationObject.target).removeClass('animated ' + animationObject.animation);
+			});
 		}
 	}
 
