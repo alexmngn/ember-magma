@@ -4,9 +4,18 @@ import { module, test } from 'qunit';
 
 module('Unit | Mixin | disabled support');
 
-// Replace this with your real tests.
-test('it works', function(assert) {
-  var DisabledSupportObject = Ember.Object.extend(DisabledSupportMixin);
-  var subject = DisabledSupportObject.create();
-  assert.ok(subject);
+
+test('disabled', function(assert) {
+	let DisabledSupportObject = Ember.Object.extend(DisabledSupportMixin);
+	let subject = DisabledSupportObject.create();
+	subject.getAttr = function (attr) {
+		return this.get('attrs.'+attr);
+	};
+
+	Ember.run(() => {
+		subject.set('attrs.disabled', true);
+	});
+
+	assert.ok(subject.get('disabled') === true, 'Disabled is properly set');
+	assert.ok(subject.get('ariaDisabled') === 'true', 'Aria disabled is properly set');
 });
