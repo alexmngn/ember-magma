@@ -4,9 +4,17 @@ import { module, test } from 'qunit';
 
 module('Unit | Mixin | busy support');
 
-// Replace this with your real tests.
-test('it works', function(assert) {
-  var BusySupportObject = Ember.Object.extend(BusySupportMixin);
-  var subject = BusySupportObject.create();
-  assert.ok(subject);
+test('busy', function(assert) {
+	let BusySupportObject = Ember.Object.extend(BusySupportMixin);
+	let subject = BusySupportObject.create();
+	subject.getAttr = function (attr) {
+		return this.get('attrs.'+attr);
+	};
+
+	Ember.run(() => {
+		subject.set('attrs.busy', true);
+	});
+
+	assert.ok(subject.get('busy') === true, 'Busy is properly set');
+	assert.ok(subject.get('ariaBusy') === 'true', 'Aria busy is properly set');
 });

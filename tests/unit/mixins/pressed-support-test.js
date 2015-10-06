@@ -4,9 +4,17 @@ import { module, test } from 'qunit';
 
 module('Unit | Mixin | pressed support');
 
-// Replace this with your real tests.
-test('it works', function(assert) {
-  var PressedSupportObject = Ember.Object.extend(PressedSupportMixin);
-  var subject = PressedSupportObject.create();
-  assert.ok(subject);
+test('pressed', function(assert) {
+	let PressedSupportObject = Ember.Object.extend(PressedSupportMixin);
+	let subject = PressedSupportObject.create();
+	subject.getAttr = function (attr) {
+		return this.get('attrs.'+attr);
+	};
+
+	Ember.run(() => {
+		subject.set('attrs.pressed', true);
+	});
+
+	assert.ok(subject.get('pressed') === true, 'Pressed is properly set');
+	assert.ok(subject.get('ariaPressed') === 'true', 'Aria pressed is properly set');
 });

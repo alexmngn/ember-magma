@@ -4,9 +4,17 @@ import { module, test } from 'qunit';
 
 module('Unit | Mixin | required support');
 
-// Replace this with your real tests.
-test('it works', function(assert) {
-  var RequiredSupportObject = Ember.Object.extend(RequiredSupportMixin);
-  var subject = RequiredSupportObject.create();
-  assert.ok(subject);
+test('required', function(assert) {
+	let RequiredSupportObject = Ember.Object.extend(RequiredSupportMixin);
+	let subject = RequiredSupportObject.create();
+	subject.getAttr = function (attr) {
+		return this.get('attrs.'+attr);
+	};
+
+	Ember.run(() => {
+		subject.set('attrs.required', true);
+	});
+
+	assert.ok(subject.get('required') === true, 'Required is properly set');
+	assert.ok(subject.get('ariaRequired') === 'true', 'Aria required is properly set');
 });
