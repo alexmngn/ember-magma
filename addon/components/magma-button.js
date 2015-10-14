@@ -29,7 +29,8 @@ export default Ember.Component.extend(DisabledSupport,
 		'disabled',
 		'style',
 		'tabindex',
-		'title'
+		'title',
+		'type'
 	],
 
 	classNames: ['magma-button'],
