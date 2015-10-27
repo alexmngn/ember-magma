@@ -89,7 +89,21 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 		 * @default hover
 		 * @public
 		 */
-		on: void 0
+		on: void 0,
+
+		/**
+		 * This is the action that will be called whenever the popover becomes visible,
+		 * @property on-show {Function}
+		 * @public
+		 */
+		'on-show': void 0,
+
+		/**
+		 * This is the action that will be called whenever the popover is completely hidden.
+		 * @property on-show {Function}
+		 * @public
+		 */
+		'on-hide': void 0
 	},
 
 	/**
@@ -186,6 +200,10 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 
 	refreshAnimation: observer('isDisplayed', function () {
 		if (this.get('isDisplayed') === true) {
+			const onShow = this.get('on-show');
+			if (onShow) {
+				onShow();
+			}
 			this.set('isVisible', this.get('isDisplayed'));
 			run.schedule('afterRender', this, () => {
 				this.popoverSetOffset();
@@ -193,6 +211,10 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 			});
 		} else {
 			this.animate(this.get('animationOut')).then(() => {
+				const onHide = this.get('on-hide');
+				if (onHide) {
+					onHide();
+				}
 				this.set('isVisible', this.get('isDisplayed'));
 			});
 		}

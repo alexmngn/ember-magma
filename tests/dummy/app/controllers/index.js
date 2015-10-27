@@ -1,3 +1,5 @@
+/* global alert */
+
 import Ember from 'ember';
 export default Ember.Controller.extend({
 	exampleFirstName: 'Alex',
@@ -59,6 +61,10 @@ export default Ember.Controller.extend({
 	radiobuttonGroupValue: Ember.computed.alias('radiobuttonGroupInitialValue'),
 
 	actions: {
+
+		showAlert(value) {
+			alert(value);
+		},
 
 		scrollToAnchor(anchor) {
 			$('html, body').animate({
