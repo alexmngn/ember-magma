@@ -93,7 +93,7 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 	},
 
 	/**
-	 * On didInsertElement, verify the `for` attribute is set and creates the event on the element.
+	 * On didInsertElement, verify the `for` attribute is set and create events.
 	 * @method popoverDidInsertElement
 	 * @private
 	 */
@@ -105,13 +105,24 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 			this.set('relativeElement', forjQueryElement);
 
 			if (on === 'click') {
-				forjQueryElement.on('click', () => {
+				forjQueryElement.on('click.magma-popover', () => {
 					this.togglePopover();
 				});
+
+				//If popover is modal, allows to close the popover when clicking anywhere outside
+				if (this.get('isConstrained')) {
+					$(document).on('click.magma-popover', () => {
+						this.hidePopover();
+					});
+					this.$().on('click.magma-popover', (event) => {
+						event.stopPropagation();
+					});
+				}
+
 			} else if (on === 'hover') {
-				forjQueryElement.on('mouseenter', () => {
+				forjQueryElement.on('mouseenter.magma-popover', () => {
 					this.showPopover();
-				}).on('mouseleave', () => {
+				}).on('mouseleave.magma-popover', () => {
 					this.hidePopover();
 				});
 			}
@@ -119,7 +130,7 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 	}),
 
 	/**
-	 * On willDestroyElement,teardown the event on the element.
+	 * On willDestroyElement,teardown the events.
 	 * @method popoverWillDestroyElement
 	 * @private
 	 */
@@ -129,9 +140,11 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 		if (forjQueryElement.length) {
 			let on = this.getAttr('on');
 			if (on === 'click') {
-				forjQueryElement.off('click');
+				forjQueryElement.off('click.magma-popover');
+				$(document).off('click.magma-popover');
+				this.$().off('click.magma-popover');
 			} else if (on === 'hover') {
-				forjQueryElement.off('mouseenter mouseleave');
+				forjQueryElement.off('mouseenter.magma-popover mouseleave.magma-popover');
 			}
 		}
 	}),
