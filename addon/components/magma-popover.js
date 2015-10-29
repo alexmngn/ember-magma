@@ -129,7 +129,9 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 						this.hidePopover();
 					});
 					this.$().on('click.magma-popover', (event) => {
-						event.stopPropagation();
+						if (this.$().has(event.target).length === 0) {
+							event.stopPropagation();
+						}
 					});
 				}
 
@@ -168,6 +170,7 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 	 * @private
 	 */
 	popoverSetOffset: observer('attrs.alignment', 'attrs.placement', function () {
+		this.positionElementsNotifyChange();
 		this.$().offset(this.getPosition());
 	}),
 
@@ -186,6 +189,7 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 	 * @private
 	 */
 	showPopover() {
+		this.popoverSetOffset();
 		this.set('isDisplayed', true);
 	},
 
@@ -201,20 +205,20 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 	refreshAnimation: observer('isDisplayed', function () {
 		if (this.get('isDisplayed') === true) {
 			const onShow = this.get('on-show');
+			this.set('isVisible', this.get('isDisplayed'));
 			if (onShow) {
 				onShow();
 			}
-			this.set('isVisible', this.get('isDisplayed'));
 			run.schedule('afterRender', this, () => {
 				this.popoverSetOffset();
 				this.animate(this.get('animationIn'));
 			});
 		} else {
+			const onHide = this.get('on-hide');
+			if (onHide) {
+				onHide();
+			}
 			this.animate(this.get('animationOut')).then(() => {
-				const onHide = this.get('on-hide');
-				if (onHide) {
-					onHide();
-				}
 				this.set('isVisible', this.get('isDisplayed'));
 			});
 		}
