@@ -131,10 +131,14 @@ export default Ember.Mixin.create({
 		placement: 'top',
 	},
 
+	positionElementsNotifyChange() {
+		this.notifyPropertyChange('relativeElement');
+		this.notifyPropertyChange('absoluteElement');
+	},
+
 	positionDidInsertElement: on('didInsertElement', function () {
 		$(window).bind('resize.positionSupport', () => {
-			this.notifyPropertyChange('relativeElement');
-			this.notifyPropertyChange('absoluteElement');
+			this.positionElementsNotifyChange();
 		});
 	}),
 
