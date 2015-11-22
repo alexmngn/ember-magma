@@ -38,9 +38,9 @@
 
 				{{#magma-form-element}}
 					{{magma-checkbox name="terms" checked=exampleTerms required=true}}
-					<label class="example-label">I accept the terms and conditions</label>
+					<label id="example-label">I accept the terms and conditions</label>
 
-					{{#magma-popover for=".example-label" on="hover" placement="right" alignment="top"}}
+					{{#magma-popover for="example-label" on="hover" placement="right" alignment="top"}}
 						You have to check this box to continue
 					{{/magma-popover}}
 
@@ -339,7 +339,8 @@ Is checked?: \{{checkboxIsChecked}}
 						<ul>
 							<li><strong>animationIn</strong> Animation when the component appears. Default is <em>fadeIn</em>.</li>
 							<li><strong>animationOut</strong> Animation when the component disappears. Default is <em>fadeOut</em>.</li>
-							<li><strong>for</strong> It corresponds to the selector of the element that will trigger the popover to be displayed or hidden.</li>
+							<li><strong>for</strong> It corresponds to the ID of the element that will trigger the popover to be displayed or hidden.</li>
+							<li><strong>isDisplayed</strong> When set to true, the popover is visible.</li>
 							<li><strong>on</strong> By default, the popover will appear on <em>hover</em> the <em>for</em> element, but you can also display it on <em>click</em>.</li>
 							<li><strong>on-hide</strong> This is the action that will be called whenever the popover starts to become invisible.</li>
 							<li><strong>on-show</strong> This is the action that will be called whenever the popover becomes visible.</li>
@@ -349,30 +350,30 @@ Is checked?: \{{checkboxIsChecked}}
 					</div>
 					<div class="row">
 						<code class="hbs"><pre>
-\{{#magma-button class="popover-button"}}
+\{{#magma-button id="popover-button"}}
   Roll over to display the tooltip
 \{{/magma-button}}
 
-\{{#magma-popover for=".popover-button" placement="right" alignment="center"}}
+\{{#magma-popover for="popover-button" placement="right" alignment="center"}}
   This appears on mouse over
 \{{/magma-popover}}
 
-\{{#magma-popover on="click" for=".popover-button" placement="bottom" alignment="left"}}
+\{{#magma-popover on="click" for="popover-button" placement="bottom" alignment="left"}}
   This appears on click&lt;br /&gt;&lt;br /&gt;
   &lt;img src="https://upload.wikimedia.org/wikipedia/en/6/69/Ember.js_Logo_and_Mascot.png" width="150"&gt;
 \{{/magma-popover}}
 						</pre></code>
 
 						<div class="example">
-							{{#magma-button class="popover-button" style="background: transparent; border: 1px solid; color: #a31212"}}
+							{{#magma-button id="popover-button" style="background: transparent; border: 1px solid; color: #a31212"}}
 								Roll over to display a tooltip. <br />Click to display another one.
 							{{/magma-button}}
 
-							{{#magma-popover for=".popover-button" on="hover" placement="right" alignment="center"}}
+							{{#magma-popover for="popover-button" on="hover" placement="right" alignment="center"}}
 								This appears on mouse over
 							{{/magma-popover}}
 
-							{{#magma-popover on="click" for=".popover-button" placement="bottom" alignment="left"}}
+							{{#magma-popover on="click" for="popover-button" placement="bottom" alignment="left"}}
 								This appears on click<br /><br />
 								<img src="https://upload.wikimedia.org/wikipedia/en/6/69/Ember.js_Logo_and_Mascot.png" width="150">
 							{{/magma-popover}}

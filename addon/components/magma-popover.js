@@ -23,7 +23,7 @@ import AnimationSupport from 'ember-magma/mixins/animation-support';
 import ModalSupport from 'ember-magma/mixins/modal-support';
 import PositionSupport from 'ember-magma/mixins/position-support';
 
-const { computed, observer, on, run, $ } = Ember;
+const { computed, isNone, observer, on, run, $ } = Ember;
 
 export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSupport, {
 
@@ -40,19 +40,28 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 	 * @property animationIn {String}
 	 * @private
 	 */
-	animationIn: 'fadeIn',
+	animationIn: computed('attrs.animationIn', function () {
+		const animationIn = this.getAttr('animationIn');
+		return isNone(animationIn) ? 'fadeIn' : animationIn;
+	}),
 
 	/**
 	 * @property animationOut {String}
 	 * @private
 	 */
-	animationOut: 'fadeOut',
+	animationOut: computed('attrs.animationOut', function () {
+		const animationOut = this.getAttr('animationOut');
+		return isNone(animationOut) ? 'fadeOut' : animationOut;
+	}),
 
 	/**
 	 * @property isDisplayed {Boolean}
 	 * @private
 	 */
-	isDisplayed: false,
+	isDisplayed: computed('attrs.isDisplayed', function () {
+		const isDisplayed = this.getAttr('isDisplayed');
+		return isNone(isDisplayed) ? false : isDisplayed;
+	}),
 
 	on: computed('attrs.on', function () {
 		return this.getAttr('on') || 'hover';
@@ -62,7 +71,7 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 
 		/**
 		 * Animation when the component appears
-		 * @property animationIn
+		 * @property attrs.animationIn
 		 * @default fadeIn
 		 * @public
 		 */
@@ -77,30 +86,37 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 		animationOut: void 0,
 
 		/**
+		 * When set to true, the popover is visible.
+		 * @property attrs.visible {Boolean}
+		 * @public
+		 */
+		isDisplayed: void 0,
+
+		/**
 		 * It corresponds to the selector of the element that will trigger the popover to be displayed or hidden.
-		 * @property for {String}
+		 * @property attrs.for {String}
 		 * @public
 		 */
 		for: void 0,
 
 		/**
-		 * The popover will appear on hover the for element, but you can also display it on click.
-		 * @property on {String}
+		 * The popover will appear on `hover` the for element, but you can also display it on `click` or on `manual`, setting the attribute isDisplayed to `true`.
+		 * @property attrs.on {String}
 		 * @default hover
 		 * @public
 		 */
 		on: void 0,
 
 		/**
-		 * This is the action that will be called whenever the popover becomes visible,
-		 * @property on-show {Function}
+		 * This is the action that will be called whenever the popover becomes visible.
+		 * @property attrs.on-show {Function}
 		 * @public
 		 */
 		'on-show': void 0,
 
 		/**
-		 * This is the action that will be called whenever the popover is completely hidden.
-		 * @property on-show {Function}
+		 * This is the action that will be called whenever the popover becomes hidden.
+		 * @property attrs.on-hide {Function}
 		 * @public
 		 */
 		'on-hide': void 0
@@ -113,7 +129,7 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 	 */
 	popoverDidInsertElement: on('didInsertElement', function () {
 		//Attach events on the 'for' element
-		let forjQueryElement = $(this.getAttr('for'));
+		let forjQueryElement = $('#'+this.getAttr('for'));
 		if (forjQueryElement.length) {
 			let on = this.getAttr('on');
 			this.set('relativeElement', forjQueryElement);
@@ -143,6 +159,7 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 				});
 			}
 		}
+		this.refreshAnimation();
 	}),
 
 	/**
@@ -152,7 +169,7 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 	 */
 	popoverWillDestroyElement: on('willDestroyElement', function () {
 		//Detach events on the 'for' element
-		let forjQueryElement = $(this.getAttr('for'));
+		let forjQueryElement = $('#'+this.getAttr('for'));
 		if (forjQueryElement.length) {
 			let on = this.getAttr('on');
 			if (on === 'click') {
@@ -189,7 +206,6 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 	 * @private
 	 */
 	showPopover() {
-		this.popoverSetOffset();
 		this.set('isDisplayed', true);
 	},
 
