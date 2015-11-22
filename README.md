@@ -1,32 +1,26 @@
-# Magma [![Build Status](https://travis-ci.org/4lex-io/ember-magma.png?branch=master)](https://travis-ci.org/4lex-io/ember-magma)
+# Ember-magma
 
-## Designed for Ember.js
-
-Magma is a bootstrap toolkit to easily create UI interfaces for Ember.js applications. It provides a list of useful UI components to be used in your Ember project.
-
-## How does this work?
-This toolkit contains reusable components you can assemble to build awesome things.
-
-Better than too many words, please visit <http://4lex-io.github.io/ember-magma/> to see examples.
+This README outlines the details of collaborating on this Ember addon.
 
 ## Installation
 
-A simple command line can make you use the addon right now. Simply run the following at the root level of your ember project:
-```
-ember install ember-magma
-```
+* `git clone` this repository
+* `npm install`
+* `bower install`
 
-**Note:** This addon has been created based on Ember 2.0. Please update your project to this version of Ember or above to be able to use this addon.
+## Running
 
-## Themes
+* `ember server`
+* Visit your app at http://localhost:4200.
 
-We understand that you don't always want to use the default styles coming from this addon. It often adds a lot of styles, and you might want to create your own theme for your application without overriding everything. For this reason, the default theme is not loaded by default in the application anymore.
+## Running Tests
 
-If you decide you want to use the Magma theme, you will need to include it in the main sass file of your project.
+* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
+* `ember test`
+* `ember test --server`
 
-```
-@import 'node_modules/ember-magma/addon/styles/themes/magma';
-```
+## Building
 
-## Documentation
-The documentation <http://4lex-io.github.io/ember-magma/> to see examples.
+* `ember build`
+
+For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
