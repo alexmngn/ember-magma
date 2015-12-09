@@ -148,8 +148,13 @@ main {
 		margin-bottom: 30px;
 	}
 
+	.row {
+		@include break;
+	}
+
 	.form {
-		@include span(6);
+		width: 580px;
+		margin: 0 auto 20px;
 
 		.magma-alert {
 			width: 412px;
@@ -157,13 +162,14 @@ main {
 	}
 
 	code {
-		background: transparent;
+		background: #ddd;
+		border-left: 4px solid #ccc;
+		max-height: 300px;
+		overflow: auto;
 	}
 
 	.formResults {
-		@include span(6 last);
-
-		background: #ddd;
+		@include span(12);
 		box-sizing: border-box;
 		line-height: 20px;
 		margin-bottom: 30px;

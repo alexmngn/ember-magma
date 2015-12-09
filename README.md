@@ -1,4 +1,4 @@
-# Magma [![Build Status](https://travis-ci.org/4lex-io/ember-magma.png?branch=master)](https://travis-ci.org/4lex-io/ember-magma)
+# Magma [![Build Status](https://travis-ci.org/alexmngn/ember-magma.png?branch=master)](https://travis-ci.org/alexmngn/ember-magma)
 
 ## Designed for Ember.js
 
@@ -7,7 +7,7 @@ Magma is a bootstrap toolkit to easily create UI interfaces for Ember.js applica
 ## How does this work?
 This toolkit contains reusable components you can assemble to build awesome things.
 
-Better than too many words, please visit <http://4lex-io.github.io/ember-magma/> to see examples.
+Better than too many words, please visit <http://alexmngn.github.io/ember-magma/> to see examples.
 
 ## Installation
 
@@ -29,4 +29,4 @@ If you decide you want to use the Magma theme, you will need to include it in th
 ```
 
 ## Documentation
-The documentation <http://4lex-io.github.io/ember-magma/> to see examples.
+The documentation <http://alexmngn.github.io/ember-magma/> to see examples.

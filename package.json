@@ -1,6 +1,6 @@
 {
   "name": "ember-magma",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Magma is a bootstrap toolkit to easily create UI interfaces for Ember.js applications.",
   "directories": {
     "doc": "doc",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/4lex-io/ember-magma"
+    "url": "https://github.com/alexmngn/ember-magma"
   },
   "engines": {
     "node": ">= 0.10.0"
@@ -60,11 +60,11 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoURL": "https://4lex-io.github.io/ember-magma"
+    "demoURL": "https://alexmngn.github.io/ember-magma"
   },
-  "homepage": "https://github.com/4lex-io/ember-magma",
+  "homepage": "https://github.com/alexmngn/ember-magma",
   "bugs": {
-    "url": "https://github.com/4lex-io/ember-magma/issues"
+    "url": "https://github.com/alexmngn/ember-magma/issues"
   },
   "main": "index.js"
 }
