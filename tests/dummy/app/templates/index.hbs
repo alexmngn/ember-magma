@@ -1,7 +1,7 @@
 <header class="hero">
 	<img src="assets/logo.png" class="logo">
 	{{#magma-button class="install" on-click=(action "scrollToAnchor" "install")}}Install now{{/magma-button}}
-	<span class="version">Version 0.2.3</span>
+	<span class="version">Version 0.2.4</span>
 </header>
 
 <main>
@@ -9,59 +9,73 @@
 		<h2>Designed for Ember.js</h2>
 		<p>Magma is a bootstrap toolkit to easily create UI interfaces for Ember.js applications. </p>
 		<p>It's now even easier and faster to create your pages, for all devices.</p>
-		<a href="https://github.com/4lex-io/ember-magma" target="_blank">View the project on Github</a>
+		<a href="https://github.com/alexmngn/ember-magma" target="_blank">View the project on Github</a>
 	</div>
 	<div class="demo">
 		<div class="container">
 			<h2>How does it work?</h2>
 			<p class="description">This toolkit contains reusable components you can assemble to build awesome things. Better than too many words, let's take a look to an example. The following form has been generated using Magma, don't hesitate to play with it! You can see the snippet of code below.</p>
 
-			<div class="form">
-				{{#magma-form-element label="First name:"}}
-					{{magma-textbox name="firstname" value=exampleFirstName}}
-				{{/magma-form-element}}
+			<div class="row">
+				<div class="form">
+					{{#magma-form-element label="Full name:"}}
+						{{magma-textbox name="lastname" value=exampleLastName required=true invalid=exampleLastNameIsInvalid}}
+						{{#magma-alert alert="error" isDisplayed=exampleLastNameIsInvalid}}
+							Please enter your last name
+						{{/magma-alert}}
+					{{/magma-form-element}}
 
-				{{#magma-form-element label="Last name:"}}
-					{{magma-textbox name="lastname" value=exampleLastName required=true invalid=exampleLastNameIsInvalid}}
-					{{#magma-alert alert="error" isDisplayed=exampleLastNameIsInvalid}}
-						Please enter your last name
-					{{/magma-alert}}
-				{{/magma-form-element}}
+					{{#magma-form-element label="City:"}}
+						{{magma-selectbox selection=exampleCity content=exampleCityOptions optionLabelPath="name" optionValuePath="value"}}
+					{{/magma-form-element}}
+					{{#magma-form-element}}
+						{{magma-checkbox name="terms" checked=exampleTerms required=true}}
+						<label id="example-label">I accept the terms and conditions</label>
 
-				{{#magma-form-element label="City:"}}
-					{{magma-selectbox selection=exampleCity content=exampleCityOptions optionLabelPath="name" optionValuePath="value"}}
-				{{/magma-form-element}}
+						{{#magma-popover for="example-label" on="hover" placement="right" alignment="top"}}
+							You have to check this box to continue
+						{{/magma-popover}}
 
-				{{#magma-form-element label="Distance:"}}
-					{{magma-range value=exampleDistance max=200}}
-				{{/magma-form-element}}
+					{{/magma-form-element}}
 
-				{{#magma-form-element}}
-					{{magma-checkbox name="terms" checked=exampleTerms required=true}}
-					<label id="example-label">I accept the terms and conditions</label>
+					{{#magma-button on-click=(action "showAlert" "Submitted!")}}
+						Submit
+					{{/magma-button}}
 
-					{{#magma-popover for="example-label" on="hover" placement="right" alignment="top"}}
-						You have to check this box to continue
-					{{/magma-popover}}
-
-				{{/magma-form-element}}
-
-				{{#magma-button action="submitForm"}}
-					Submit
-				{{/magma-button}}
-
+				</div>
 			</div>
-			<div class="formResults">
-				<h3>Form result:</h3>
-					<pre><code class="javascript">
-{
-  firstName: {{exampleFirstName}},
-  lastName: {{#if exampleLastNameIsInvalid}}null{{else}}{{exampleLastName}}{{/if}},
-  city: {{exampleCity.value}},
-  distance: {{exampleDistance}},
-  terms: {{exampleTerms}}
-}
-					</code></pre>
+			<div class="row">
+				<div class="formResults">
+					<h3>Form code:</h3>
+						<code class="hbs"><pre>
+
+	\{{#magma-form-element label="Full name:"}}
+		\{{magma-textbox name="lastname" value=exampleLastName required=true invalid=exampleLastNameIsInvalid}}
+		\{{#magma-alert alert="error" isDisplayed=exampleLastNameIsInvalid}}
+			Please enter your last name
+		\{{/magma-alert}}
+	\{{/magma-form-element}}
+
+	\{{#magma-form-element label="City:"}}
+		\{{magma-selectbox selection=exampleCity content=exampleCityOptions optionLabelPath="name" optionValuePath="value"}}
+	\{{/magma-form-element}}
+
+	\{{#magma-form-element}}
+		\{{magma-checkbox name="terms" checked=exampleTerms required=true}}
+		<label id="example-label">I accept the terms and conditions</label>
+
+		\{{#magma-popover for="example-label" on="hover" placement="right" alignment="top"}}
+			You have to check this box to continue
+		\{{/magma-popover}}
+
+	\{{/magma-form-element}}
+
+	\{{#magma-button on-click=(action "submitForm")}}
+		Submit
+	\{{/magma-button}}
+
+						</pre></code>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -648,7 +662,7 @@ Selected element: {{citySelection.value}}
 
 		<h3>No issue.</h3>
 
-		<p>If you want to report an issue, please submit your request on Github: <a href="https://github.com/4lex-io/ember-magma/issues" target="_blank">https://github.com/4lex-io/ember-magma/issues</a></p>
+		<p>If you want to report an issue, please submit your request on Github: <a href="https://github.com/alexmngn/ember-magma/issues" target="_blank">https://github.com/alexmngn/ember-magma/issues</a></p>
 
 	</div>
 
@@ -657,7 +671,7 @@ Selected element: {{citySelection.value}}
 <footer>
 	<div class="container">
 		<h3>Licence</h3>
-		<p>This addon is licensed under the MIT licence. For more information, <a href="https://github.com/4lex-io/ember-magma/blob/master/LICENSE.md" target="_blank">click here</a></p>
+		<p>This addon is licensed under the MIT licence. For more information, <a href="https://github.com/alexmngn/ember-magma/blob/master/LICENSE.md" target="_blank">click here</a></p>
 
 		<h3>Donation</h3>
 		<p>This project has been created to be open-source and free to the community. I don't want to monetize my libraries as I want them to be accessible to everyone, but if you like this project and you would like to reward the developer, it would be helpful :)</p>
