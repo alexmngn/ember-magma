@@ -1,0 +1,4 @@
+{{yield (hash
+	list=(component 'magma-tabs-list' on-tab-change=(action 'tabChange') on-tab-did-insert=(action 'tabRegister') activePanel=activePanel)
+	panel=(component 'magma-tabs-panel' activePanel=activePanel tabs=tabs)
+)}}

@@ -1,0 +1,44 @@
+.magma-tabs {
+
+	&.magma-disabled {
+		opacity: 0.3;
+		pointer-events: none;
+	}
+
+	.magma-tabs-list {
+		margin: 0 0 0 5px;
+		padding: 0;
+		overflow: hidden;
+	}
+
+	.magma-tabs-list-item {
+		background-color: $magma-color-alpha;
+		border-radius: 5px 5px 0 0;
+		color: $magma-color-eta;
+		cursor: pointer;
+		display: inline-block;
+		list-style-type: none;
+		margin: 0 3px;
+		padding: 10px 15px;
+
+		&.magma-selected {
+			background-color: $magma-color-beta;
+		}
+
+		&.magma-disabled {
+			opacity: 0.3;
+			pointer-events: none;
+		}
+	}
+
+	.magma-tabs-panel {
+		border: 1px solid $magma-color-beta;
+		border-radius: 5px;
+		display: block;
+		padding: 10px;
+
+		&.magma-hidden {
+			display: none;
+		}
+	}
+}
