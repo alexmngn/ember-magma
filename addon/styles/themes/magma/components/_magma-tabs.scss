@@ -15,11 +15,15 @@
 		background-color: $magma-color-alpha;
 		border-radius: 5px 5px 0 0;
 		color: $magma-color-eta;
-		cursor: pointer;
 		display: inline-block;
 		list-style-type: none;
 		margin: 0 3px;
 		padding: 10px 15px;
+		transition: background 400ms;
+
+		&:hover:not(.magma-disabled) {
+			background: $magma-color-beta;
+		}
 
 		&.magma-selected {
 			background-color: $magma-color-beta;
