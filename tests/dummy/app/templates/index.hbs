@@ -526,11 +526,11 @@ Selected element: \{{radiobuttonGroupValue}}
 						<h4>Default</h4>
 
 						<code class="hbs"><pre>
-\{{magma-selectbox content=cityOptions optionLabelPath="name" optionValuePath="value" class="magma-small"}}
-\{{magma-selectbox content=cityOptions optionLabelPath="name" optionValuePath="value"}}
-\{{magma-selectbox content=cityOptions optionLabelPath="name" optionValuePath="value" class="magma-large"}}
+\{{magma-selectbox selection=citySelection content=cityOptions optionLabelPath="name" optionValuePath="value" class="magma-small"}}
+\{{magma-selectbox selection=citySelection content=cityOptions optionLabelPath="name" optionValuePath="value"}}
+\{{magma-selectbox selection=citySelection content=cityOptions optionLabelPath="name" optionValuePath="value" class="magma-large"}}
 
-Selected element: {{citySelection.value}}
+Selected element: \{{citySelection.value}}
 						</pre></code>
 
 						<div class="example">
