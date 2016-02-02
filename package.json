@@ -1,7 +1,7 @@
 {
   "name": "ember-magma",
-  "version": "0.2.4",
-  "description": "Magma is a bootstrap toolkit to easily create UI interfaces for Ember.js applications.",
+  "version": "0.2.5",
+  "description": "Magma is a bootstrap toolkit that brings a set a UI components to help you create your Ember.js applications.",
   "directories": {
     "doc": "doc",
     "test": "tests"
