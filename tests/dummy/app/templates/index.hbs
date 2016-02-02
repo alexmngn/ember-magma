@@ -127,6 +127,7 @@
 						<li>{{#magma-button on-click=(action "scrollToAnchor" "radiobutton-group")}}Radiobutton group{{/magma-button}}</li>
 						<li>{{#magma-button on-click=(action "scrollToAnchor" "range")}}Range{{/magma-button}}</li>
 						<li>{{#magma-button on-click=(action "scrollToAnchor" "selectbox")}}Selectbox{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "tabs")}}Tabs{{/magma-button}}</li>
 						<li>{{#magma-button on-click=(action "scrollToAnchor" "textarea")}}Textarea{{/magma-button}}</li>
 						<li>{{#magma-button on-click=(action "scrollToAnchor" "textbox")}}Textbox{{/magma-button}}</li>
 					</ul>
@@ -138,7 +139,7 @@
 
 					<div class="row">
 						<p>An alert box with different style and color, based on your need. You can also create your own, it will add the class <em>magma-alert-{alert}</em> to the component, and you can style it the way you want.</p>
-						<ul>
+						<ul class="attributes">
 							<li><strong>alert</strong> Type of alert your want to display.</li>
 							<li><strong>animationIn</strong> Animation when the component appears. Default is <em>fadeIn</em>.</li>
 							<li><strong>animationOut</strong> Animation when the component disappears. Default is <em>fadeOut</em>.</li>
@@ -192,7 +193,7 @@
 
 					<div class="row">
 						<p>The button is something very important in a web page. If you use the magma theme, you can use the classes <em>magma-small</em> or <em>magma-large</em> to change the size of the component.</p>
-						<ul>
+						<ul class="attributes">
 							<li><strong>disabled</strong> When set to true, the button is disabled, and has the class <em>magma-disabled</em> set to it.</li>
 							<li><strong>name</strong> The name is used to share events between the button and the button-group. Only used when part of a button-group.</li>
 							<li><strong>pressed</strong> When set to true, the button will have the pressed state.</li>
@@ -263,8 +264,8 @@
 
 					<h3 data-anchor="button-group">Button group</h3>
 
-					<p>You can assemble multiple buttons within a group. They will behave about the same way a radiobutton will work. This is very useful if you want to create a navigation bar, or a multi-panel with tabs for example.</p>
-					<ul>
+					<p>You can assemble multiple buttons within a group. They will behave about the same way a radiobutton will work. This is very useful if you want to create a navigation bar for example.</p>
+					<ul class="attributes">
 						<li><strong>name</strong> This name is mandatory and should be the same in the group and the button itself. It allows to share the events between the two components.</li>
 						<li><strong>on-value-change</strong> This is the action that will be called whenever the value of the group changes. The action will receive the value as a parameter.</li>
 						<li><strong>value</strong> You can set the value of the current pressed button with this attribute.</li>
@@ -296,7 +297,7 @@ Selected element: \{{buttonGroupValue}}
 					<h3 data-anchor="checkbox">Checkbox</h3>
 
 					<p>A simple checkbox. You can disable it, make it required or even have an invalid state set on it.</p>
-					<ul>
+					<ul class="attributes">
 						<li><strong>checked</strong> When set to true, the checkbox is ticked.</li>
 						<li><strong>disabled</strong> When set to true, the checkbox is disabled, and has the class <em>magma-disabled</em> set to it.</li>
 						<li><strong>invalid</strong> When set to true, the checkbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
@@ -320,7 +321,7 @@ Is checked?: \{{checkboxIsChecked}}
 					<h3 data-anchor="form-element">Form element</h3>
 
 					<p>It's not always easy to bind a label to form field with Ember, especially with auto-generated IDs. This will allow you to create a label and to bind it to your input element. You can also create your own label</p>
-					<ul>
+					<ul class="attributes">
 						<li><strong>label</strong> The label to be displayed</li>
 					</ul>
 
@@ -397,7 +398,7 @@ Is checked?: \{{checkboxIsChecked}}
 					<h3 data-anchor="progress">Progress</h3>
 
 					<p>This creates a progress bar, very useful to display the state of something loading. You can display the value of the progression as well. You can access the property <em>indicatorValue</em> which returns the percentage of progression.</p>
-					<ul>
+					<ul class="attributes">
 						<li><strong>indicatorAnimation</strong> When set to true, the progress bar will be animated. Default is <em>true</em>.</li>
 						<li><strong>indicatorAnimationDuration</strong> When <em>indicatorAnimation</em> is set to true, this will set the speed of the <em>indicatorValue</em> animation in miliseconds. Default is <em>400</em>.</li>
 						<li><strong>max</strong> The maximum value the progress bar can reach. Default is <em>100</em>.</li>
@@ -429,7 +430,7 @@ Is checked?: \{{checkboxIsChecked}}
 					<h3 data-anchor="radiobutton">Radiobutton</h3>
 
 					<p>A simple radiobutton. You can disable it, make it required or even have an invalid state set on it.</p>
-					<ul>
+					<ul class="attributes">
 						<li><strong>checked</strong> When set to true, the radiobutton is ticked</li>
 						<li><strong>disabled</strong>  When set to true, the radiobutton is disabled, and has the class <em>magma-disabled</em> set to it.</li>
 						<li><strong>invalid</strong> When set to true, the checkbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
@@ -451,7 +452,7 @@ Is checked?: \{{checkboxIsChecked}}
 					<h3 data-anchor="radiobutton-group">Radio button group</h3>
 
 					<p>A radiobutton doesn't work alone, they work in group. With this component, you can get the value of the current selected radiobutton.</p>
-					<ul>
+					<ul class="attributes">
 						<li><strong>name</strong> This name is mandatory and should be the same in the group and the button itself. It allows to share the events between the two components.</li>
 						<li><strong>on-value-change</strong> This is the action that will be called whenever the value of the group changes. The action will receive the value as a parameter.</li>
 						<li><strong>value</strong> You can get the value of the current pressed button within this attribute. You can also set the default value.</li>
@@ -482,7 +483,7 @@ Selected element: \{{radiobuttonGroupValue}}
 					<h3 data-anchor="range">Range</h3>
 
 					<p>Creates a slider where you can set a minimum, current and maximum value.</p>
-					<ul>
+					<ul class="attributes">
 						<li><strong>disabled</strong>  When set to true, the range has a disabled state, and has the class <em>magma-disabled</em> set to it.</li>
 						<li><strong>max</strong> Indicate the maximum value of the allowed range of values for the element.</li>
 						<li><strong>min</strong> Indicate the minimum value of the allowed range of values for the element. </li>
@@ -508,7 +509,7 @@ Selected element: \{{radiobuttonGroupValue}}
 					<h3 data-anchor="selectbox">Selectbox</h3>
 
 					<p>Creates a drop-down list using the select tag. If you use the magma theme, you can use the classes <em>magma-small</em> or <em>magma-large</em> to change the size of the component.</p>
-					<ul>
+					<ul class="attributes">
 						<li><strong>action</strong> You can call an action when the drop-down did change. It will have the <em>selection</em> in parameter.</li>
 						<li><strong>content</strong> An array containing objects to be displayed in the drop-down.</li>
 						<li><strong>disabled</strong>  When set to true, the selectbox has a disabled state, and has the class <em>magma-disabled</em> set to it.</li>
@@ -559,10 +560,64 @@ Selected element: {{citySelection.value}}
 						</div>
 					</div>
 
+					<h3 data-anchor="tabs">Tabs</h3>
+
+					<p>Creates a tab system.</p>
+					<ul class="attributes">
+						<li><strong>disabled</strong>  When set to true, the tab system will be disabled, and has the class <em>magma-disabled</em> set to it.</li>
+						<li><strong>list.item.disabled</strong> When set to true, the tab that has a disabled state, and has the class <em>magma-disabled</em> set to it.</li>
+						<li><strong>list.item.for</strong> It corresponds to the id of the tabpanel that will be displayed when you click on the tab.</li>
+						<li><strong>panel.id</strong> Id of the tabpanel bound to the attribute `list.item.for`.</li>
+					</ul>
+
+					<div class="row">
+
+						<code class="hbs"><pre>
+\{{#magma-tabs as |tabs|}}
+	\{{#tabs.list as |list|}}
+		\{{#list.item for="tabpanel1" active=true}}
+			Tab 1
+		\{{/list.item}}
+		\{{#list.item for="tabpanel2"}}
+			Tab 2
+		\{{/list.item}}
+	\{{/tabs.list}}
+
+	\{{#tabs.panel id="tabpanel1"}}
+		Panel 1
+	\{{/tabs.panel}}
+	\{{#tabs.panel id="tabpanel2"}}
+		Panel 2
+	\{{/tabs.panel}}
+\{{/magma-tabs}}
+						</pre></code>
+
+						<div class="example">
+							{{#magma-tabs as |tabs|}}
+								{{#tabs.list as |list|}}
+									{{#list.item for="tabpanel1" active=true}}
+										Tab 1
+									{{/list.item}}
+									{{#list.item for="tabpanel2"}}
+										Tab 2
+									{{/list.item}}
+								{{/tabs.list}}
+
+								{{#tabs.panel id="tabpanel1"}}
+									Panel 1
+								{{/tabs.panel}}
+								{{#tabs.panel id="tabpanel2"}}
+									Panel 2
+								{{/tabs.panel}}
+							{{/magma-tabs}}
+						</div>
+
+					</div>
+
 					<h3 data-anchor="textarea">Textarea</h3>
 
 					<p>Creates a multi-line text input using the textarea tag. If you use the magma theme, you can use the classes <em>magma-small</em> or <em>magma-large</em> to change the size of the component.</p>
-					<ul>
+					<ul class="attributes">
 						<li><strong>disabled</strong>  When set to true, the selectbox has a disabled state, and has the class <em>magma-disabled</em> set to it.</li>
 						<li><strong>invalid</strong> When set to true, the selectbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
 						<li><strong>required</strong> When set to true, the selectbox has a required state, and has the class <em>magma-required</em> set to it.</li>
@@ -610,7 +665,7 @@ Selected element: {{citySelection.value}}
 					<h3 data-anchor="textbox">Textbox</h3>
 
 					<p>Creates a single-line text input using the input tag. If you use the magma theme, you can use the classes <em>magma-small</em> or <em>magma-large</em> to change the size of the component.</p>
-					<ul>
+					<ul class="attributes">
 						<li><strong>disabled</strong>  When set to true, the selectbox has a disabled state, and has the class <em>magma-disabled</em> set to it.</li>
 						<li><strong>invalid</strong> When set to true, the selectbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
 						<li><strong>required</strong> When set to true, the selectbox has a required state, and has the class <em>magma-required</em> set to it.</li>

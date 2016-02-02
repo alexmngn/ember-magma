@@ -93,7 +93,7 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 		isDisplayed: void 0,
 
 		/**
-		 * It corresponds to the selector of the element that will trigger the popover to be displayed or hidden.
+		 * It corresponds to the id of the element that will trigger the popover to be displayed or hidden.
 		 * @property attrs.for {String}
 		 * @public
 		 */
