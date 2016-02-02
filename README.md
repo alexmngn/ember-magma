@@ -2,7 +2,7 @@
 
 ## Designed for Ember.js
 
-Magma is a bootstrap toolkit to easily create UI interfaces for Ember.js applications. It provides a list of useful UI components to be used in your Ember project.
+Magma is a bootstrap toolkit that brings a set a UI components to help you create your Ember.js applications.
 
 ## How does this work?
 This toolkit contains reusable components you can assemble to build awesome things.
@@ -16,7 +16,7 @@ A simple command line can make you use the addon right now. Simply run the follo
 ember install ember-magma
 ```
 
-**Note:** This addon has been created based on Ember 2.0. Please update your project to this version of Ember or above to be able to use this addon.
+**Note:** This addon has been created based on Ember 2.3. Please update your project to this version of Ember or above to be able to use this addon.
 
 ## Themes
 
