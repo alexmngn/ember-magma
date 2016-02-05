@@ -4,9 +4,8 @@ var component;
 
 moduleForComponent('magma-button', 'Unit | Component | magma button', {
 	unit: true,
-	needs: ['service:magma-event'],
 	setup() {
-		component = this.subject({name: 'buttonGroup', value: 'button1'});
+		component = this.subject({name: 'buttons', value: 'button1'});
 	},
 
 	teardown() {

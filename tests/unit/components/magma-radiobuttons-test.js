@@ -2,11 +2,10 @@ import { moduleForComponent, test } from 'ember-qunit';
 
 var component;
 
-moduleForComponent('magma-button-group', 'Unit | Component | magma button group', {
+moduleForComponent('magma-radiobuttons', 'Unit | Component | magma radiobuttons group', {
 	unit: true,
-	needs: ['service:magma-event'],
 	setup() {
-		component = this.subject({name: 'buttonGroup', value: 'button1'});
+		component = this.subject({name: 'radiobuttons', value: 'radiobutton1'});
 	},
 
 	teardown() {

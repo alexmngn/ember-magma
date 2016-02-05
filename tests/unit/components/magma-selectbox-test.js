@@ -19,7 +19,6 @@ var content = [
 
 moduleForComponent('magma-selectbox', 'Unit | Component | magma selectbox', {
 	unit: true,
-	needs: ['service:magma-event'],
 	setup() {
 		component = this.subject({content: content});
 	},
