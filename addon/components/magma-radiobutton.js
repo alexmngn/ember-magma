@@ -18,7 +18,7 @@ import DisabledSupport from 'ember-magma/mixins/disabled-support';
 import InvalidSupport from 'ember-magma/mixins/invalid-support';
 import RequiredSupport from 'ember-magma/mixins/required-support';
 
-const { inject, on } = Ember;
+const { computed, observer, on } = Ember;
 
 export default Ember.Component.extend(DisabledSupport,
 	InvalidSupport,
@@ -36,66 +36,82 @@ export default Ember.Component.extend(DisabledSupport,
 
 	classNames: ['magma-radiobutton'],
 
-	magmaEvent: inject.service('magma-event'),
-
 	tagName: 'input',
 
 	type: 'radio',
 
 	/**
-	 * Value of the radiobutton
-	 * @property value {String}
-	 * @public
-	 */
-	value: void 0,
-
-	/**
-	 * On init, initialize the event between the radiobutton and the radiobutton group if needed.
-	 * @method radiobuttonInit
+	 * @property activeValue
 	 * @private
 	 */
-	radiobuttonInit: on('init', function () {
-		let name = this.get('name');
-		if (name) {
-			this.get('magmaEvent').subscribe(name+'RadiobuttonGroup', this, 'radiobuttonGroupDidChange');
-		}
+	activeValue: computed.oneWay('attrs.activeValue', function () {
+		return this.getAttr('activeValue');
 	}),
 
 	/**
-	 * On willDestroyElement, teardown the event between the radiobutton and the radiobutton group.
-	 * @method radiobuttonWillDestroyElement
+	 * @property value
 	 * @private
 	 */
-	radiobuttonWillDestroyElement: on('willDestroyElement', function () {
-		let name = this.get('name');
-		if (name) {
-			this.get('magmaEvent').unsubscribe(name+'RadiobuttonGroup');
-		}
+	value: computed.oneWay('attrs.value', function () {
+		return this.getAttr('value');
 	}),
 
-	/**
-	 * Fired when one radiobutton group state changes. It sets the `checked` and `disabled` states.
-	 * @event radiobuttonGroupDidChange
-	 * @private
-	 */
-	radiobuttonGroupDidChange(event) {
-		this.setProperties({
-			checked: (event.value === this.get('value')),
-			disabled: event.disabled || false
-		});
+	attrs: {
+
+		/**
+		 * Value of the active radio
+		 * @property activeValue {String}
+		 * @public
+		 */
+		activeValue: void 0,
+
+		/**
+		 * Value of the radiobutton
+		 * @property value {String}
+		 * @public
+		 */
+		value: void 0,
 	},
 
 	/**
-	 * On change, will send an event to the associated group.
-	 * @method radiobuttonChange
+	 * On didInsertElement, check the state of the radio button
+	 * @method radiobuttonDidInsertElement
 	 * @private
 	 */
-	radiobuttonChange: on('change', function () {
-		let name = this.get('name');
-		if (this.get('disabled') || !name) {
-			return false;
+	radiobuttonDidInsertElement: on('didInsertElement', function () {
+		if (this.get('checked')) {
+			this.radiobuttonDidChange();
 		}
 
-		this.get('magmaEvent').publish(name+'Radiobutton', {value: this.get('value')});
+		if (this.get('value') && this.get('activeValue')) {
+			this.radiobuttonActiveValueDidChange();
+		}
+	}),
+
+	/**
+	 * Observes activeValue, will set the radio button to checked if the activeValue is the same as the value of the radio button
+	 * @method radiobuttonActiveValueDidChange
+	 * @private
+	 */
+	radiobuttonActiveValueDidChange: observer('activeValue', function () {
+		const value = this.get('value');
+		const activeValue = this.get('activeValue');
+		if (value && activeValue === value) {
+			this.set('checked', true);
+		} else if (activeValue !== value) {
+			this.set('checked', false);
+		}
+	}),
+
+	/**
+	 * On change, will send an event to the associated group.
+	 * @method radiobuttonDidChange
+	 * @private
+	 */
+	radiobuttonDidChange: on('change', function() {
+		const onChangeAction = this.getAttr('on-change');
+		if (onChangeAction) {
+			onChangeAction(this.get('value'));
+		}
 	})
 });
