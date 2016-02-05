@@ -16,7 +16,7 @@ A simple command line can make you use the addon right now. Simply run the follo
 ember install ember-magma
 ```
 
-**Note:** This addon has been created based on Ember 2.3. Please update your project to this version of Ember or above to be able to use this addon.
+**Note:** This addon requires you to use Ember 2.3 or above. Please update your project's Ember version to be able to use this addon.
 
 ## Themes
 
@@ -28,5 +28,5 @@ If you decide you want to use the Magma theme, you will need to include it in th
 @import 'node_modules/ember-magma/addon/styles/themes/magma';
 ```
 
-## Documentation
-The documentation <http://alexmngn.github.io/ember-magma/> to see examples.
+## Documentation & Demos
+The documentation and demos are available here: <http://alexmngn.github.io/ember-magma/>
