@@ -409,7 +409,7 @@ Is checked?: \{{checkboxIsChecked}}
 						<code class="hbs"><pre>
 \{{magma-progress value=50}}
 
-\{{#magma-progress value=(mut progressValue) as |progress|}}
+\{{#magma-progress value=progressValue as |progress|}}
   \{{progress.indicatorValue}}%
 \{{/magma-popover}}
 						</pre></code>
@@ -418,7 +418,7 @@ Is checked?: \{{checkboxIsChecked}}
 
 							{{magma-progress value=50}}
 
-							{{#magma-progress value=(mut progressValue) as |progress|}}
+							{{#magma-progress value=progressValue as |progress|}}
 								{{progress.indicatorValue}}%
 							{{/magma-progress}}<br />
 

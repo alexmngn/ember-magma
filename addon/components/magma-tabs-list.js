@@ -8,8 +8,6 @@
 
 import Ember from 'ember';
 
-const { computed } = Ember;
-
 export default Ember.Component.extend({
 
 	'aria-multiselectable': false,
@@ -24,8 +22,6 @@ export default Ember.Component.extend({
 	role: 'tablist',
 
 	tagName: 'ul',
-
-	magmaTabs: computed.alias('parentView'),
 
 	attrs: {
 

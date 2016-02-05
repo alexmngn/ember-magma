@@ -16,7 +16,8 @@ import DisabledSupport from 'ember-magma/mixins/disabled-support';
 
 const { observer, on } = Ember;
 
-export default Ember.Component.extend(DisabledSupport, {
+export default Ember.Component.extend(
+	DisabledSupport, {
 
 	attributeBindings: [
 		'disabled',
