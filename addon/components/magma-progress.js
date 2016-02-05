@@ -35,9 +35,9 @@ export default Ember.Component.extend({
 
 	ariaValuemin: 0,
 
-	ariaValuemax: computed.alias('valueMax'),
+	ariaValuemax: computed.oneWay('valueMax'),
 
-	ariaValuenow: computed.alias('value'),
+	ariaValuenow: computed.oneWay('value'),
 
 	/**
 	 * @property indicatorAnimation

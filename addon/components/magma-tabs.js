@@ -42,15 +42,32 @@ export default Ember.Component.extend(
 
 	role: 'tab',
 
+	/**
+	 * Array of tabs with the key as the ID of the panel and the value as the ID of the tab.
+	 * This array is used to create the relationship between the tab and the panel for ARIA.
+	 * @property tabs {Array}
+	 * @private
+	 */
 	tabs: Ember.A(),
 
 	actions: {
+
+		/**
+		 * Fired when a tab gets created, this event is called to save the tab ID and the panel ID.
+		 * @event tabRegister
+		 * @private
+		 */
 		tabRegister(tabId, panelId) {
 			let tab = [];
 			tab[panelId] = tabId;
 			this.get('tabs').push(tab);
 		},
 
+		/**
+		 * Fired when the user clicked a tab and a new panel is activated.
+		 * @event tabChange
+		 * @private
+		 */
 		tabChange(id) {
 			if (id) {
 				this.set('activePanel', id);

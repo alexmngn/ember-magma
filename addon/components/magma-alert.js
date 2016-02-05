@@ -54,6 +54,16 @@
 		return isNone(isDisplayed) ? true : isDisplayed;
 	}),
 
+	/**
+	 * Class name of the alert box, based on `alert` property. It returns `magma-alert-{alert}`
+	 * @property alertClassName {String}
+	 * @private
+	 */
+	alertClassName: computed('alert', function () {
+		const alert = this.getAttr('alert');
+		return alert ? 'magma-alert-'+alert : void 0;
+	}),
+
 	attrs: {
 
 		/**
@@ -97,18 +107,8 @@
 	}),
 
 	/**
-	 * Class name of the alert box, based on `alert` property. It returns `magma-alert-{alert}`
-	 * @property alertClassName {String}
-	 * @private
-	 */
-	alertClassName: computed('alert', function () {
-		const alert = this.getAttr('alert');
-		return alert ? 'magma-alert-'+alert : void 0;
-	}),
-
-	/**
-	 * Observes the attrs.visible attribute. Will animate and show/hide the component when the value changes.
-	 * @property alertClassName {String}
+	 * Observes isDisplayed. Will animate and show/hide the component when the value changes.
+	 * @method refreshAnimation
 	 * @private
 	 */
 	refreshAnimation: observer('isDisplayed', function () {

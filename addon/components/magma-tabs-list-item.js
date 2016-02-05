@@ -45,7 +45,7 @@ export default Ember.Component.extend(
 		return this.getAttr('activePanel') === this.getAttr('for') || false;
 	}),
 
-	selected: computed.alias('isActive'),
+	selected: computed.oneWay('isActive'),
 
 	attrs: {
 
