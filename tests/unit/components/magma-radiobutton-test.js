@@ -4,9 +4,8 @@ var component;
 
 moduleForComponent('magma-radiobutton', 'Unit | Component | magma radiobutton', {
 	unit: true,
-	needs: ['service:magma-event'],
 	setup() {
-		component = this.subject({name: 'radiobuttonGroup', value: 'radiobutton1'});
+		component = this.subject({name: 'radiobuttons', value: 'radiobutton1'});
 	},
 
 	teardown() {
