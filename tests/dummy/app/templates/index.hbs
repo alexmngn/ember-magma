@@ -87,7 +87,7 @@
 
 		<code>$ ember install ember-magma</code>
 
-		<p><strong>Note:</strong> This addon has been created based on Ember 2.3. Please update your project to this version of Ember or above to be able to use this addon.</p>
+		<p><strong>Note:</strong> This addon requires you to use Ember 2.3 or above. Please update your project's Ember version to be able to use this addon.</p>
 	</div>
 
 	<div class="themes container">
@@ -194,10 +194,9 @@
 						<p>The button is something very important in a web page. If you use the magma theme, you can use the classes <em>magma-small</em> or <em>magma-large</em> to change the size of the component.</p>
 						<ul class="attributes">
 							<li><strong>disabled</strong> When set to true, the button is disabled, and has the class <em>magma-disabled</em> set to it.</li>
-							<li><strong>name</strong> The name is used to share events between the button and the button-group. Only used when part of a button-group.</li>
 							<li><strong>pressed</strong> When set to true, the button will have the pressed state.</li>
 							<li><strong>on-click</strong> This is the action that will be called whenever the user click on the button.</li>
-							<li><strong>value</strong> The value is used to share events between the button and the button-group. Only used when part of a button-group.</li>
+							<li><strong>value</strong> The value is sent as a parameter when the user click on the button.</li>
 						</ul>
 					</div>
 
@@ -399,7 +398,7 @@ Is checked?: \{{checkboxIsChecked}}
 					<p>This creates a progress bar, very useful to display the state of something loading. You can display the value of the progression as well. You can access the property <em>indicatorValue</em> which returns the percentage of progression.</p>
 					<ul class="attributes">
 						<li><strong>indicatorAnimation</strong> When set to true, the progress bar will be animated. Default is <em>true</em>.</li>
-						<li><strong>indicatorAnimationDuration</strong> When <em>indicatorAnimation</em> is set to true, this will set the speed of the <em>indicatorValue</em> animation in miliseconds. Default is <em>400</em>.</li>
+						<li><strong>indicatorAnimationDuration</strong> When <em>indicatorAnimation</em> is set to true, this will set the speed of the <em>indicatorValue</em> animation in milliseconds. Default is <em>400</em>.</li>
 						<li><strong>max</strong> The maximum value the progress bar can reach. Default is <em>100</em>.</li>
 						<li><strong>value</strong> The current value of the progress bar. Default is <em>0</em>.</li>
 					</ul>
@@ -428,7 +427,7 @@ Is checked?: \{{checkboxIsChecked}}
 
 					<h3 data-anchor="radiobuttons">Radiobuttons</h3>
 
-					<p>This component allows you to create a group of radiobuttons. Using this component allows you to get and set the value of the currently selected radiobutton.</p>
+					<p>This component allows you to create a group of radio buttons. By using this component, you can get the value of the currently selected radio button or set the one you want selected.</p>
 					<ul class="attributes">
 						<li><strong>name</strong> This name is mandatory and should be the same in the group and the button itself. It allows to share the events between the two components.</li>
 						<li><strong>on-value-change</strong> This is the action that will be called whenever the value of the group changes. The action will receive the value as a parameter.</li>
