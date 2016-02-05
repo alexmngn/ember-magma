@@ -118,13 +118,12 @@
 					<ul>
 						<li>{{#magma-button on-click=(action "scrollToAnchor" "alert")}}Alert{{/magma-button}}</li>
 						<li>{{#magma-button on-click=(action "scrollToAnchor" "button")}}Button{{/magma-button}}</li>
-						<li>{{#magma-button on-click=(action "scrollToAnchor" "button-group")}}Button group{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "buttons")}}Buttons{{/magma-button}}</li>
 						<li>{{#magma-button on-click=(action "scrollToAnchor" "checkbox")}}Checkbox{{/magma-button}}</li>
 						<li>{{#magma-button on-click=(action "scrollToAnchor" "form-element")}}Form element{{/magma-button}}</li>
 						<li>{{#magma-button on-click=(action "scrollToAnchor" "popover")}}Popover{{/magma-button}}</li>
 						<li>{{#magma-button on-click=(action "scrollToAnchor" "progress")}}Progress{{/magma-button}}</li>
-						<li>{{#magma-button on-click=(action "scrollToAnchor" "radiobutton")}}Radiobutton{{/magma-button}}</li>
-						<li>{{#magma-button on-click=(action "scrollToAnchor" "radiobutton-group")}}Radiobutton group{{/magma-button}}</li>
+						<li>{{#magma-button on-click=(action "scrollToAnchor" "radiobuttons")}}Radiobuttons{{/magma-button}}</li>
 						<li>{{#magma-button on-click=(action "scrollToAnchor" "range")}}Range{{/magma-button}}</li>
 						<li>{{#magma-button on-click=(action "scrollToAnchor" "selectbox")}}Selectbox{{/magma-button}}</li>
 						<li>{{#magma-button on-click=(action "scrollToAnchor" "tabs")}}Tabs{{/magma-button}}</li>
@@ -162,7 +161,7 @@
   Have a look to this information, &lt;a href="#"&gt;click here!&lt;/a&gt;
 \{{/magma-alert}}
 
-\{{#magma-alert alert="success" animationIn="flipInX" animationOut="flipOutX" isDisplayed=(mut alertIsDisplayed)}}
+\{{#magma-alert alert="success" animationIn="flipInX" animationOut="flipOutX" isDisplayed=alertIsDisplayed}}
   Your request has been sent!
 \{{/magma-alert}}
 						</pre></code>
@@ -181,7 +180,7 @@
 								Have a look to this information, <a href="javascript:alert('Yay!');">click here!</a>
 							{{/magma-alert}}
 
-							{{#magma-alert alert="success" animationIn="flipInX" animationOut="flipOutX" isDisplayed=(mut alertIsDisplayed)}}
+							{{#magma-alert alert="success" animationIn="flipInX" animationOut="flipOutX" isDisplayed=alertIsDisplayed}}
 								Your request has been sent!
 							{{/magma-alert}}<br />
 
@@ -262,34 +261,34 @@
 						</div>
 					</div>
 
-					<h3 data-anchor="button-group">Button group</h3>
+					<h3 data-anchor="button-group">Buttons</h3>
 
-					<p>You can assemble multiple buttons within a group. They will behave about the same way a radiobutton will work. This is very useful if you want to create a navigation bar for example.</p>
+					<p>You can assemble multiple buttons within a group. They will behave about the same way a list of radio buttons will work. This is very useful if you want to create a navigation bar for example. See the component <strong>magma-button</strong> to get the list of attributes for the button itself.</p>
 					<ul class="attributes">
-						<li><strong>name</strong> This name is mandatory and should be the same in the group and the button itself. It allows to share the events between the two components.</li>
+						<li><strong>disabled</strong> When set to true, the buttons are disabled, and the component has the class <em>magma-disabled</em> set to it.</li>
 						<li><strong>on-value-change</strong> This is the action that will be called whenever the value of the group changes. The action will receive the value as a parameter.</li>
 						<li><strong>value</strong> You can set the value of the current pressed button with this attribute.</li>
 					</ul>
 
 					<div class="row">
 						<code class="hbs"><pre>
-\{{#magma-button-group name="buttonGroupHello" value=(mut buttonGroupInitialValue) on-value-change=(action "buttonGroupValueDidChange")}}
-  \{{#magma-button name="buttonGroupHello" value="Bonjour" pressed=true}} Bonjour \{{/magma-button}}
-  \{{#magma-button name="buttonGroupHello" value="Hola"}} Hola \{{/magma-button}}
-  \{{#magma-button name="buttonGroupHello" value="Hello"}} Hello \{{/magma-button}}
-\{{/magma-button-group}}
+\{{#magma-buttons value=buttonsInitialValue on-value-change=(action "buttonsValueDidChange") as |buttons|}}
+  \{{#buttons.button value="Bonjour"}} Bonjour \{{/buttons.button}}
+  \{{#buttons.button value="Hola"}} Hola \{{/buttons.button}}
+  \{{#buttons.button value="Hello"}} Hello \{{/buttons.button}}
+\{{/magma-buttons}}
 
-Selected element: \{{buttonGroupValue}}
+Selected element: \{{buttonsValue}}
 						</pre></code>
 
 						<div class="example">
-							{{#magma-button-group name="buttonGroupHello" value=(mut buttonGroupInitialValue) on-value-change=(action "buttonGroupValueDidChange")}}
-								{{#magma-button name="buttonGroupHello" value="Bonjour" pressed=true}} Bonjour {{/magma-button}}
-								{{#magma-button name="buttonGroupHello" value="Hola"}} Hola {{/magma-button}}
-								{{#magma-button name="buttonGroupHello" value="Hello"}} Hello {{/magma-button}}
-							{{/magma-button-group}}<br />
+							{{#magma-buttons value=buttonsInitialValue on-value-change=(action "buttonsValueDidChange") as |buttons|}}
+							  {{#buttons.button value="Bonjour"}} Bonjour {{/buttons.button}}
+							  {{#buttons.button value="Hola"}} Hola {{/buttons.button}}
+							  {{#buttons.button value="Hello"}} Hello {{/buttons.button}}
+							{{/magma-buttons}}<br />
 
-							Selected element: {{buttonGroupValue}}
+							Selected element: {{buttonsValue}}
 						</div>
 
 					</div>
@@ -427,56 +426,39 @@ Is checked?: \{{checkboxIsChecked}}
 						</div>
 					</div>
 
-					<h3 data-anchor="radiobutton">Radiobutton</h3>
+					<h3 data-anchor="radiobuttons">Radiobuttons</h3>
 
-					<p>A simple radiobutton. You can disable it, make it required or even have an invalid state set on it.</p>
-					<ul class="attributes">
-						<li><strong>checked</strong> When set to true, the radiobutton is ticked</li>
-						<li><strong>disabled</strong>  When set to true, the radiobutton is disabled, and has the class <em>magma-disabled</em> set to it.</li>
-						<li><strong>invalid</strong> When set to true, the checkbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
-						<li><strong>name</strong> The name of the checkbox</li>
-						<li><strong>required</strong> When set to true, the checkbox has a required state, and has the class <em>magma-required</em> set to it</li>
-						<li><strong>value</strong> Value of the radiobutton.</li>
-					</ul>
-
-					<div class="row">
-						<code class="hbs"><pre>
-\{{magma-radiobutton name="radiobuttonGroup" value="Hello"}}
-						</pre></code>
-
-						<div class="example">
-							{{magma-radiobutton name="radiobuttonGroup1" value="Hello"}}
-						</div>
-					</div>
-
-					<h3 data-anchor="radiobutton-group">Radio button group</h3>
-
-					<p>A radiobutton doesn't work alone, they work in group. With this component, you can get the value of the current selected radiobutton.</p>
+					<p>This component allows you to create a group of radiobuttons. Using this component allows you to get and set the value of the currently selected radiobutton.</p>
 					<ul class="attributes">
 						<li><strong>name</strong> This name is mandatory and should be the same in the group and the button itself. It allows to share the events between the two components.</li>
 						<li><strong>on-value-change</strong> This is the action that will be called whenever the value of the group changes. The action will receive the value as a parameter.</li>
 						<li><strong>value</strong> You can get the value of the current pressed button within this attribute. You can also set the default value.</li>
+						<li><strong>button.checked</strong> When set to true, the radiobutton is ticked</li>
+						<li><strong>button.disabled</strong>  When set to true, the radiobutton is disabled, and has the class <em>magma-disabled</em> set to it.</li>
+						<li><strong>button.invalid</strong> When set to true, the checkbox has an invalid state, and has the class <em>magma-invalid</em> set to it.</li>
+						<li><strong>button.required</strong> When set to true, the checkbox has a required state, and has the class <em>magma-required</em> set to it</li>
+						<li><strong>button.value</strong> Value of the radiobutton.</li>
 					</ul>
 
 					<div class="row">
 						<code class="hbs"><pre>
-\{{magma-radiobutton-group name="radiobuttonHelloGroup" value=(mut radiobuttonGroupInitialValue) on-value-change=(action "radiobuttonGroupValueDidChange")}}
-  \{{magma-radiobutton name="radiobuttonHelloGroup" value="Bonjour"}}
-  \{{magma-radiobutton name="radiobuttonHelloGroup" value="Hola"}}
-  \{{magma-radiobutton name="radiobuttonHelloGroup" value="Hello"}}
-\{{/magma-radiobutton-group}}
+\{{#magma-radiobuttons name="radiobuttonHelloGroup" value=radiobuttonsInitialValue on-value-change=(action 'radiobuttonsValueDidChange') as |radiobuttons|}}
+	\{{radiobuttons.button value="Bonjour"}}
+	\{{radiobuttons.button value="Hola"}}
+	\{{radiobuttons.button value="Hello"}}
+\{{/magma-radiobuttons}}
 
-Selected element: \{{radiobuttonGroupValue}}
+Selected element: \{{radiobuttonsValue}}
 						</pre></code>
 
 						<div class="example">
-							{{#magma-radiobutton-group name="radiobuttonHelloGroup" value=(mut radiobuttonGroupInitialValue) on-value-change=(action "radiobuttonGroupValueDidChange")}}
-								{{magma-radiobutton name="radiobuttonHelloGroup" value="Bonjour" checked=true}}
-								{{magma-radiobutton name="radiobuttonHelloGroup" value="Hola"}}
-								{{magma-radiobutton name="radiobuttonHelloGroup" value="Hello"}}
-							{{/magma-radiobutton-group}}<br />
+							{{#magma-radiobuttons name="radiobuttonHelloGroup" value=radiobuttonsInitialValue on-value-change=(action 'radiobuttonsValueDidChange') as |radiobuttons|}}
+								{{radiobuttons.button value="Bonjour"}}
+								{{radiobuttons.button value="Hola"}}
+								{{radiobuttons.button value="Hello"}}
+							{{/magma-radiobuttons}}<br />
 
-							Selected element: {{radiobuttonGroupValue}}
+							Selected element: {{radiobuttonsValue}}
 						</div>
 					</div>
 

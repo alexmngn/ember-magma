@@ -13,7 +13,7 @@
 		cursor: pointer;
 	}
 
-	&.magma-pressed:not(.magma-disabled) {
+	&.magma-pressed {
 		background: $magma-color-beta;
 	}
 

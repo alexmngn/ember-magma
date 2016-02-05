@@ -52,13 +52,13 @@ export default Ember.Controller.extend({
 
 	progressValue: 25,
 
-	buttonGroupInitialValue: 'Bonjour',
+	buttonsInitialValue: 'Bonjour',
 
-	buttonGroupValue: Ember.computed.alias('buttonGroupInitialValue'),
+	buttonsValue: Ember.computed.alias('buttonsInitialValue'),
 
-	radiobuttonGroupInitialValue: 'Bonjour',
+	radiobuttonsInitialValue: 'Bonjour',
 
-	radiobuttonGroupValue: Ember.computed.alias('radiobuttonGroupInitialValue'),
+	radiobuttonsValue: Ember.computed.alias('radiobuttonsInitialValue'),
 
 	actions: {
 
@@ -72,12 +72,12 @@ export default Ember.Controller.extend({
 			}, 400);
 		},
 
-		buttonGroupValueDidChange(value) {
-			this.set('buttonGroupValue', value);
+		buttonsValueDidChange(value) {
+			this.set('buttonsValue', value);
 		},
 
-		radiobuttonGroupValueDidChange(value) {
-			this.set('radiobuttonGroupValue', value);
+		radiobuttonsValueDidChange(value) {
+			this.set('radiobuttonsValue', value);
 		},
 
 		toggleAlert() {
