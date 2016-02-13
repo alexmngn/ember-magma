@@ -131,7 +131,7 @@ export default Ember.Component.extend(AnimationSupport, ModalSupport, PositionSu
 		//Attach events on the 'for' element
 		let forjQueryElement = $('#'+this.getAttr('for'));
 		if (forjQueryElement.length) {
-			let on = this.getAttr('on');
+			let on = this.get('on');
 			this.set('relativeElement', forjQueryElement);
 
 			if (on === 'click') {

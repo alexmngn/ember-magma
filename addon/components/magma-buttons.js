@@ -23,9 +23,14 @@ const { computed, run } = Ember;
 export default Ember.Component.extend(
 	DisabledSupport, {
 
-	attributeBindings: ['style'],
+	attributeBindings: [
+		'style',
+		'role'
+	],
 
 	classNames: ['magma-buttons'],
+
+	role: 'group',
 
 	/**
 	 * @property value {String}
